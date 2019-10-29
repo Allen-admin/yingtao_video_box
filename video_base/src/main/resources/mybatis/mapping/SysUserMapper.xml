@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.k365.video_base.mapper.SysUserMapper" >
+
+    <select id="findUserRPByName" resultType="java.util.Map">
+      SELECT
+          su.username,su.status,su.id AS user_id,
+          sr.name AS role_name,sr.id AS role_id,
+          sp.code AS permit_code,sp.url AS permit_url,
+          sp.id AS permit_id,sp.verification AS permit_verification
+        FROM
+          sys_user As su LEFT JOIN sys_user_role AS sur ON su.id = sur.sys_user_id
+          LEFT JOIN sys_role AS sr ON sur.sys_role_id = sr.id
+          LEFT JOIN sys_role_permit AS srp ON sr.id = srp.sys_role_id
+          LEFT JOIN sys_permit AS sp ON srp.sys_permit_id = sp.id
+          WHERE su.username = #{username}
+          ORDER BY sp.sort;
+    </select>
+
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.k365.video_base.mapper.VideoCommentMapper">
+    
+    <sql id="search_comment_where">
+        <if test="searchValue != null and searchValue != ''">
+            AND MATCH(`user_nickname`, `video_title`, `content`)
+            AGAINST(#{searchValue} IN BOOLEAN MODE)
+        </if>
+
+    </sql>
+
+    <select id="searchVideoComment" parameterType="com.k365.video_base.model.so.VideoCommentSO" resultType="com.k365.video_base.model.po.VideoComment">
+        SELECT
+        id,user_id,`time`,video_id, content,user_nickname,video_title,status,
+          (SELECT count(*) FROM  video_comment
+            <where>
+              <include refid="search_comment_where"/>
+            </where>) AS total
+        FROM
+        video_comment AS videoComment
+        <where>
+            <include refid="search_comment_where"/>
+        </where>
+        LIMIT #{pageSize} OFFSET ${page}
+    </select>
+
+
+</mapper>

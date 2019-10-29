@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>video_common</artifactId>
+	<packaging>jar</packaging>
+	<name>video_common</name>
+	<description>Video Util for Spring Boot</description>
+
+	<!--<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.5.RELEASE</version>
+		<relativePath/>
+	</parent>-->
+    <parent>
+        <groupId>com.k365</groupId>
+        <artifactId>video_box</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+	<!--<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<spring-boot.version>2.1.5.RELEASE</spring-boot.version>
+		<spring.version>5.1.7.RELEASE</spring.version>
+
+		<javase.version>3.3.0</javase.version>
+		<java-jwt.version>3.7.0</java-jwt.version>
+		<fastdfs-client-java.version>1.27-RELEASE</fastdfs-client-java.version>
+	</properties>-->
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+		</dependency>
+		<!--google身份验证器-->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>${javase.version}</version>
+		</dependency>
+
+		<!--redis-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+        <!--JWT-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${java-jwt.version}</version>
+        </dependency>
+
+		<!--HttpClient-->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+
+		<!--Fast DFS-->
+		<dependency>
+			<groupId>org.csource</groupId>
+			<artifactId>fastdfs-client-java</artifactId>
+			<version>${fastdfs-client-java.version}</version>
+			<!--TODO 解决fastdfs-clientt-java-1.27-RELEASE.jar 包找不到问题-->
+			<!--<scope>system</scope>-->
+			<!--<systemPath>${basedir}/libs/fastdfs-client-java-1.27-RELEASE.jar</systemPath>-->
+		</dependency>
+
+		<!--友盟sdk-->
+		<dependency>
+			<groupId>com.redpacket</groupId>
+			<artifactId>umeng.api.client.java.biz</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<!--<scope>system</scope>
+			<systemPath>${basedir}/libs/umeng.api.client.java.biz.jar</systemPath>-->
+		</dependency>
+		<dependency>
+			<groupId>com.redpacket</groupId>
+			<artifactId>umeng.api.client.java.biz-sources</artifactId>
+			<version>1.1.8</version>
+			<!--<scope>system</scope>
+			<systemPath>${basedir}/libs/umeng.api.client.java.biz-sources.jar</systemPath>-->
+		</dependency>
+		<dependency>
+			<groupId>com.redpacket</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+			<!--<scope>system</scope>
+			<systemPath>${basedir}/libs/commons-logging-1.1.1.jar</systemPath>-->
+		</dependency>
+
+
+
+
+		<!--User Agent-->
+		<dependency>
+			<groupId>eu.bitwalker</groupId>
+			<artifactId>UserAgentUtils</artifactId>
+			<version>1.21</version>
+		</dependency>
+
+
+		<!-- 获取中文拼音 -->
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+
+		<!--导入excel-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>4.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>4.1.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
+				<configuration>
+					<fork>true</fork>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+					<compilerArguments>
+						<extdirs>libs</extdirs>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

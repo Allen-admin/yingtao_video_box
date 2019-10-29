@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.k365.video_base.mapper.VideoMapper">
+
+    <select id="searchMatchVideoPage" parameterType="com.k365.video_base.model.so.VideoSO"
+            resultType="com.k365.video_base.model.po.Video">
+      SELECT
+        id,cover,title,time_len,director,create_date,
+        play_count_for_day,play_count_for_week,play_count_for_month,
+        synopsis,code,save_sum,status,play_sum,is_vip,resolution
+      FROM
+        video
+      <where>
+        <if test="status != null ">
+          AND status = ${status}
+        </if>
+        AND MATCH(title,code)
+        AGAINST(#{searchValue} IN BOOLEAN MODE)
+        LIMIT #{pageSize} OFFSET ${page}
+      </where>
+    </select>
+
+    <select id="searchMatchVideoPageCount" parameterType="com.k365.video_base.model.so.VideoSO">
+      SELECT
+        COUNT(DISTINCT id)
+      FROM
+        video
+      <where>
+        <if test="status != null ">
+          AND status = ${status}
+        </if>
+        AND MATCH(title,code)
+        AGAINST(#{searchValue} IN BOOLEAN MODE)
+      </where>
+    </select>
+
+</mapper>

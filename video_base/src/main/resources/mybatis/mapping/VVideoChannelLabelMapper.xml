@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.k365.video_base.mapper.VVideoChannelLabelMapper">
+
+    <select id="searchMatchPage" parameterType="com.k365.video_base.model.so.VideoSO" resultType="com.k365.video_base.model.ro.VVideoChannelLabelRO">
+        SELECT
+          v_id,v_code,v_cover,v_title,v_status,v_play_sum,v_create_date
+          ,GROUP_CONCAT(vc_name) AS video_channels,GROUP_CONCAT(vl_name) AS video_labels
+        FROM
+          v_video_channel_label
+        <where>
+            <if test="videoLabelId != null ">
+                AND vl_id = ${videoLabelId}
+            </if>
+            <if test="videoChannelId != null ">
+                AND vc_id = ${videoChannelId}
+            </if>
+            <if test="status != null ">
+                AND v_status = ${status}
+            </if>
+            <if test="searchValue != null and searchValue != ''">
+                AND MATCH(v_title,v_code)
+                AGAINST(#{searchValue} IN BOOLEAN MODE)
+            </if>
+        </where>
+        GROUP BY v_id
+        LIMIT #{pageSize} OFFSET ${page}
+    </select>
+
+    <select id="searchMatchPageCount" parameterType="com.k365.video_base.model.so.VideoSO" resultType="java.lang.Long">
+        SELECT
+          COUNT(DISTINCT v_id)
+        FROM
+          v_video_channel_label
+        <where>
+            <if test="videoLabelId != null ">
+                AND vl_id = ${videoLabelId}
+            </if>
+            <if test="videoChannelId != null ">
+                AND vc_id = ${videoChannelId}
+            </if>
+            <if test="status != null ">
+                AND v_status = ${status}
+            </if>
+            <if test="searchValue != null and searchValue != ''">
+                AND MATCH(v_title,v_code)
+                AGAINST(#{searchValue} IN BOOLEAN MODE)
+            </if>
+        </where>
+    </select>
+
+    <select id="findVideosByLabelIds" parameterType="com.k365.video_base.model.so.VideoSO" resultType="com.k365.video_base.model.ro.VVideoChannelLabelRO">
+        SELECT
+          v_id,v_cover,v_title,v_play_sum,v_create_date,v_time_len
+        FROM
+          v_video_channel_label
+        <where>
+            <if test="status != null ">
+                AND v_status = ${status}
+            </if>
+            <if test="videoLabelIds!=null and videoLabelIds.size!=0">
+                AND vl_id IN
+                <foreach collection="videoLabelIds" item="vlId"
+                         index="index" open="(" close=")" separator=",">
+                    #{vlId}
+                </foreach>
+            </if>
+        </where>
+        GROUP BY v_id
+        LIMIT #{pageSize} OFFSET ${page}
+    </select>
+
+</mapper>

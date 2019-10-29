@@ -1,0 +1,16 @@
+FROM maven:3.6-jdk-8-alpine as build
+WORKDIR /app
+COPY . .
+RUN mvn install
+
+FROM openjdk:8-jdk-alpine
+WORKDIR /app
+COPY --from=build /app/video_site_api/target/video_site_api-0.0.1-SNAPSHOT.jar /app
+ENTRYPOINT ["java","-jar","video_site_api-0.0.1-SNAPSHOT.jar"]
+EXPOSE 8084
+
+
+
+
+
+

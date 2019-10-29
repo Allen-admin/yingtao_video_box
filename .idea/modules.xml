@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/video_base/video_base.iml" filepath="$PROJECT_DIR$/video_base/video_base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video_box.iml" filepath="$PROJECT_DIR$/video_box.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video_common/video_common.iml" filepath="$PROJECT_DIR$/video_common/video_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video_manager_api/video_manager_api.iml" filepath="$PROJECT_DIR$/video_manager_api/video_manager_api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video_service/video_service.iml" filepath="$PROJECT_DIR$/video_service/video_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video_site_api/video_site_api.iml" filepath="$PROJECT_DIR$/video_site_api/video_site_api.iml" />
+    </modules>
+  </component>
+</project>

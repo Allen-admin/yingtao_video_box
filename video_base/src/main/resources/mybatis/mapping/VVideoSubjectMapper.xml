@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.k365.video_base.mapper.VVideoSubjectMapper">
+
+    <select id="findVideoSubject" parameterType="com.k365.video_base.model.dto.VideoSubjectDTO"
+            resultType="com.k365.video_base.model.ro.VVideoSubjectRO">
+        SELECT
+            COUNT(DISTINCT v_id) AS video_total,
+            vs_id,
+            vs_cover,
+            vs_name,
+            vs_status,
+            vs_sort,
+            vs_content
+        FROM
+          `v_video_subject`
+        <where>
+            <if test="vsStatus != null ">
+                AND vs_status = ${vsStatus}
+            </if>
+            <if test="vStatus != null ">
+                AND v_status = ${vStatus}
+            </if>
+        </where>
+        GROUP BY vs_id
+        ORDER BY vs_sort
+        LIMIT #{pageSize} OFFSET ${page}
+    </select>
+</mapper>
