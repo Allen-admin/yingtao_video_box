@@ -601,25 +601,17 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 Video video = this.getById(v.getVideoId());
                 list.add(video);
             }
-
-            Collections.sort(list, new Comparator<Video>() {
-                @Override
-                public int compare(Video u1, Video u2) {
-                    long result = u2.getPlayCountForWeek() - u1.getPlayCountForWeek();
-                    if (result > 0) {
-                        return 1;
-                    }else if (result < 0) {
-                        return -1;
-                    }
-                        return 0; //相等为0
-                    }
-                }); // 按周播放降序排序
-            //装入标签查询出来的视频和不够补全的视频数据
+            //创建一个map用于去重
+            Map<String,Integer> map=new HashMap();
             List<Video> list2=new ArrayList<>();
 
-
-            //判断数据库数据是否足够,不够则补全
-            if(list.size()<videoDTO.getPageSize()){
+            if(list.size()>=videoDTO.getPageSize()){
+                for(int i = 0;i<videoDTO.getPageSize();i++){
+                    map.put(list.get(new Random().nextInt(list.size())).getId(),0);
+                    list2.add(list.get(new Random().nextInt(list.size())));
+                    list.remove(new Random().nextInt(list.size()));
+                }
+            }else{
                 for(int i=0;i<list.size();i++){
                     list2.add(list.get(i));
                 }
@@ -628,10 +620,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 List<Video> list1 = page2.getRecords();
                 for (Video vvv:list1){
                     list2.add(vvv);
-                }
-            }else{
-                for(int i=0;i<videoDTO.getPageSize();i++){
-                    list2.add(list.get(i));
                 }
             }
             //最后取前videoDTO.getPageSize()部
