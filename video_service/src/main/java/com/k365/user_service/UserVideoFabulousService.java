@@ -30,6 +30,6 @@ public interface UserVideoFabulousService extends IService<UserVideoFabulous> {
     /**
      * 根据用户id或根据视频id删除
      */
- /*   void removeByVidOrUId(UserVideoFabulous userVideoFabulous);*/
+    void removeByVidOrUId(UserVideoFabulous userVideoFabulous);
 
 }

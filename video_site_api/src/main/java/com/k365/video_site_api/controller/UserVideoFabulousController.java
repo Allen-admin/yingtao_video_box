@@ -3,7 +3,10 @@ package com.k365.video_site_api.controller;
 
 import com.k365.user_service.UserVideoFabulousService;
 import com.k365.video_base.common.ResultFactory;
+import com.k365.video_base.common.UserContext;
 import com.k365.video_base.model.dto.VUserVideoFabulousDTO;
+import com.k365.video_base.model.po.User;
+import com.k365.video_base.model.po.UserVideoFabulous;
 import com.k365.video_common.annotation.TokenVerify;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -39,5 +42,18 @@ public class UserVideoFabulousController {
         userVideofabulousService.addFabulous(vUserVideoFabulousDTO.getVId());
         return ResultFactory.buildSuccessResult();
     }
+
+
+    @PostMapping("/remove")
+    @ApiOperation("取消点赞")
+    @TokenVerify
+    @ApiImplicitParam(paramType = "header", name = "Token", value = "身份认证Token")
+    public String remove(@RequestBody VUserVideoFabulousDTO vUserVideoFabulousDTO) {
+        User currentUser = UserContext.getCurrentUser();
+        userVideofabulousService.removeByVidOrUId(UserVideoFabulous.builder().userId(currentUser.getId())
+                .videoId(vUserVideoFabulousDTO.getVId()).build());
+        return ResultFactory.buildSuccessResult();
+    }
+
 
 }
