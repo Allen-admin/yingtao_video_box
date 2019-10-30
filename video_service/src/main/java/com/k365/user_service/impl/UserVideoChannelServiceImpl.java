@@ -55,6 +55,7 @@ public class UserVideoChannelServiceImpl
 
     @Override
     public void removeByUId(String uId) {
+
         this.remove(new UpdateWrapper<UserVideoChannel>().eq("user_id",uId));
     }
 
