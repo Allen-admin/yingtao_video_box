@@ -594,6 +594,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                     new QueryWrapper<Video>());
             //获取标签中的随机一个标签
             VideoLabelVideo videoLabelVideo = labelVideoList.get((int) (0 + Math.random() * (labelVideoList.size() - 1 - 0 + 1)));
+            System.out.println(videoLabelVideo.getVideoLabelId());
             //根据标签ID查询视频
             List<VideoLabelVideo> VideoLabelVideos=videoLabelVideoService.list(new QueryWrapper<VideoLabelVideo>().eq("video_label_id",videoLabelVideo.getVideoLabelId()));
             List<Video> list=new ArrayList<>();
@@ -607,25 +608,33 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
             if(list.size()>=videoDTO.getPageSize()){
                 for(int i = 0;i<videoDTO.getPageSize();i++){
-                    map.put(list.get(new Random().nextInt(list.size())).getId(),0);
-                    list2.add(list.get(new Random().nextInt(list.size())));
-                    list.remove(new Random().nextInt(list.size()));
+                    int r1 = new Random().nextInt(list.size());
+                    list2.add(list.get(r1));
+                    list.remove(r1);
                 }
             }else{
                 for(int i=0;i<list.size();i++){
                     list2.add(list.get(i));
+                    map.put(list.get(i).getId(),0);
                 }
                 IPage<Video> page2 = this.page(new Page<Video>().setCurrent(videoDTO.getPage()).setSize(videoDTO.getPageSize()),
                         new QueryWrapper<Video>().orderByDesc("play_count_for_week").orderByAsc("play_count_for_month"));
                 List<Video> list1 = page2.getRecords();
                 for (Video vvv:list1){
-                    list2.add(vvv);
+                    if(map.get(vvv.getId())!=null){
+
+                    }else{
+                        list2.add(vvv);
+                        map.put(vvv.getId(),0);
+                    }
                 }
             }
-            //最后取前videoDTO.getPageSize()部
+            //最后取前随机pagesize部
             List<Video> list3=new ArrayList<>();
             for(int i=0;i<videoDTO.getPageSize();i++){
-                list3.add(list2.get(i));
+                int r2 = new Random().nextInt(list2.size());
+                list3.add(list2.get(r2));
+                list2.remove(r2);
             }
             page.setRecords(list3);
 
