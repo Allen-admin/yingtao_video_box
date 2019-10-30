@@ -3,9 +3,9 @@ package com.k365.user_service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.k365.video_base.common.UserContext;
 import com.k365.user_service.UserVideoCollectionService;
 import com.k365.user_service.VUserVideoCollectionService;
+import com.k365.video_base.common.UserContext;
 import com.k365.video_base.mapper.UserVideoCollectionMapper;
 import com.k365.video_base.model.dto.VUserVideoCollectionDTO;
 import com.k365.video_base.model.po.User;
@@ -18,9 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.ListUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * <p>
@@ -72,6 +72,7 @@ public class UserVideoCollectionServiceImpl extends ServiceImpl<UserVideoCollect
         }
         return true;
     }
+
 
     @Override
     public void removeByVidOrUId(UserVideoCollection userVideoCollection) {

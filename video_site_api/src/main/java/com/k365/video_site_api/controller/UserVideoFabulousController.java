@@ -43,7 +43,6 @@ public class UserVideoFabulousController {
         return ResultFactory.buildSuccessResult();
     }
 
-
     @PostMapping("/remove")
     @ApiOperation("取消点赞")
     @TokenVerify
@@ -54,6 +53,5 @@ public class UserVideoFabulousController {
                 .videoId(vUserVideoFabulousDTO.getVId()).build());
         return ResultFactory.buildSuccessResult();
     }
-
 
 }

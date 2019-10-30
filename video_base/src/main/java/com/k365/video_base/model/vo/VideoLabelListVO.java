@@ -34,5 +34,7 @@ public class VideoLabelListVO {
 
     private Boolean hasCollected;
 
+    private Boolean hasFabulous;
+
     private Collection<VideoLabelVO> videoLabelVOList;
 }

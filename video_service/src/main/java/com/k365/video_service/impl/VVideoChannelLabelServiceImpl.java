@@ -1,26 +1,26 @@
 package com.k365.video_service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.k365.user_service.UserVideoCollectionService;
+import com.k365.user_service.UserVideoFabulousService;
 import com.k365.video_base.mapper.VVideoChannelLabelMapper;
 import com.k365.video_base.model.po.VVideoChannelLabel;
-import com.k365.video_base.model.po.VideoLabel;
 import com.k365.video_base.model.ro.VVideoChannelLabelRO;
 import com.k365.video_base.model.so.VideoSO;
-import com.k365.video_base.model.vo.*;
+import com.k365.video_base.model.vo.BaseListVO;
+import com.k365.video_base.model.vo.VVideoChannelLabelVO;
+import com.k365.video_base.model.vo.VideoLabelListVO;
+import com.k365.video_base.model.vo.VideoLabelVO;
 import com.k365.video_common.constant.StatusEnum;
 import com.k365.video_service.VVideoChannelLabelService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.velocity.util.ArrayListWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.ListUtils;
 
 import java.util.*;
-import java.util.zip.Inflater;
 
 /**
  * <p>
@@ -36,6 +36,9 @@ public class VVideoChannelLabelServiceImpl extends ServiceImpl<VVideoChannelLabe
 
     @Autowired
     private UserVideoCollectionService userVideoCollectionService;
+
+    @Autowired
+    private UserVideoFabulousService userVideoFabulousService;
 
     @Override
     public BaseListVO<VVideoChannelLabelVO> searchByKeyWordAndType(VideoSO videoSO) {
@@ -125,7 +128,6 @@ public class VVideoChannelLabelServiceImpl extends ServiceImpl<VVideoChannelLabe
                 .eq("v_status", StatusEnum.ENABLE.key()).orderByAsc("vl_sort")
                 .select("v_id,v_code,v_title,v_play_sum,v_create_date,v_play_url,v_save_url,vl_id,vl_name"));
 
-
         Set<Integer> vlIds = new HashSet<>();
         List<VideoLabelVO> labelVOList = new ArrayList<>();
         if(!ListUtils.isEmpty(list)){
@@ -143,6 +145,7 @@ public class VVideoChannelLabelServiceImpl extends ServiceImpl<VVideoChannelLabe
             });
             result.setVideoLabelVOList(labelVOList);
             result.setHasCollected(userVideoCollectionService.hasCollection(result.getVId()));
+            result.setHasFabulous(userVideoFabulousService.hasFabulous(result.getVId()));
         }
 
         return result;

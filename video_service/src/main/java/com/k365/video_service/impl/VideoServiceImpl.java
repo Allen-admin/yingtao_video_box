@@ -798,6 +798,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         }
 
         result.put("videoInfo", labelsByVId);
+
         //获取广告相关信息
         result.put("playPageAd", adService.getPlayPageAd(request));
 
