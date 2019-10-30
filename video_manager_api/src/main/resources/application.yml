@@ -23,9 +23,9 @@ spring:
         #druid相关配置
         druid:
             #基本属性--使用druid作为数据库连接池
-            url: jdbc:mysql://23.225.228.218:3306/video_box?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
-            username: root
-            password: wuji..!@#mysql..#@!abc
+            url: jdbc:mysql://103.100.142.208:3306/video_box?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+            username: test
+            password: 123.Shui
             driver-class-name: com.mysql.cj.jdbc.Driver
             type: com.alibaba.druid.pool.DruidDataSource
             #监控统计拦截的filters
@@ -53,10 +53,10 @@ spring:
     #Redis配置
     redis:
         #Redis数据库索引，默认为0
-        database: 0
-        host: 23.225.228.218
-        port: 6379
-        password: wuji..!@#redis..#@!abc
+         database: 0
+         host: 103.100.142.208
+         port: 6379
+         password: 123.sh
         # 连接超时时间（毫秒）
         timeout: 10000
         # 连接池设置
@@ -98,19 +98,25 @@ mybatis-plus:
         map-underscore-to-camel-case: true
         cache-enabled: false
 #自定义属性
-custom-attr:
+#custom-attr:
     #fastdfs storage server
-    fastdfs:
-        storage-server: http://198.2.202.226:8888
+    #fastdfs:
+        #storage-server: http://198.2.202.226:8888
         #fastdfs conf
-        config: classpath:/fdfs_client.conf
+        #config: classpath:/fdfs_client.conf
     #Swagger2 switch
     swagger2-ui-switch: true
     #Druid View 监控
-    druid-view:
-        login-name: master
-        login-password: 123.Shui.com
-        ip-allow:
-        ip-deny:
+    #druid-view:
+        #login-name: master
+        #login-password: 123.Shui.com
+        #ip-allow:
+        #ip-deny:
 
 
+#自定义属性
+custom-attr:
+    #fastdfs storage server
+    fastdfs-storage-server: http://103.100.142.208
+    #Swagger2 switch
+    swagger2-ui-switch: true
