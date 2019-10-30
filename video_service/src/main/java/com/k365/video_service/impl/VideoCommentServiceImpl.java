@@ -117,12 +117,15 @@ public class VideoCommentServiceImpl extends ServiceImpl<VideoCommentMapper, Vid
         List<VideoComment> records = this.page(new Page<VideoComment>().setCurrent(videoCommentDTO.getPage())
                 .setSize(videoCommentDTO.getPageSize()), new QueryWrapper<VideoComment>().eq("status", StatusEnum.ENABLE.key())
                 .eq("video_id", videoCommentDTO.getVideoId()).orderByDesc("time")).getRecords();
+
         //通过userid查询用户   查询用户头像和姓名
         for(VideoComment videoComment:records){
             User user = userService.getById(videoComment.getUserId());
+
             if(!StringUtils.isEmpty(user.getNickname())){
                 videoComment.setUserNickname(user.getNickname());
             }
+
             if(!StringUtils.isEmpty(user.getUserIcon())){
                 videoComment.setUserIcon(user.getUserIcon());
             }
