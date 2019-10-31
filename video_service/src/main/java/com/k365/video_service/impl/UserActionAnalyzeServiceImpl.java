@@ -45,11 +45,12 @@ public class UserActionAnalyzeServiceImpl extends ServiceImpl<UserActionAanlyzeM
 
         System.out.println("add user action anaylze:" + actionType);
 
-        //1.根据videoId获取videlLableList
         String videoID = userActionAnaylzeDTO.getVideoId();
+
+        //1.根据videoId获取videlLableList
         List<VideoLabelVideo> videoLabelVideoList = videoLabelVideoService.getVideoLableVideosByVideoId(videoID);
 
-        //2.组装待新增数据userActionAnaylzeList
+        //2.组装待插入数据库数据userActionAnaylzeList
         List<UserActionAnalyze> userActionAnalyzeList = null;
         if (!videoLabelVideoList.isEmpty() && videoLabelVideoList.size() > 0) {
 
@@ -69,10 +70,11 @@ public class UserActionAnalyzeServiceImpl extends ServiceImpl<UserActionAanlyzeM
             }
         }
 
-        //3.根据macAddr查询user_action_anaylze获取list
+        //3.根据macAddr查询user_action_anaylze获取当前数据
         List<UserActionAnalyze> userActionAnalyzeListOld = this.findUserActionAnaylzeListByMacAddr(userActionAnaylzeDTO.getMacAddr());
 
         if (!userActionAnalyzeListOld.isEmpty() && userActionAnalyzeListOld.size() > 0) {
+            //最多只能为50条数据 TODO：
             if (userActionAnalyzeListOld.size() > 50 && userActionAnalyzeListOld.size() > userActionAnalyzeList.size()) {
                 //删除集合里（userActionAnalyzeList.size()）条最旧的数据
                 for (int i = 0; i <= userActionAnalyzeList.size(); i++) {

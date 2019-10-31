@@ -10,6 +10,7 @@ import com.k365.manager_service.AdService;
 import com.k365.manager_service.DomainService;
 import com.k365.manager_service.SysConfParamService;
 import com.k365.user_service.UserService;
+import com.k365.user_service.UserVideoFabulousService;
 import com.k365.user_service.UserViewingRecordService;
 import com.k365.video_base.common.AppDisplayTypeEnum;
 import com.k365.video_base.common.UserContext;
@@ -109,6 +110,9 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     @Autowired
     private UserActionAnalyzeService userActionAnalyzeService;
+
+    @Autowired
+    private UserVideoFabulousService userVideoFabulousService;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
@@ -821,8 +825,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         UserActionAnaylzeDTO userActionAnaylzeDTO = new UserActionAnaylzeDTO();
         userActionAnaylzeDTO.setVideoId(videoSO.getVideoId());
         userActionAnaylzeDTO.setMacAddr(currentUser.getMacAddr());
-        userActionAnalyzeService.add(userActionAnaylzeDTO,1);
-
+        int actionType = 1;
+        userActionAnalyzeService.add(userActionAnaylzeDTO,actionType);
         return result;
     }
 
@@ -867,7 +871,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         UserActionAnaylzeDTO userActionAnaylzeDTO = new UserActionAnaylzeDTO();
         userActionAnaylzeDTO.setVideoId(videoSO.getVideoId());
         userActionAnaylzeDTO.setMacAddr(currentUser.getMacAddr());
-        userActionAnalyzeService.add(userActionAnaylzeDTO,4);
+        userActionAnalyzeService.add(userActionAnaylzeDTO,3);
         return saveUrl;
     }
 

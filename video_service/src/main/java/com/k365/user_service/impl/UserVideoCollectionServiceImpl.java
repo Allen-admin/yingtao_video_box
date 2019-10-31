@@ -69,7 +69,7 @@ public class UserVideoCollectionServiceImpl extends ServiceImpl<UserVideoCollect
         UserActionAnaylzeDTO userActionAnaylzeDTO = new UserActionAnaylzeDTO();
         userActionAnaylzeDTO.setVideoId(vId);
         userActionAnaylzeDTO.setMacAddr(currentUser.getMacAddr());
-        userActionAnalyzeService.add(userActionAnaylzeDTO, 3);
+        userActionAnalyzeService.add(userActionAnaylzeDTO, 2);
     }
 
     @Override
