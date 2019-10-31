@@ -1,7 +1,7 @@
 package com.k365.video_base.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.k365.video_base.model.po.UserFeedback;
+import com.k365.video_base.model.po.UserActionAnalyze;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @description：
  */
 @Mapper
-public interface UserActionAanlyzeMapper extends BaseMapper<UserFeedback> {
+public interface UserActionAanlyzeMapper extends BaseMapper<UserActionAnalyze> {
 
 }
