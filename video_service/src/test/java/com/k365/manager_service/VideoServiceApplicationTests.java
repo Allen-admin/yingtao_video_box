@@ -2,7 +2,7 @@ package com.k365.manager_service;
 
 import com.k365.global.RedisService;
 import com.k365.video_common.constant.SysParamNameEnum;
-import com.k365.video_common.constant.SysParamValueNameEnum;
+import com.k365.video_service.VideoLabelVideoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,9 @@ public class VideoServiceApplicationTests {
 
     @Autowired(required = false)
     private SysConfParamService sysConfParamService;
+
+    @Autowired(required = false)
+    private VideoLabelVideoService videoLabelVideoService;
 
     @Test
     public void contextLoads() {
@@ -55,4 +58,8 @@ public class VideoServiceApplicationTests {
         redisService.setString("哈喽","沃德");
     }
 
+    @Test
+    public void getVideoLableVideosByVideoId(){
+       System.out.print("videoLableVideos lenth :"+videoLabelVideoService.getVideoLableVideosByVideoId("0935c490082f39e516ffa972a2565123").size());
+    }
 }

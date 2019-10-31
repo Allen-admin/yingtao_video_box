@@ -2,14 +2,11 @@ package com.k365.video_service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.k365.video_base.model.po.VideoChannelVideo;
-import com.k365.video_base.model.po.VideoLabelVideo;
-import com.k365.video_base.mapper.VideoLabelVideoMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.k365.video_base.model.po.VideoSubjectVideo;
+import com.k365.video_base.mapper.VideoLabelVideoMapper;
+import com.k365.video_base.model.po.VideoLabelVideo;
 import com.k365.video_service.VideoLabelVideoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -81,5 +78,12 @@ public class VideoLabelVideoServiceImpl extends ServiceImpl<VideoLabelVideoMappe
         return JSONArray.parseArray(JSON.toJSONString(this.listObjs(new QueryWrapper<VideoLabelVideo>()
                 .in("video_id",videoIds).select("video_label_id"))),Integer.class);
 
+    }
+
+    @Override
+    public List<VideoLabelVideo> getVideoLableVideosByVideoId(String videoId) {
+        return this.list(
+                new QueryWrapper<VideoLabelVideo>()
+                        .eq("video_id", videoId));
     }
 }

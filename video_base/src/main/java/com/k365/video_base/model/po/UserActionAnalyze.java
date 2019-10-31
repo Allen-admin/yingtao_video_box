@@ -6,8 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.sql.Date;
-
+import java.util.Date;
 /**
  * <p>
  * <p>
@@ -21,8 +20,8 @@ import java.sql.Date;
 @Accessors(chain = true)
 public class UserActionAnalyze {
 
-    @TableId(value = "id", type = IdType.UUID)
-    private String id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
 
     /**
@@ -33,7 +32,7 @@ public class UserActionAnalyze {
     /**
      * 视频标签id
      */
-    private String videoLabelId;
+    private Integer videoLabelId;
 
     /**
      * 创建时间
