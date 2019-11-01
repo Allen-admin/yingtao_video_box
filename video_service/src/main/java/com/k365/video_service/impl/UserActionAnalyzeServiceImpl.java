@@ -70,28 +70,34 @@ public class UserActionAnalyzeServiceImpl extends ServiceImpl<UserActionAanlyzeM
             }
         }
 
-        //3.根据macAddr查询user_action_anaylze获取当前数据
-        List<UserActionAnalyze> userActionAnalyzeListOld = this.findUserActionAnaylzeListByMacAddr(userActionAnaylzeDTO.getMacAddr());
+        //待新增条数
+        int addSize = userActionAnalyzeList.size();
+        if (actionType > 0 && addSize > 0) {
+            for (int i = 1; i <= actionType; i++) {
+                //3.根据macAddr查询user_action_anaylze获取当前数据
+                List<UserActionAnalyze> userActionAnalyzeListOld = this.findUserActionAnaylzeListByMacAddr(userActionAnaylzeDTO.getMacAddr());
 
-        if (!userActionAnalyzeListOld.isEmpty() && userActionAnalyzeListOld.size() > 0) {
-            //最多只能为50条数据 TODO：
-            if (userActionAnalyzeListOld.size() > 50 && userActionAnalyzeListOld.size() > userActionAnalyzeList.size()) {
-                //删除集合里（userActionAnalyzeList.size()）条最旧的数据
-                for (int i = 0; i <= userActionAnalyzeList.size(); i++) {
-                    userActionAnalyzeListOld.remove(i);
-                }
-                //根据macAddr删除数据库表里的所有数据
-                if (this.remove(new UpdateWrapper<UserActionAnalyze>().in("mac_addr", userActionAnaylzeDTO.getMacAddr()))) {
-                    //插入
-                    this.saveBatch(userActionAnalyzeListOld);
-                }
-            }
-        }
+                //当前数据条数
+                int currSize = userActionAnalyzeListOld.size();
+                if (!userActionAnalyzeListOld.isEmpty() && currSize > 0) {
 
-        //4.批量新增
-        if (actionType > 0) {
-            for (int i = 0; i <= actionType; i++) {
-                System.out.println("user action anaylze data :"+userActionAnalyzeList);
+                    if ((currSize + addSize) > 50) {
+
+                        //删除 addSize条
+                        for (int j = 1; j <= addSize; j++) {
+                            userActionAnalyzeListOld.remove(j);
+                        }
+
+                        //根据macAddr删除数据库表里的所有数据
+                        if (this.remove(new UpdateWrapper<UserActionAnalyze>().in("mac_addr", userActionAnaylzeDTO.getMacAddr()))) {
+                            //插入
+                            this.saveBatch(userActionAnalyzeListOld);
+                        }
+                    }
+                }
+
+                //4.批量新增
+                System.out.println("user action anaylze data :" + userActionAnalyzeList);
                 this.saveOrUpdateBatch(userActionAnalyzeList);
             }
         }
