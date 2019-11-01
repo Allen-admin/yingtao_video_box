@@ -35,19 +35,19 @@ public class UserVideoFabulousServiceImpl extends ServiceImpl<UserVideoFabulousM
     private UserActionAnalyzeService userActionAnalyzeService;
 
     @Override
-    public void addFabulous(String vId) {
+    public void addFabulous(String vid) {
         User currentUser = UserContext.getCurrentUser();
 
-        if (hasFabulous(vId)) {
+        if (hasFabulous(vid)) {
             throw new ResponsiveException("视频已点赞");
 
         }
-        this.save(UserVideoFabulous.builder().videoId(vId).userId(currentUser.getId()).
+        this.save(UserVideoFabulous.builder().videoId(vid).userId(currentUser.getId()).
                 createDate(new Date()).build());
 
         //调用用户行为分析接口
         UserActionAnaylzeDTO userActionAnaylzeDTO = new UserActionAnaylzeDTO();
-        userActionAnaylzeDTO.setVideoId(vId);
+        userActionAnaylzeDTO.setVideoId(vid);
         userActionAnaylzeDTO.setMacAddr(currentUser.getMacAddr());
         userActionAnalyzeService.add(userActionAnaylzeDTO,2);
 
