@@ -101,7 +101,7 @@ mybatis-plus:
 custom-attr:
     #fastdfs storage server
     fastdfs:
-        storage-server:  http://103.100.142.208
+        storage-server:  http://103.100.142.208:8888
         #fastdfs conf
         config: classpath:/fdfs_client.conf
     #Swagger2 switch

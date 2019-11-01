@@ -117,6 +117,6 @@ mybatis-plus:
 #自定义属性
 custom-attr:
     #fastdfs storage server
-    fastdfs-storage-server: http://103.100.142.208
+    fastdfs-storage-server: http://103.100.142.208:8888
     #Swagger2 switch
     swagger2-ui-switch: true
