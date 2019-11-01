@@ -64,7 +64,6 @@ public class VideoChannelVideoServiceImpl extends
             newVcIds.removeAll(intersection);
 
         }
-
         newVcIds.forEach(newVcId ->
                 newVcv.add(VideoChannelVideo.builder().videoId(videoId).videoChannelId(newVcId).build())
         );
