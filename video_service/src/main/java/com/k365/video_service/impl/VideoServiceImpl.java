@@ -596,13 +596,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         List<VideoLabelVideo> labelVideoList = videoLabelVideoService.list(new QueryWrapper<VideoLabelVideo>().eq("video_id", videoDTO.getId()));
         if(labelVideoList.size()==0) {
             IPage<Video> pagess = this.page(new Page<Video>().setCurrent(videoDTO.getPage()).setSize(videoDTO.getPageSize()),
-                    new QueryWrapper<Video>().orderByDesc("play_count_for_week").orderByAsc("play_count_for_month"));
+                    new QueryWrapper<Video>().notIn("status",2).orderByDesc("play_count_for_week").orderByAsc("play_count_for_month"));
             return videoDataConverter(pagess, false,request);
         }
         IPage<Video> pages=null;
         if(labelVideoList!=null){
             IPage<Video> page = this.page(new Page<Video>().setCurrent(videoDTO.getPage()).setSize(videoDTO.getPageSize()),
-                    new QueryWrapper<Video>());
+                    new QueryWrapper<Video>().notIn("status",2));
             //获取标签中的随机一个标签
             VideoLabelVideo videoLabelVideo = labelVideoList.get((int) (0 + Math.random() * (labelVideoList.size() - 1 - 0 + 1)));
             System.out.println(videoLabelVideo.getVideoLabelId());
@@ -611,7 +611,9 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             List<Video> list=new ArrayList<>();
             for(VideoLabelVideo v:VideoLabelVideos){
                 Video video = this.getById(v.getVideoId());
-                list.add(video);
+                if(video.getStatus()!=2){
+                    list.add(video);
+                }
             }
             //创建一个map用于去重
             Map<String,Integer> map=new HashMap();
@@ -629,7 +631,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                     map.put(list.get(i).getId(),0);
                 }
                 IPage<Video> page2 = this.page(new Page<Video>().setCurrent(videoDTO.getPage()).setSize(videoDTO.getPageSize()),
-                        new QueryWrapper<Video>().orderByDesc("play_count_for_week").orderByAsc("play_count_for_month"));
+                        new QueryWrapper<Video>().notIn("status",2).orderByDesc("play_count_for_week").orderByAsc("play_count_for_month"));
                 List<Video> list1 = page2.getRecords();
                 for (Video vvv:list1){
                     if(map.get(vvv.getId())!=null){
@@ -652,7 +654,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             pages=page;
         }else{
             IPage<Video> page = this.page(new Page<Video>().setCurrent(videoDTO.getPage()).setSize(videoDTO.getPageSize()),
-                    new QueryWrapper<Video>().orderByDesc("play_count_for_week").orderByAsc("play_count_for_month"));
+                    new QueryWrapper<Video>().notIn("status",2).orderByDesc("play_count_for_week").orderByAsc("play_count_for_month"));
             pages=page;
         }
         return videoDataConverter(pages, false,request);
