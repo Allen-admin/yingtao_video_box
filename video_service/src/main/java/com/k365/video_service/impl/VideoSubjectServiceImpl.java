@@ -98,6 +98,9 @@ public class VideoSubjectServiceImpl extends ServiceImpl<VideoSubjectMapper, Vid
 
         String domain2 = domainService.getAppPicDomain();//图片封面域名
         List<VVideoSubjectRO> ros = vVideoSubjectService.findVideoSubjects(videoSubjectDTO);
+        for (VVideoSubjectRO v:ros){
+            v.setVsCover(domain2 + Trim.custom_ltrim(v.getVsCover(), "group"));
+        }
         AdVO adVO = adService.getOneVAdBy4User(request);
         if (adVO != null) {
             ros = ListUtils.isEmpty(ros) ? new ArrayList<>() : ros;
