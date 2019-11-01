@@ -399,6 +399,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public List<VideoBasicInfoVO> findULikes(VideoDTO videoDTO,ServletRequest request) {
         User currentUser = UserContext.getCurrentUser();
 
+
         String domain = domainService.getDomain(request);
         String domain2 = domainService.getAppPicDomain();//图片封面域名
         //观影在、记录中的视频ids
