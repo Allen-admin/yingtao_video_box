@@ -29,6 +29,7 @@ public interface VideoService extends IService<Video> {
      */
     void add(VideoDTO videoDTO);
 
+
     /**
      * 根据id查询视频
      */

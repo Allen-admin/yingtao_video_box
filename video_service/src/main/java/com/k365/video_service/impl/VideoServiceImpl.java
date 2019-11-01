@@ -10,11 +10,13 @@ import com.k365.manager_service.AdService;
 import com.k365.manager_service.DomainService;
 import com.k365.manager_service.SysConfParamService;
 import com.k365.user_service.UserService;
+import com.k365.user_service.UserVideoFabulousService;
 import com.k365.user_service.UserViewingRecordService;
 import com.k365.video_base.common.AppDisplayTypeEnum;
 import com.k365.video_base.common.UserContext;
 import com.k365.video_base.common.VideoContants;
 import com.k365.video_base.mapper.VideoMapper;
+import com.k365.video_base.model.dto.UserActionAnaylzeDTO;
 import com.k365.video_base.model.dto.VideoDTO;
 import com.k365.video_base.model.dto.VideoSubjectDTO;
 import com.k365.video_base.model.po.*;
@@ -105,6 +107,12 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Autowired
     @Lazy
     private DomainService domainService;
+
+    @Autowired
+    private UserActionAnalyzeService userActionAnalyzeService;
+
+    @Autowired
+    private UserVideoFabulousService userVideoFabulousService;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
@@ -815,6 +823,12 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             userViewingRecordService.add(videoSO.getVideoId());
         }
 
+        //调用用户行为分析接口
+        UserActionAnaylzeDTO userActionAnaylzeDTO = new UserActionAnaylzeDTO();
+        userActionAnaylzeDTO.setVideoId(videoSO.getVideoId());
+        userActionAnaylzeDTO.setMacAddr(currentUser.getMacAddr());
+        int actionType = 1;
+        userActionAnalyzeService.add(userActionAnaylzeDTO,actionType);
         return result;
     }
 
@@ -853,7 +867,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        System.out.println(saveUrl);
+        System.out.println("get download video url:"+saveUrl);
+
+        //调用用户行为分析接口
+        UserActionAnaylzeDTO userActionAnaylzeDTO = new UserActionAnaylzeDTO();
+        userActionAnaylzeDTO.setVideoId(videoSO.getVideoId());
+        userActionAnaylzeDTO.setMacAddr(currentUser.getMacAddr());
+        userActionAnalyzeService.add(userActionAnaylzeDTO,3);
         return saveUrl;
     }
 

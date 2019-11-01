@@ -35,4 +35,9 @@ public interface VideoLabelVideoService extends IService<VideoLabelVideo> {
      */
     List<Integer> getVLIdsByVIds(List<String> videoIds);
 
+    /**
+     * 根据视频id批量查询
+     */
+    List<VideoLabelVideo> getVideoLableVideosByVideoId(String videoId);
+
 }
