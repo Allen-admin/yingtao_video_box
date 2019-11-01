@@ -172,11 +172,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
         VideoListVO resultVo = new VideoListVO();
         BeanUtils.copyProperties(video, resultVo);
+
         if (!ListUtils.isEmpty(vvlcsaList)) {
             resultVo.setVideoChannels(new ArrayList<>());
             resultVo.setVideoLabels(new ArrayList<>());
             resultVo.setActors(new ArrayList<>());
             resultVo.setVideoSubjects(new ArrayList<>());
+
             Set<String> idSet = new HashSet<>();
             vvlcsaList.forEach(vvlcsa -> {
                 if (vvlcsa.getVcId() != null && !idSet.contains("vc-" + vvlcsa.getVcId())) {
@@ -207,7 +209,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
     public void update(VideoDTO videoDTO) {
-        int length = videoDTO.getVideoActorIds().length;
+
         Video video = this.getById(videoDTO.getId());
         if (video == null) {
             throw new RuntimeException("视频不存在或已被删除");
@@ -225,13 +227,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             //B.修改视频频道关系
             videoChannelVideoService.updateByVideoId(id, videoDTO.getVideoChannelIds());
 
+            int length = videoDTO.getVideoActorIds().length;
             //C.修改视频女优关系
             if(length==0){
                 videoActorService.removeByVideoId(id);
             }else{
                 videoActorService.updateByVideoId(id, videoDTO.getVideoActorIds());
             }
-
 
             //D.修改视频主题关系
             videoSubjectVideoService.updateByVideoId(id, videoDTO.getVideoSubjectIds());

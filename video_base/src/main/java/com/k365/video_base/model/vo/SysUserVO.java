@@ -12,6 +12,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SysUserVO {
+
     private String id;
 
     private String username;

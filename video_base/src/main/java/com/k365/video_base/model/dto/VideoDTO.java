@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -103,7 +102,7 @@ public class VideoDTO extends SplitPageDTO implements BaseDTO {
     /**
      * 视频频道id
      */
-    //@NotEmpty(groups = {Update.class,Add.class},message = "所属频道不能为空")
+    /*@NotEmpty(groups = {Update.class,Add.class},message = "所属频道不能为空")*/
     private Integer[] videoChannelIds;
 
     /**

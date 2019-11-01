@@ -67,11 +67,13 @@ public class VSysUserRoleServiceImpl
 
                 if (vSysUserRole.getRoleName()!=null)
                     roleMap.get(vSysUserRole.getUserId()).add(vSysUserRole.getRoleName());
+
                 if (vSysUserRole.getRoleId()!=null)
                     roleIDsMap.get(vSysUserRole.getUserId()).add(vSysUserRole.getRoleId());
 
             });
         }
+
         return new BaseListVO<SysUserVO>().setList(sysUserVOSet).setTotal(total);
     }
 

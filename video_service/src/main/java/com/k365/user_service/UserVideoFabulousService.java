@@ -32,4 +32,10 @@ public interface UserVideoFabulousService extends IService<UserVideoFabulous> {
      */
     void removeByVidOrUId(UserVideoFabulous userVideoFabulous);
 
+    /**
+     * 查询点赞视频的数目
+     * @param vid
+     */
+    Integer countFabulous(String vid);
+
 }

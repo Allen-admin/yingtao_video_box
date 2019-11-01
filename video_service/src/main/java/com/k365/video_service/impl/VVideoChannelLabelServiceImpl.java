@@ -143,6 +143,8 @@ public class VVideoChannelLabelServiceImpl extends ServiceImpl<VVideoChannelLabe
                             .setPlayUrl(vvcl.getVPlayUrl());
                 }
             });
+
+            result.setCountFabulous(userVideoFabulousService.countFabulous(result.getVId()));
             result.setVideoLabelVOList(labelVOList);
             result.setHasCollected(userVideoCollectionService.hasCollection(result.getVId()));
             result.setHasFabulous(userVideoFabulousService.hasFabulous(result.getVId()));

@@ -70,5 +70,10 @@ public class UserVideoFabulousServiceImpl extends ServiceImpl<UserVideoFabulousM
     }
 
 
+    @Override
+    public Integer countFabulous(String vid) {
+        return this.count(new QueryWrapper<UserVideoFabulous>().eq("video_id",vid));
+    }
+
 }
 
