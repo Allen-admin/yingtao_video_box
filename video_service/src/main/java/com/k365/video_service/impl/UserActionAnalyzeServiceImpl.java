@@ -113,6 +113,6 @@ public class UserActionAnalyzeServiceImpl extends ServiceImpl<UserActionAanlyzeM
     public List<UserActionAnalyze> findUserActionAnaylzeListByMacAddr(String macAddr) {
         return this.list(
                 new QueryWrapper<UserActionAnalyze>()
-                        .eq("mac_addr", macAddr).orderByDesc("crttime"));
+                        .eq("mac_addr", macAddr).orderByAsc("crttime"));
     }
 }
