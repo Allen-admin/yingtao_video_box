@@ -70,32 +70,24 @@ public class UserActionAnalyzeServiceImpl extends ServiceImpl<UserActionAanlyzeM
             }
         }
 
-        //待新增条数
         int addSize = userActionAnalyzeList.size();
+
         if (actionType > 0 && addSize > 0) {
-            for (int i = 1; i <= actionType; i++) {
+            for (int i = 0; i < actionType; i++) {
+
                 //3.根据macAddr查询user_action_anaylze获取当前数据
                 List<UserActionAnalyze> userActionAnalyzeListOld = this.findUserActionAnaylzeListByMacAddr(userActionAnaylzeDTO.getMacAddr());
 
-                //当前数据条数
                 int currSize = userActionAnalyzeListOld.size();
+
                 if (!userActionAnalyzeListOld.isEmpty() && currSize > 0) {
-
                     if ((currSize + addSize) > 50) {
-
-                        //删除 addSize条
-                        for (int j = 1; j <= addSize; j++) {
-                            userActionAnalyzeListOld.remove(j);
-                        }
-
-                        //根据macAddr删除数据库表里的所有数据
-                        if (this.remove(new UpdateWrapper<UserActionAnalyze>().in("mac_addr", userActionAnaylzeDTO.getMacAddr()))) {
-                            //插入
-                            this.saveBatch(userActionAnalyzeListOld);
+                        for (int j = 0; j < addSize; j++) {
+                            //删除数据库中最早的addSize条数据
+                            this.remove(new UpdateWrapper<UserActionAnalyze>().eq("id", userActionAnalyzeListOld.get(j).getId()));
                         }
                     }
                 }
-
                 //4.批量新增
                 System.out.println("user action anaylze data :" + userActionAnalyzeList);
                 this.saveOrUpdateBatch(userActionAnalyzeList);
