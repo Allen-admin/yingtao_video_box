@@ -61,10 +61,12 @@ public class VideoSubject {
      * 主题类型
      */
     private Integer subjectType;
+
     /**
      * 主题图标
      */
     private String icon;
+
 }
 
 

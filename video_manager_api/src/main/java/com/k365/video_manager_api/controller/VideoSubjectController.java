@@ -29,13 +29,20 @@ public class VideoSubjectController {
     @Autowired
     private VideoSubjectService videoSubjectService;
 
-
     @PostMapping("/list")
-    @ApiOperation(value = "查询视频专题")
+    @ApiOperation(value = "查询所有视频专题")
     @ApiImplicitParam(paramType = "header", name = "Authorization", value = "身份认证Token")
     public String getList(@RequestBody VideoSubjectDTO videoSubjectDTO) {
         videoSubjectDTO.setVsStatus(StatusEnum.ENABLE.key());
         return ResultFactory.buildSuccessResult(videoSubjectService.findAll(videoSubjectDTO));
+    }
+
+    @PostMapping("/find")
+    @ApiOperation(value = "查询分页视频专题")
+    @ApiImplicitParam(paramType = "header", name = "Authorization", value = "身份认证Token")
+    public String find(@RequestBody VideoSubjectDTO videoSubjectDTO) {
+        videoSubjectDTO.setVsStatus(StatusEnum.ENABLE.key());
+        return ResultFactory.buildSuccessResult(videoSubjectService.findPage(videoSubjectDTO));
     }
 
     @PostMapping("/add")
