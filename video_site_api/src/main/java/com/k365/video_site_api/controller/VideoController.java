@@ -55,7 +55,7 @@ public class VideoController {
     }
 
     @PostMapping("/get/u-likes")
-    @ApiOperation(value = "猜你喜欢视频")
+    @ApiOperation(value = "智能推荐")
     @TokenVerify
     @Armor(target = {OSEnum.IOS, OSEnum.ANDROID})
     @ApiImplicitParam(paramType = "header", name = "Token", value = "身份认证Token")

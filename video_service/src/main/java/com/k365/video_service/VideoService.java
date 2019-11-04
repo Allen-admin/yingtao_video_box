@@ -66,7 +66,7 @@ public interface VideoService extends IService<Video> {
     BaseListVO<VideoVO> searchByVideoType(VideoSO videoSO,ServletRequest request);
 
     /**
-     * 分页查询猜你喜欢
+     * 分页查询智能推荐
      */
     List<VideoBasicInfoVO> findULikes(VideoDTO videoDTO,ServletRequest request);
 

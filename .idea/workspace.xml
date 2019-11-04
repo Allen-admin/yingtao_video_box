@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="46d9a5db-db98-4c18-9cf4-394d38c72b96" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/dto/UserActionAnaylzeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/UserActionAnalyzeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/UserActionAnalyzeServiceImpl.java" afterDir="false" />
+    <list default="true" id="46d9a5db-db98-4c18-9cf4-394d38c72b96" name="Default" comment="修改插入用户行为分析的数据">
+      <change afterPath="$PROJECT_DIR$/video_common/src/main/java/com/k365/video_common/util/MyHashMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/UserActionAnalyze.java" beforeDir="false" afterPath="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/UserActionAnalyze.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoCollectionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoCollectionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoFabulousServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoFabulousServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoLabelVideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoLabelVideoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoLabelVideoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoLabelVideoServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video_service/src/test/java/com/k365/manager_service/VideoServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/video_service/src/test/java/com/k365/manager_service/VideoServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/VideoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/VideoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video_site_api/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/video_site_api/src/main/resources/application.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/video_site_api/target/" />
@@ -49,107 +45,59 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="VideoController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/VideoController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="139" column="72" lean-forward="true" selection-start-line="139" selection-start-column="72" selection-end-line="139" selection-end-column="72" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserVideoFabulousController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/UserVideoFabulousController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="41" selection-start-line="41" selection-end-line="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserVideoFabulousService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/UserVideoFabulousService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserVideoFabulousServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoFabulousServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/UserService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="27" column="42" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="122" column="11" lean-forward="true" selection-start-line="122" selection-start-column="11" selection-end-line="122" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserActionAnalyzeServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/UserActionAnalyzeServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="92" column="62" lean-forward="true" selection-start-line="92" selection-start-column="62" selection-end-line="92" selection-end-column="62" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserActionAnalyze.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/UserActionAnalyze.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VideoChannel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/VideoChannel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VideoSiteApiApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/VideoSiteApiApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.41577825">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="VideoController.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/VideoController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="200">
+                  <caret line="67" selection-start-line="67" selection-end-line="67" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="VideoService.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoService.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="19">
+                  <caret line="35" selection-start-line="35" selection-end-line="35" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="UserActionAnalyzeServiceImpl.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/UserActionAnalyzeServiceImpl.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="500">
+                  <caret line="107" column="70" lean-forward="true" selection-start-line="106" selection-start-column="15" selection-end-line="107" selection-end-column="70" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="VideoServiceImpl.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoServiceImpl.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="469">
+                  <caret line="445" column="41" selection-start-line="445" selection-start-column="41" selection-end-line="445" selection-end-column="41" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#16748#16766#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -162,14 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>userser</find>
-      <find>getone</find>
-      <find>this.li</find>
-      <find>cover</find>
-      <find>domain</find>
-      <find>this.</find>
-      <find>geton</find>
-      <find>update</find>
       <find>该用户名</find>
       <find>1000</find>
       <find>add</find>
@@ -179,19 +119,27 @@
       <find>Date</find>
       <find>Update</find>
       <find>事务</find>
-      <find>删除</find>
       <find>视频下载</find>
-      <find>点赞</find>
       <find>getVideoLableVideosByVideoId</find>
-      <find>收藏</find>
       <find>UserVideoCollectionService</find>
-      <find>播放</find>
-      <find>findPlayVideo</find>
       <find>addCollection</find>
-      <find>addFabulous</find>
       <find>getSaveVideoUrl</find>
-      <find>visitorAutoRegister</find>
       <find>save</find>
+      <find>visitorAutoRegister</find>
+      <find>视频播放</find>
+      <find>收藏</find>
+      <find>播放</find>
+      <find>播放视频</find>
+      <find>findPlayVideo</find>
+      <find>addFabulous</find>
+      <find>点赞</find>
+      <find>删除</find>
+      <find>removeByUserId</find>
+      <find>remove</find>
+      <find>findULikes</find>
+      <find>findById</find>
+      <find>videoService</find>
+      <find>findU</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -203,7 +151,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/video_base/src/main/resources/mybatis/mapping/ManagerGroupMapper.xml" />
         <option value="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/vo/UserNewVO.java" />
         <option value="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/vo/VideoViewingInfoVO.java" />
         <option value="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/dto/ManagerGroupDTO.java" />
@@ -227,7 +174,6 @@
         <option value="$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/Test.java" />
         <option value="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/User.java" />
         <option value="$PROJECT_DIR$/video_manager_api/src/main/java/com/k365/video_manager_api/newcontroller/ManagerGroupController.java" />
-        <option value="$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/VideoController.java" />
         <option value="$PROJECT_DIR$/video_common/src/main/resources/fdfs_client.conf" />
         <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/new_manager_service/ManagerGroupService.java" />
         <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/new_manager_service/impl/ManagerGroupServiceImpl.java" />
@@ -236,24 +182,26 @@
         <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/new_manager_service/impl/ManagerEmployeeServiceImpl.java" />
         <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoCommentServiceImpl.java" />
         <option value="$PROJECT_DIR$/video_manager_api/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/video_site_api/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/mapper/UserActionAnalyzeMapper.java" />
         <option value="$PROJECT_DIR$/video_base/src/main/resources/mybatis/mapping/UserActionAnalyzeMapper.xml" />
         <option value="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/mapper/UserActionAanlyzeMapper.java" />
-        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoService.java" />
         <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoActionAnalyzeService.java" />
         <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoActionAnalyzeService.java" />
         <option value="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/dto/UserActionAnaylzeDTO.java" />
-        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoLabelVideoService.java" />
         <option value="$PROJECT_DIR$/video_service/src/test/java/com/k365/manager_service/VideoServiceApplicationTests.java" />
-        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoLabelVideoServiceImpl.java" />
         <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/UserActionAnalyzeService.java" />
-        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoFabulousServiceImpl.java" />
-        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoCollectionServiceImpl.java" />
-        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoServiceImpl.java" />
-        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/UserActionAnalyzeServiceImpl.java" />
         <option value="$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/UserActionAnalyze.java" />
+        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoCollectionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoFabulousServiceImpl.java" />
+        <option value="$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/VideoController.java" />
+        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoService.java" />
+        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/UserActionAnalyzeServiceImpl.java" />
+        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/video_site_api/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoLabelVideoService.java" />
+        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoLabelVideoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/video_common/src/main/java/com/k365/video_common/util/MyHashMap.java" />
+        <option value="$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -290,10 +238,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="617" />
-    <option name="y" value="10" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="174" />
+    <option name="y" value="158" />
+    <option name="width" value="1716" />
+    <option name="height" value="885" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -301,9 +249,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -314,62 +259,6 @@
             <path>
               <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
               <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_base" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="video_base" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="video_base" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_base" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="video_base" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="po" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
               <item name="video_service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -405,63 +294,31 @@
             <path>
               <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
               <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_site_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_site_api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_site_api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_site_api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_site_api" type="462c0819:PsiDirectoryNode" />
+              <item name="video_service" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="k365" type="462c0819:PsiDirectoryNode" />
+              <item name="video_service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
               <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_site_api" type="462c0819:PsiDirectoryNode" />
+              <item name="video_service" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="k365" type="462c0819:PsiDirectoryNode" />
-              <item name="video_site_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="video_box_new" type="b2602c69:ProjectViewProjectNode" />
-              <item name="video_box_new" type="462c0819:PsiDirectoryNode" />
-              <item name="video_site_api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="k365" type="462c0819:PsiDirectoryNode" />
-              <item name="video_site_api" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="video_service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -479,7 +336,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -509,17 +366,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.VideoSiteApiApplication">
+  <component name="RunManager" selected="Application.VideoServiceImpl">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
-    <configuration name="AESCipher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.k365.video_common.util.AESCipher" />
+    <configuration name="MyHashMap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.k365.video_common.util.MyHashMap" />
       <module name="video_common" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.k365.video_common.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="VideoServiceImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.k365.video_service.impl.VideoServiceImpl" />
+      <module name="video_service" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.k365.video_service.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -707,17 +575,19 @@
     <list>
       <item itemvalue="Spring Boot.VideoSiteApiApplication" />
       <item itemvalue="Spring Boot.VideoManagerSystemApiApplication" />
-      <item itemvalue="Application.AESCipher" />
       <item itemvalue="JUnit.VideoServiceApplicationTests.getVideoLableVideosByVideoId" />
       <item itemvalue="JUnit.VideoServiceApplicationTests.testRedisAnnotation" />
       <item itemvalue="JUnit.VideoServiceApplicationTests.testFindAll" />
+      <item itemvalue="Application.MyHashMap" />
+      <item itemvalue="Application.VideoServiceImpl" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.VideoServiceImpl" />
+        <item itemvalue="Application.MyHashMap" />
         <item itemvalue="JUnit.VideoServiceApplicationTests.testFindAll" />
         <item itemvalue="JUnit.VideoServiceApplicationTests.testRedisAnnotation" />
         <item itemvalue="JUnit.VideoServiceApplicationTests.getVideoLableVideosByVideoId" />
-        <item itemvalue="Application.AESCipher" />
       </list>
     </recent_temporary>
   </component>
@@ -768,7 +638,10 @@
       <workItem from="1572246002487" duration="688000" />
       <workItem from="1572252195002" duration="9039000" />
       <workItem from="1572311325390" duration="14294000" />
-      <workItem from="1572431715888" duration="27220000" />
+      <workItem from="1572431715888" duration="28861000" />
+      <workItem from="1572511668399" duration="69000" />
+      <workItem from="1572511756697" duration="6079000" />
+      <workItem from="1572570390228" duration="64782000" />
     </task>
     <task id="LOCAL-00001" summary="submit">
       <created>1571447812442</created>
@@ -910,7 +783,49 @@
       <option name="project" value="LOCAL" />
       <updated>1572483963496</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="用户点击视频记录实体类及mapper">
+      <created>1572510112107</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1572510112107</updated>
+    </task>
+    <task id="LOCAL-00022" summary="用户点击视频记录实体类及mapper">
+      <created>1572510249041</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1572510249041</updated>
+    </task>
+    <task id="LOCAL-00023" summary="用户点击视频记录实体类及mapper">
+      <created>1572523051492</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1572523051492</updated>
+    </task>
+    <task id="LOCAL-00024" summary="用户行为分析数据新增">
+      <created>1572576885826</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1572576885826</updated>
+    </task>
+    <task id="LOCAL-00025" summary="用户行为分析数据新增">
+      <created>1572577126045</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1572577126045</updated>
+    </task>
+    <task id="LOCAL-00026" summary="修改插入用户行为分析的数据">
+      <created>1572663477402</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1572663477402</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -934,16 +849,16 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="203932000" />
+    <option name="totallyTimeSpent" value="276503000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.14232409" side_tool="true" visible="true" weight="0.523446" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.14658849" side_tool="true" weight="0.3380589" />
       <window_info anchor="right" id="Maven Projects" order="10" weight="0.15991472" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="7" />
       <window_info anchor="right" id="Database" order="4" />
@@ -952,37 +867,37 @@
       <window_info id="UI Designer" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.05997819" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4904051" weight="0.32824427" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.48987207" weight="0.4700109" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info id="Image Layers" order="4" />
-      <window_info anchor="bottom" id="Java Enterprise" order="12" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4738806" weight="0.36750272" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8576759" visible="true" weight="0.523446" />
-      <window_info anchor="bottom" id="Spring" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3432836" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.46695095" weight="0.15812431" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8534115" weight="1.0" />
+      <window_info anchor="bottom" id="Spring" order="10" sideWeight="0.49946696" weight="0.3293348" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.27558637" />
       <window_info anchor="right" id="Bean Validation" order="7" weight="0.32995737" />
       <window_info id="Web" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3293348" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="right" id="Word Book" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="SciView" order="8" />
-      <window_info anchor="right" id="Word Book" order="11" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
       <window_info id="Designer" order="7" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.7574627" visible="true" weight="0.10250818" />
-      <window_info anchor="bottom" id="Spring" order="10" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8534115" visible="true" weight="0.16139586" />
+      <window_info anchor="bottom" id="Spring" order="10" sideWeight="0.49946696" weight="0.3293348" />
       <window_info id="Image Layers" order="4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="6" side_tool="true" />
@@ -990,25 +905,25 @@
       <window_info id="Capture Tool" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.24253732" side_tool="true" weight="0.18865867" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49253732" weight="0.32824427" />
-      <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.14658849" side_tool="true" weight="0.3380589" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.48987207" weight="0.4700109" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Word Book" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
-      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4738806" weight="0.36836284" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.46695095" weight="0.15812431" />
       <window_info anchor="right" id="Maven Projects" order="10" weight="0.15991472" />
-      <window_info anchor="bottom" id="Find" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23560767" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3293348" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.27558637" />
       <window_info anchor="right" id="SciView" order="8" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Web" order="5" side_tool="true" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.05997819" />
       <window_info anchor="right" id="Bean Validation" order="7" weight="0.32995737" />
     </layout-to-restore>
   </component>
@@ -1050,7 +965,9 @@
     <MESSAGE value="新增功能" />
     <MESSAGE value="接口修改" />
     <MESSAGE value="用户点击视频记录实体类及mapper" />
-    <option name="LAST_COMMIT_MESSAGE" value="用户点击视频记录实体类及mapper" />
+    <MESSAGE value="用户行为分析数据新增" />
+    <MESSAGE value="修改插入用户行为分析的数据" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改插入用户行为分析的数据" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1058,118 +975,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/resources/mybatis/mapping/UserSaveVideoRecordMapper.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/resources/mybatis/mapping/UserVideoChannelMapper.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/resources/mybatis/mapping/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/resources/mybatis/generator/generatorConfig.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/resources/mybatis/mapping/UserActionAnalyzeMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="9" lean-forward="true" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/UserFeedback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/mapper/UserFeedbackMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.1.2/mybatis-plus-core-3.1.2.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/mapper/TaskMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/mapper/UserActionAanlyzeMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="40" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoSubjectService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/dto/VideoDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-967">
-          <caret line="31" column="7" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoLabelServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="58" column="5" lean-forward="true" selection-start-line="41" selection-start-column="3" selection-end-line="58" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/Video.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="26" column="22" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.1.2/mybatis-plus-core-3.1.2.jar!/com/baomidou/mybatisplus/core/conditions/Wrapper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-575">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VActorVideoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VVideoSubjectServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.1.2/mybatis-plus-core-3.1.2-sources.jar!/com/baomidou/mybatisplus/core/conditions/Wrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-855" />
@@ -1221,10 +1026,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-          <folding>
-            <element signature="e#327#328#0" expanded="true" />
-            <element signature="e#361#362#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1232,10 +1033,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-216">
           <caret line="176" column="15" selection-start-line="176" selection-start-column="11" selection-end-line="176" selection-end-column="15" />
-          <folding>
-            <element signature="e#6390#6391#0" expanded="true" />
-            <element signature="e#6438#6439#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1257,9 +1054,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="22" selection-start-line="12" selection-end-line="12" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1267,10 +1061,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-329">
           <caret line="66" column="69" lean-forward="true" selection-start-line="66" selection-start-column="69" selection-end-line="66" selection-end-column="69" />
-          <folding>
-            <element signature="e#2092#2093#0" expanded="true" />
-            <element signature="e#2153#2154#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1288,54 +1078,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoLabelVideoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="60" column="97" lean-forward="true" selection-start-line="60" selection-start-column="15" selection-end-line="60" selection-end-column="97" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoLabelVideoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="40" column="48" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="115" column="26" selection-start-line="115" selection-start-column="11" selection-end-line="115" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/UserActionAnalyzeService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoCollectionServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="71" column="62" lean-forward="true" selection-start-line="71" selection-start-column="62" selection-end-line="71" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/UserVideoCollectionService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1346,13 +1092,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="868" column="66" lean-forward="true" selection-start-line="868" selection-start-column="66" selection-end-line="868" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -1360,81 +1099,247 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="27" column="42" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="122" column="11" lean-forward="true" selection-start-line="122" selection-start-column="11" selection-end-line="122" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/VideoSiteApiApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/VideoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="139" column="72" lean-forward="true" selection-start-line="139" selection-start-column="72" selection-end-line="139" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/UserVideoFabulousService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoFabulousServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/UserVideoFabulousController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/UserActionAnalyzeServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="92" column="62" lean-forward="true" selection-start-line="92" selection-start-column="62" selection-end-line="92" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/VideoChannel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
+        <state relative-caret-position="266">
           <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/UserActionAnalyze.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="191">
           <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserFeedbackServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/UserVideoCollectionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="28" column="22" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoCollectionServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="71" column="62" lean-forward="true" selection-start-line="71" selection-start-column="62" selection-end-line="71" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/armorcontroller/ArmorData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3326">
+          <caret line="561" column="9" selection-start-line="561" selection-start-column="9" selection-end-line="561" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/Video.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserVideoFabulousServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="41" column="49" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/UserVideoFabulousService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/UserVideoFabulousController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="41" column="39" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="27" column="42" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/manager_service/DomainService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="39" column="15" lean-forward="true" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_manager_api/src/main/java/com/k365/video_manager_api/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="66" column="24" lean-forward="true" selection-start-line="66" selection-start-column="24" selection-end-line="66" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserSaveVideoRecordServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="28" column="90" lean-forward="true" selection-start-line="28" selection-start-column="90" selection-end-line="28" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/UserSaveVideoRecordService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="26" column="23" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_common/src/main/java/com/k365/video_common/util/AESCipher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_site_api/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="25" column="12" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_manager_api/src/main/resources/application-dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="54" column="24" lean-forward="true" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_site_api/src/main/resources/application-prod.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1959" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/user_service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="122" column="11" lean-forward="true" selection-start-line="122" selection-start-column="11" selection-end-line="122" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/UserActionAnalyzeServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="107" column="70" lean-forward="true" selection-start-line="106" selection-start-column="15" selection-end-line="107" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/VideoSiteApiApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_common/src/main/java/com/k365/video_common/util/MyHashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" column="41" lean-forward="true" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
+          <folding>
+            <element signature="e#1116#1133#0" expanded="true" />
+            <element signature="e#1321#1327#0" expanded="true" />
+            <element signature="e#1785#1802#0" expanded="true" />
+            <element signature="e#2034#2040#0" expanded="true" />
+            <element signature="e#2891#2909#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/VideoLabelVideoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="45" column="54" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoLabelVideoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="54" column="44" lean-forward="true" selection-start-line="54" selection-start-column="44" selection-end-line="54" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/vo/VideoListVO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/dto/VideoDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-453">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/manager_service/AdService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_base/src/main/java/com/k365/video_base/model/po/VideoLabelVideo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_site_api/src/main/java/com/k365/video_site_api/controller/VideoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video_service/src/main/java/com/k365/video_service/impl/VideoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="445" column="41" selection-start-line="445" selection-start-column="41" selection-end-line="445" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#16748#16766#0" expanded="true" />
           </folding>
         </state>
       </provider>

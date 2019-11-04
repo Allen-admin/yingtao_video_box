@@ -86,4 +86,11 @@ public class VideoLabelVideoServiceImpl extends ServiceImpl<VideoLabelVideoMappe
                 new QueryWrapper<VideoLabelVideo>()
                         .eq("video_id", videoId));
     }
+
+    @Override
+    public List<VideoLabelVideo> getVideoLableVideosByLableId(String videoLabelId) {
+        return this.list(
+                new QueryWrapper<VideoLabelVideo>()
+                        .eq("video_label_id", videoLabelId));
+    }
 }
