@@ -469,6 +469,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             if (videoIdList.size() == 0) {
                 //从4个videoIdList中取100条数据
                 Set<String> videoIdAllSet = new HashSet<>();
+
                 for (int i = 0; i < videoIdList4.size(); i++) {
                     for (int j = 0; j < videoIdList4.get(i).size(); j++) {
                         if (videoIdAllSet.size() == 100) {
@@ -478,6 +479,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                     }
                 }
 
+                System.out.println("videoIdAllSet:"+videoIdAllSet);
                 for (int i = 0; i < videoIdAllSet.size(); i++) {
                     if (videoIdList.size() == 100) {
                         break;
@@ -485,7 +487,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                     videoIdList.add(videoIdAllSet.iterator().next());
                 }
 
-                System.out.println("when union set size is 0,new videoIdList:"+videoIdList.size());
+                System.out.println("when union set size is 0,new videoIdList:" + videoIdList);
             }
 
             List<Video> videoList = new ArrayList<>();
