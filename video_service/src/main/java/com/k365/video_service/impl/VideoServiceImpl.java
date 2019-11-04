@@ -489,24 +489,27 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 //         currPage为3，下标则为pageSize*2
                 //查询之前，校验 list的size() > = currPage * pageSize
                 int index = 0;
+
                 if (videoList.size() >= currPage * pageSize) {
                     if (currPage > 1) {
                         index = (currPage - 1) * pageSize;
                     }
-
-                    for (int p = index; p < videoList.size(); p++) {
-                        VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(videoList.get(p).getId())
-                                .setCover(videoList.get(p).getCover()).setTitle(videoList.get(p).getTitle()).setPlaySum(videoList.get(p).getPlaySum())
-                                .setTimeLen(videoList.get(p).getTimeLen()).setCreateDate(videoList.get(p).getCreateDate()).setIsVip(videoList.get(p).getIsVip());
-
-                        if (vo.getCover() != null && !vo.getCover().equals("")) {
-                            vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
-                        }
-                        resultList.add(vo);
-                    }
                 }
+                for (int p = index; p < videoList.size(); p++) {
+                    System.out.println("p data:" + videoList.get(p).getId());
+                    VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(videoList.get(p).getId())
+                            .setCover(videoList.get(p).getCover()).setTitle(videoList.get(p).getTitle()).setPlaySum(videoList.get(p).getPlaySum())
+                            .setTimeLen(videoList.get(p).getTimeLen()).setCreateDate(videoList.get(p).getCreateDate()).setIsVip(videoList.get(p).getIsVip());
+
+                    if (vo.getCover() != null && !vo.getCover().equals("")) {
+                        vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
+                    }
+                    System.out.println("vo:" + vo);
+                    resultList.add(vo);
+                }
+
             }
-        }else{
+        } else {
             String domain = domainService.getDomain(request);
             String domain2 = domainService.getAppPicDomain();//图片封面域名
             //观影记录中的视频ids
