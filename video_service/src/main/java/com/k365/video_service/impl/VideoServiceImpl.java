@@ -479,12 +479,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                     }
                 }
 
-                System.out.println("videoIdAllSet:"+videoIdAllSet);
-                for (int i = 0; i < videoIdAllSet.size(); i++) {
-                    if (videoIdList.size() == 100) {
-                        break;
-                    }
-                    videoIdList.add(videoIdAllSet.iterator().next());
+                System.out.println("videoIdAllSet:" + videoIdAllSet);
+
+                Iterator it = videoIdAllSet.iterator();
+
+                while(it.hasNext()){
+                    System.out.println(it.next());
+                    videoIdList.add((String)it.next());
                 }
 
                 System.out.println("when union set size is 0,new videoIdList:" + videoIdList);
