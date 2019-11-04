@@ -478,12 +478,14 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                     }
                 }
 
-                for (int i = 0; i < videoIdAllSet.size(); i++){
-                    if (videoIdList.size() ==100){
+                for (int i = 0; i < videoIdAllSet.size(); i++) {
+                    if (videoIdList.size() == 100) {
                         break;
                     }
                     videoIdList.add(videoIdAllSet.iterator().next());
                 }
+
+                System.out.println("when union set size is 0,new videoIdList:"+videoIdList.size());
             }
 
             List<Video> videoList = new ArrayList<>();
@@ -494,9 +496,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         .eq("id", videoIdList.get(jj)).and(wrapper -> wrapper.eq("status", StatusEnum.ENABLE.key())));
 
                 videoList.add(video);
-                System.out.println("union set video list size:" + videoList.size());
             }
-
+            System.out.println("union set video list size:" + videoList.size());
 
             //如果video<100
             int needVideoSize = 0;
