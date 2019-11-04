@@ -61,4 +61,9 @@ public class VVideoSubjectRO {
      */
     private String adUrl;
 
+    /**
+     * 图标
+     */
+    private String vsIcon;
+
 }

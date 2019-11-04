@@ -11,7 +11,8 @@
             vs_name,
             vs_status,
             vs_sort,
-            vs_content
+            vs_content,
+            vs_icon
         FROM
           `v_video_subject`
         <where>
@@ -20,6 +21,9 @@
             </if>
             <if test="vStatus != null ">
                 AND v_status = ${vStatus}
+            </if>
+            <if test="subjectType != null ">
+                AND vs_subject_type = ${subjectType}
             </if>
         </where>
         GROUP BY vs_id
