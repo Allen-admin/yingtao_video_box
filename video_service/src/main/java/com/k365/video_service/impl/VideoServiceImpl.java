@@ -416,8 +416,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 lableIdCountMap.putInteger(userActionAnalyzeList.get(i).getVideoLabelId(), 1);
             }
             System.out.println("lableIdCountMap size:" + lableIdCountMap.size());
-            System.out.println("lableIdCountMap:" + lableIdCountMap);
-
 
             //对lableIdMap的value及count进行降序排序
             Map<Integer, Integer> probs = new TreeMap<Integer, Integer>();
@@ -438,7 +436,9 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             //根据4个videoLableId查询videoId
             List<List<String>> videoIdList4 = new ArrayList<>();
 
+            //遍历videoLableId List
             for (int k = 0; k < videoLabelIdList.size(); k++) {
+
                 List<VideoLabelVideo> videoLabelVideoList = new ArrayList<>();
                 videoLabelVideoList = videoLabelVideoService.getVideoLableVideosByLableId(String.valueOf(videoLabelIdList.get(k)));
 
@@ -453,34 +453,83 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             }
 
             List<String> videoIdList = new ArrayList<>();//videoId并集
+
             if (videoIdList4.size() > 0) {
                 videoIdList = videoIdList4.get(0);
             }
-            //取videoIdList4中每个List并集
+
+            //取4个videoIdList中的并集
             for (int kkk = 1; kkk < videoIdList4.size(); kkk++) {
                 videoIdList.retainAll(videoIdList4.get(kkk));
             }
 
-            System.out.println("video id union set:" + videoIdList);
+            System.out.println("video id union set size:" + videoIdList.size());
+
+            //如果并集为0
+            if (videoIdList.size() == 0) {
+                //从4个videoIdList中取100条数据
+                Set<String> videoIdAllSet = new HashSet<>();
+
+                for (int i = 0; i < videoIdList4.size(); i++) {
+                    for (int j = 0; j < videoIdList4.get(i).size(); j++) {
+                        if (videoIdAllSet.size() == 100) {
+                            break;
+                        }
+                        videoIdAllSet.add(videoIdList4.get(i).get(j));
+                    }
+                }
+
+                System.out.println("videoIdAllSet:" + videoIdAllSet);
+
+                Iterator it = videoIdAllSet.iterator();
+
+                while(it.hasNext()){
+                    System.out.println(it.next());
+                    videoIdList.add((String)it.next());
+                }
+
+                System.out.println("when union set size is 0,new videoIdList:" + videoIdList);
+            }
 
             List<Video> videoList = new ArrayList<>();
+
             for (int jj = 0; jj < videoIdList.size(); jj++) {
                 Video video = new Video();
                 video = this.getOne(new QueryWrapper<Video>()
                         .eq("id", videoIdList.get(jj)).and(wrapper -> wrapper.eq("status", StatusEnum.ENABLE.key())));
+
                 videoList.add(video);
             }
+            System.out.println("union set video list size:" + videoList.size());
 
-            System.out.println("video list:" + videoList);
+            //如果video<100
+            int needVideoSize = 0;
+            if (videoList.size() > 0 && videoList.size() < 100) {
+                //待补全的视频个数
+                needVideoSize = 100 - videoList.size();
+
+                List<Video> allVideoList = new ArrayList<Video>();
+                allVideoList = this.list(new QueryWrapper<Video>().orderByAsc("play_count_for_day"));
+                for (int pp = 0; pp < needVideoSize; pp++) {
+                    //补视频
+                    videoList.add(allVideoList.get(pp));
+                }
+
+
+            } else if (videoList.size() > 100) {
+                //待删除个数
+                needVideoSize = videoList.size() - 100;
+                for (int pp = 0; pp < needVideoSize; pp++) {
+                    videoList.remove(pp);
+                }
+            }
+
 
             String domain2 = domainService.getAppPicDomain();//图片封面域名
 
             if (!ListUtils.isEmpty(videoList)) {
-
                 int pageSize = videoDTO.getPageSize();
                 int currPage = videoDTO.getPage();
-                System.out.println("pageSize:" + pageSize); //10
-                System.out.println("currPage:" + currPage);//1
 
                 //对list的数据进行分页
                 //currPage为查询list的开始下标标记：
@@ -495,8 +544,12 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         index = (currPage - 1) * pageSize;
                     }
                 }
-                for (int p = index; p < videoList.size(); p++) {
-                    System.out.println("p data:" + videoList.get(p).getId());
+
+                if (index > 0) {
+                    pageSize = videoList.size();
+                }
+                System.out.println("index start is :" + index);
+                for (int p = index; p < pageSize; p++) {
                     VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(videoList.get(p).getId())
                             .setCover(videoList.get(p).getCover()).setTitle(videoList.get(p).getTitle()).setPlaySum(videoList.get(p).getPlaySum())
                             .setTimeLen(videoList.get(p).getTimeLen()).setCreateDate(videoList.get(p).getCreateDate()).setIsVip(videoList.get(p).getIsVip());
@@ -504,10 +557,9 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                     if (vo.getCover() != null && !vo.getCover().equals("")) {
                         vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
                     }
-                    System.out.println("vo:" + vo);
                     resultList.add(vo);
                 }
-
+                System.out.println(" resultList size:" + resultList.size());
             }
         } else {
             String domain = domainService.getDomain(request);
@@ -580,6 +632,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         if (resultList.size() > 0) {
             adService.getAd4User(resultList, request);
         }
+        System.out.println(" resultList size:" + resultList.size());
         return resultList;
     }
 
