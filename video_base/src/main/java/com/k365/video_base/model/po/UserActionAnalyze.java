@@ -23,7 +23,6 @@ public class UserActionAnalyze {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-
     /**
      * 用户mac地址
      */
