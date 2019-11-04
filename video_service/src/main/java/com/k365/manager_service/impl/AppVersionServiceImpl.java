@@ -125,7 +125,7 @@ public class AppVersionServiceImpl extends
 
     @Override
     public Boolean findArmorDataSwitch(AppInfo appInfo) {
-        AppVersion version = this.getOne(new QueryWrapper<AppVersion>().eq("os_type", appInfo.getOsKey())
+       AppVersion version = this.getOne(new QueryWrapper<AppVersion>().eq("os_type", appInfo.getOsKey())
                 .eq("status", StatusEnum.ENABLE.key()).eq("version_name", appInfo.getAppVersion()));
 
         log.info("获取伪装数据开关，os={},appVersion={},switch={}", appInfo.getOsName(), appInfo.getAppVersion(), version != null ? version.getArmorData() : null);

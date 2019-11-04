@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.k365.video_base.model.dto.VideoSubjectDTO;
 import com.k365.video_base.model.po.VideoSubject;
 import com.k365.video_base.model.ro.VVideoSubjectRO;
-import com.k365.video_base.model.so.VideoSO;
-import com.k365.video_base.model.vo.VideoBasicInfoVO;
 
 import javax.servlet.ServletRequest;
 import java.util.List;

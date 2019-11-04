@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.k365.manager_service.AdService;
 import com.k365.manager_service.DomainService;
+import com.k365.video_base.common.SubjectTypeEnum;
 import com.k365.video_base.mapper.VideoSubjectMapper;
 import com.k365.video_base.model.dto.VideoSubjectDTO;
 import com.k365.video_base.model.po.VideoSubject;
@@ -96,13 +97,19 @@ public class VideoSubjectServiceImpl extends ServiceImpl<VideoSubjectMapper, Vid
     @Override
     public List<VVideoSubjectRO> pageList(VideoSubjectDTO videoSubjectDTO,ServletRequest request) {
 
+        if(videoSubjectDTO.getSubjectType()==null){
+            videoSubjectDTO.setSubjectType(SubjectTypeEnum.LEVEL1.key());
+        }
         String domain2 = domainService.getAppPicDomain();//图片封面域名
         List<VVideoSubjectRO> ros = vVideoSubjectService.findVideoSubjects(videoSubjectDTO);
         for (VVideoSubjectRO v:ros){
             v.setVsCover(domain2 + Trim.custom_ltrim(v.getVsCover(), "group"));
+            if(v.getVsIcon()!=null){
+                v.setVsIcon(domain2+Trim.custom_ltrim(v.getVsIcon(), "group"));
+            }
         }
         AdVO adVO = adService.getOneVAdBy4User(request);
-        if (adVO != null) {
+        if (adVO != null&&videoSubjectDTO.getSubjectType()!=SubjectTypeEnum.LEVEL2.key()) {
             ros = ListUtils.isEmpty(ros) ? new ArrayList<>() : ros;
             ros.add(new VVideoSubjectRO().setVsCover(domain2 + Trim.custom_ltrim(adVO.getCover(), "group")).setVsId(adVO.getId()).setVsName(adVO.getTitle())
                     .setAdUrl(adVO.getDetailsUrl()).setIsAd(true));

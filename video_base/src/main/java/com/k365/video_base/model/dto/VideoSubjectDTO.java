@@ -53,4 +53,11 @@ public class VideoSubjectDTO extends SplitPageDTO implements BaseDTO {
      * 视频主题状态
      */
     private Integer vsStatus;
+
+    /**
+     * 视频主题类型
+     */
+    private Integer subjectType;
+
+
 }

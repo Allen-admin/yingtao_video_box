@@ -43,5 +43,7 @@ public class VideoSubjectController {
         return ResultFactory.buildSuccessResult(videoSubjectService.pageList(videoSubjectDTO,request));
     }
 
+
+
 }
 
