@@ -53,10 +53,10 @@ spring:
     #Redis配置
     redis:
         #Redis数据库索引，默认为0
-         database: 0
-         host: 23.225.228.218
-         port: 6379
-         password: wuji..!@#redis..#@!abc
+        database: 0
+        host: 23.225.228.218
+        port: 6379
+        password: wuji..!@#redis..#@!abc
         # 连接超时时间（毫秒）
         timeout: 10000
         # 连接池设置
