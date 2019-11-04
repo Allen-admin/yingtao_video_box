@@ -521,8 +521,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 if (index > 0) {
                     pageSize = videoList.size();
                 }
+                System.out.println("index start is :"+index);
                 for (int p = index; p < pageSize; p++) {
-                    System.out.println("index start is :"+p);
                     VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(videoList.get(p).getId())
                             .setCover(videoList.get(p).getCover()).setTitle(videoList.get(p).getTitle()).setPlaySum(videoList.get(p).getPlaySum())
                             .setTimeLen(videoList.get(p).getTimeLen()).setCreateDate(videoList.get(p).getCreateDate()).setIsVip(videoList.get(p).getIsVip());
