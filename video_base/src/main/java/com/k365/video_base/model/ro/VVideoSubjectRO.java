@@ -66,4 +66,5 @@ public class VVideoSubjectRO {
      */
     private String vsIcon;
 
+
 }

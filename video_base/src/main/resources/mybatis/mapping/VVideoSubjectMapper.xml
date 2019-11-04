@@ -13,6 +13,7 @@
             vs_sort,
             vs_content,
             vs_icon
+
         FROM
           `v_video_subject`
         <where>

@@ -2,6 +2,8 @@ package com.k365.video_service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.k365.manager_service.AdService;
 import com.k365.manager_service.DomainService;
@@ -11,6 +13,7 @@ import com.k365.video_base.model.dto.VideoSubjectDTO;
 import com.k365.video_base.model.po.VideoSubject;
 import com.k365.video_base.model.ro.VVideoSubjectRO;
 import com.k365.video_base.model.vo.AdVO;
+import com.k365.video_base.model.vo.BaseListVO;
 import com.k365.video_common.exception.ResponsiveException;
 import com.k365.video_common.util.Trim;
 import com.k365.video_service.VVideoSubjectService;
@@ -88,10 +91,27 @@ public class VideoSubjectServiceImpl extends ServiceImpl<VideoSubjectMapper, Vid
         for (VVideoSubjectRO ro : ros) {
             if (ro.getVsId() != null) {
                 result.add(VideoSubject.builder().content(ro.getVsContent()).cover(ro.getVsCover()).videoTotal(ro.getVideoTotal())
-                        .id(Integer.valueOf(String.valueOf(ro.getVsId()))).name(ro.getVsName()).status(ro.getVsStatus()).sort(ro.getVsSort()).build());
+                        .id(Integer.valueOf(String.valueOf(ro.getVsId()))).name(ro.getVsName())
+                        .icon(ro.getVsIcon()).status(ro.getVsStatus()).sort(ro.getVsSort()).build());
             }
         }
         return result;
+    }
+
+    @Override
+    public BaseListVO<VideoSubject> findPage(VideoSubjectDTO videoSubjectDTO) {
+
+        IPage<VideoSubject> page=this.page(new Page<VideoSubject>().setSize(videoSubjectDTO.getPageSize()).
+                        setCurrent(videoSubjectDTO.getPage()),
+                new QueryWrapper<VideoSubject>().orderByAsc("sort"));
+
+
+
+
+
+
+        return new BaseListVO<VideoSubject>().setTotal(page.getTotal()).setList(page.getRecords());
+
     }
 
     @Override

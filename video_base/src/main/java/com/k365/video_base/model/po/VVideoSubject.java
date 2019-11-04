@@ -1,10 +1,10 @@
 package com.k365.video_base.model.po;
 
-import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -100,4 +100,8 @@ public class VVideoSubject {
      * 是否为VIP视频
      */
     private Boolean vIsVip;
+
+
+
+
 }
