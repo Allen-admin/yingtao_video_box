@@ -40,4 +40,9 @@ public interface VideoLabelVideoService extends IService<VideoLabelVideo> {
      */
     List<VideoLabelVideo> getVideoLableVideosByVideoId(String videoId);
 
+    /**
+     * 根据videlLableId批量查询
+     */
+    List<VideoLabelVideo> getVideoLableVideosByLableId(String labelId);
+
 }
