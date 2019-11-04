@@ -436,7 +436,9 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             //根据4个videoLableId查询videoId
             List<List<String>> videoIdList4 = new ArrayList<>();
 
+            //遍历videoLableId List
             for (int k = 0; k < videoLabelIdList.size(); k++) {
+
                 List<VideoLabelVideo> videoLabelVideoList = new ArrayList<>();
                 videoLabelVideoList = videoLabelVideoService.getVideoLableVideosByLableId(String.valueOf(videoLabelIdList.get(k)));
 
@@ -456,12 +458,33 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 videoIdList = videoIdList4.get(0);
             }
 
-            //取videoIdList4中每个List并集
+            //取4个videoIdList中的并集
             for (int kkk = 1; kkk < videoIdList4.size(); kkk++) {
                 videoIdList.retainAll(videoIdList4.get(kkk));
             }
 
             System.out.println("video id union set size:" + videoIdList.size());
+
+            //如果并集为0
+            if (videoIdList.size() == 0) {
+                //从4个videoIdList中取100条数据
+                Set<String> videoIdAllSet = new HashSet<>();
+                for (int i = 0; i < videoIdList4.size(); i++) {
+                    for (int j = 0; j < videoIdList4.get(i).size(); j++) {
+                        if (videoIdAllSet.size() == 100) {
+                            break;
+                        }
+                        videoIdAllSet.add(videoIdList4.get(i).get(j));
+                    }
+                }
+
+                for (int i = 0; i < videoIdAllSet.size(); i++){
+                    if (videoIdList.size() ==100){
+                        break;
+                    }
+                    videoIdList.add(videoIdAllSet.iterator().next());
+                }
+            }
 
             List<Video> videoList = new ArrayList<>();
 
@@ -521,7 +544,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 if (index > 0) {
                     pageSize = videoList.size();
                 }
-                System.out.println("index start is :"+index);
+                System.out.println("index start is :" + index);
                 for (int p = index; p < pageSize; p++) {
                     VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(videoList.get(p).getId())
                             .setCover(videoList.get(p).getCover()).setTitle(videoList.get(p).getTitle()).setPlaySum(videoList.get(p).getPlaySum())
