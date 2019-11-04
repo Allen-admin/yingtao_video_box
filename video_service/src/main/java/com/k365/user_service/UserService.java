@@ -105,7 +105,7 @@ public interface UserService extends IService<User> {
     /**
      * 推广玩家注册
      */
-    void spreadRegister(String spreadCode);
+    void spreadRegister(String spreadCode,String registerChannel);
 
     /**
      * 查询推广列表
@@ -131,5 +131,11 @@ public interface UserService extends IService<User> {
      * 验证推广二维码地址是否正确
      */
     boolean verifySpreadQr(String spreadQrcodeUrl, AppTypeEnum appType);
+
+    /**
+     * 查询结束时间
+     * @param
+     */
+    void EndTime();
 
 }

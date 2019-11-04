@@ -40,18 +40,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.ListUtils;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
@@ -110,7 +103,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String macAddr = userDTO.getMacAddr();
         //TODO mac未加密 暂时注释
         //AES解密
-        try {
+       /* try {
             macAddr = AESCipher.aesDecryptString(macAddr);
 
         } catch (InvalidKeyException e) {
@@ -128,7 +121,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
+*/
         //mac地址前添加app标识，多个app用户数据隔离
         macAddr = StringUtils.join(appType.getCode(), "-", macAddr);
         userDTO.setMacAddr(macAddr);
@@ -614,8 +607,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
-    public void spreadRegister(String spreadCode) {
+    public void spreadRegister(String spreadCode,String registerChannel) {
         User spreadUser = this.getById(spreadCode);
+
+        spreadUser.setRegisterChannel(registerChannel);
+
         //填写当前玩家等推广人
         User currentUser = UserContext.getCurrentUser();
         if (spreadUser != null && StringUtils.isBlank(currentUser.getRecommenderId())) {
@@ -693,6 +689,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return true;
 
         return false;
+    }
+
+    @Override
+    public void EndTime() {
+        User currentUser = UserContext.getCurrentUser();
+        String id = currentUser.getId();
+        User user=this.getById(id);
+
+        Date date = new Date();
+        user.setLastTime((date.getTime()-user.getLastLoginTime().getTime())/60000);
+        this.updateUser(user);
+
     }
 
     /*    @Override

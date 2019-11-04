@@ -56,7 +56,6 @@ public class UserController {
         return ResultFactory.buildSuccessResult(userService.getUserInfo());
     }
 
-
     @PostMapping(value = "/check-mobile/{mobile}")
     @ApiOperation(value = "手机号是否注册过")
     public String checkMobile(@PathVariable(value = "mobile") String mobile) {
@@ -105,7 +104,7 @@ public class UserController {
     @TokenVerify
     @ApiImplicitParam(paramType = "header", name = "Token", value = "身份认证Token")
     public String spreadUserRegister(@RequestBody UserDTO userDTO) {
-        userService.spreadRegister(userDTO.getSpreadCode());
+        userService.spreadRegister(userDTO.getSpreadCode(),userDTO.getRegisterChannel());
         return ResultFactory.buildSuccessResult();
     }
 
@@ -125,6 +124,16 @@ public class UserController {
     public String viewingInfo() {
         return ResultFactory.buildSuccessResult(userService.getViewingCount());
     }
+
+    @GetMapping(value = "/LastTime")
+    @ApiOperation(value = "获取当前用户结束时间")
+    @TokenVerify
+    @ApiImplicitParam(paramType = "header", name = "Token", value = "身份认证Token")
+    public String userLastTime() {
+        userService.EndTime();
+        return ResultFactory.buildSuccessResult();
+    }
+
 
 /*  @PostMapping(value = "/resend-code/{mobile}")
     @ApiOperation(value = "重新发送短信验证码")
