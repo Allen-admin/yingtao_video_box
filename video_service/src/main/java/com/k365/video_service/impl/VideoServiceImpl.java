@@ -490,10 +490,11 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             List<Video> videoList = new ArrayList<>();
             //遍历videoIdList获取video
             for (int jj = 0; jj < videoIdList.size(); jj++) {
-                Video video = new Video();
-                video = this.getOne(new QueryWrapper<Video>()
+                Video video = this.getOne(new QueryWrapper<Video>()
                         .eq("id", videoIdList.get(jj)).and(wrapper -> wrapper.eq("status", StatusEnum.ENABLE.key())));
-                videoList.add(video);
+                if(video!=null){
+                    videoList.add(video);
+                }
             }
             System.out.println("union set video list size:" + videoList.size());
 
@@ -529,20 +530,27 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         index = (currPage - 1) * pageSize;
                     }
                 }
-
                 if (index > 0) {
                     pageSize = videoList.size();
                 }
                 System.out.println("index start is :" + index);
                 //组装vo
                 for (int p = index; p < pageSize; p++) {
-                    VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(videoList.get(p).getId())
-                            .setCover(videoList.get(p).getCover()).setTitle(videoList.get(p).getTitle()).setPlaySum(videoList.get(p).getPlaySum())
-                            .setTimeLen(videoList.get(p).getTimeLen()).setCreateDate(videoList.get(p).getCreateDate()).setIsVip(videoList.get(p).getIsVip());
-                    if (vo.getCover() != null && !vo.getCover().equals("")) {
-                        vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
+                    VideoBasicInfoVO vo = new VideoBasicInfoVO();
+                    if(videoList.get(p).getId()!=null){
+                        vo.setId(videoList.get(p).getId());
+                        vo.setCover(videoList.get(p).getCover());
+                        vo.setTitle(videoList.get(p).getTitle());
+                        vo.setPlaySum(videoList.get(p).getPlaySum());
+                        vo.setTimeLen(videoList.get(p).getTimeLen());
+                        vo.setCreateDate(videoList.get(p).getCreateDate());
+                        vo.setIsVip(videoList.get(p).getIsVip());
+                        if (vo.getCover() != null && !vo.getCover().equals("")) {
+                            vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
+                        }
+                        resultList.add(vo);
                     }
-                    resultList.add(vo);
+
                 }
                 System.out.println(" resultList size:" + resultList.size());
             }
