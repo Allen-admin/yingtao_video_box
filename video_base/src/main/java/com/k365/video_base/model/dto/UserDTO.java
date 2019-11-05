@@ -105,7 +105,7 @@ public class UserDTO extends SplitPageDTO implements BaseDTO {
     /**
      * 上一次的登出时间
      */
-    private Date lastLoginOutTime;
+    private Long lastLoginOutTime;
 
 
 }
