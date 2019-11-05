@@ -110,7 +110,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         String macAddr = userDTO.getMacAddr();
 
-
         //TODO mac未加密 暂时注释
         //AES解密
         try {
@@ -135,15 +134,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userDTO.setMacAddr(macAddr);
 
         User user = this.getOne(new QueryWrapper<User>().eq("mac_addr", macAddr));
-
-
-
-
-    /*            if (cache.hasKey(cacheKey)) {
-            user = (User) cache.get(cacheKey);
-        } else {
-
-        }*/
 
         boolean newUser = false;
         if (user == null) {
@@ -454,7 +444,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             user = this.getOne(new QueryWrapper<User>().eq("id", uId));
             if (user == null)
                 return null;
-
             cache.set(cacheKey, user, DateUtil.getSurplusSecondOfToday());
         }
         return user;
