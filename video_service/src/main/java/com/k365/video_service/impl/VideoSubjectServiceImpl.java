@@ -124,7 +124,7 @@ public class VideoSubjectServiceImpl extends ServiceImpl<VideoSubjectMapper, Vid
         List<VVideoSubjectRO> ros = vVideoSubjectService.findVideoSubjects(videoSubjectDTO);
         for (VVideoSubjectRO v:ros){
             v.setVsCover(domain2 + Trim.custom_ltrim(v.getVsCover(), "group"));
-            if(v.getVsIcon()!=null){
+            if(v.getVsIcon()!=null&&!v.getVsIcon().equals("")){
                 v.setVsIcon(domain2+Trim.custom_ltrim(v.getVsIcon(), "group"));
             }
         }
