@@ -27,13 +27,13 @@ import javax.servlet.ServletRequest;
  */
 @RestController
 @RequestMapping("/video-subject")
-@Api(tags = "视频主题")
+@Api(tags = "视频专题")
 public class VideoSubjectController {
 
     @Autowired
     private VideoSubjectService videoSubjectService;
 
-    @ApiOperation(value = "获取视频主题")
+    @ApiOperation(value = "获取视频专题")
     @PostMapping("/list")
     @TokenVerify
     @ApiImplicitParam(paramType = "header", name = "Token", value = "身份认证Token")
