@@ -404,10 +404,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
         String macAddr = currentUser.getMacAddr();
 
+        //根据macAddr查询videoLabelId
         List<UserActionAnalyze> userActionAnalyzeList = userActionAnalyzeService.findUserActionAnaylzeListByMacAddr(macAddr);
 
         List<VideoBasicInfoVO> resultList = new ArrayList<>();
-
         if (userActionAnalyzeList.size() > 0) {
 
             MyHashMap lableIdCountMap = new MyHashMap();//key:videoLableId,value:count
@@ -415,7 +415,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             for (int i = 0; i < userActionAnalyzeList.size(); i++) {
                 lableIdCountMap.putInteger(userActionAnalyzeList.get(i).getVideoLabelId(), 1);
             }
-            System.out.println("lableIdCountMap size:" + lableIdCountMap.size());
 
             //对lableIdMap的value及count进行降序排序
             Map<Integer, Integer> probs = new TreeMap<Integer, Integer>();
@@ -440,30 +439,31 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             for (int k = 0; k < videoLabelIdList.size(); k++) {
 
                 List<VideoLabelVideo> videoLabelVideoList = new ArrayList<>();
+                //每个videoLableId对应的videoList
                 videoLabelVideoList = videoLabelVideoService.getVideoLableVideosByLableId(String.valueOf(videoLabelIdList.get(k)));
 
+                //每个videoList对应的videoIdList
                 List<String> videoLableVideoIdList = new ArrayList<>();
 
                 for (int kk = 0; kk < videoLabelVideoList.size(); kk++) {
                     videoLableVideoIdList.add(videoLabelVideoList.get(kk).getVideoId());
                 }
-
                 //每个videoLableId所对应的videoList
                 videoIdList4.add(videoLableVideoIdList);
             }
 
-            List<String> videoIdList = new ArrayList<>();//videoId并集
+            List<String> videoIdList = new ArrayList<>();
 
+            //取4个videoIdList中的并集
             if (videoIdList4.size() > 0) {
                 videoIdList = videoIdList4.get(0);
             }
-
-            //取4个videoIdList中的并集
             for (int kkk = 1; kkk < videoIdList4.size(); kkk++) {
                 videoIdList.retainAll(videoIdList4.get(kkk));
             }
 
             System.out.println("video id union set size:" + videoIdList.size());
+
 
             //如果并集为0
             if (videoIdList.size() == 0) {
@@ -478,26 +478,21 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         videoIdAllSet.add(videoIdList4.get(i).get(j));
                     }
                 }
-
                 System.out.println("videoIdAllSet:" + videoIdAllSet);
 
                 Iterator it = videoIdAllSet.iterator();
-
-                while(it.hasNext()){
-                    System.out.println(it.next());
-                    videoIdList.add((String)it.next());
+                while (it.hasNext()) {
+                    videoIdList.add((String) it.next());
                 }
-
                 System.out.println("when union set size is 0,new videoIdList:" + videoIdList);
             }
 
             List<Video> videoList = new ArrayList<>();
-
+            //遍历videoIdList获取video
             for (int jj = 0; jj < videoIdList.size(); jj++) {
                 Video video = new Video();
                 video = this.getOne(new QueryWrapper<Video>()
                         .eq("id", videoIdList.get(jj)).and(wrapper -> wrapper.eq("status", StatusEnum.ENABLE.key())));
-
                 videoList.add(video);
             }
             System.out.println("union set video list size:" + videoList.size());
@@ -515,7 +510,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                     videoList.add(allVideoList.get(pp));
                 }
 
-
             } else if (videoList.size() > 100) {
                 //待删除个数
                 needVideoSize = videoList.size() - 100;
@@ -524,21 +518,12 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 }
             }
 
-
             String domain2 = domainService.getAppPicDomain();//图片封面域名
 
             if (!ListUtils.isEmpty(videoList)) {
                 int pageSize = videoDTO.getPageSize();
                 int currPage = videoDTO.getPage();
-
-                //对list的数据进行分页
-                //currPage为查询list的开始下标标记：
-                //    比如:currPage为1，下标则为0
-                //         currPage为2，下标则为pageSize
-                //         currPage为3，下标则为pageSize*2
-                //查询之前，校验 list的size() > = currPage * pageSize
                 int index = 0;
-
                 if (videoList.size() >= currPage * pageSize) {
                     if (currPage > 1) {
                         index = (currPage - 1) * pageSize;
@@ -549,11 +534,11 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                     pageSize = videoList.size();
                 }
                 System.out.println("index start is :" + index);
+                //组装vo
                 for (int p = index; p < pageSize; p++) {
                     VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(videoList.get(p).getId())
                             .setCover(videoList.get(p).getCover()).setTitle(videoList.get(p).getTitle()).setPlaySum(videoList.get(p).getPlaySum())
                             .setTimeLen(videoList.get(p).getTimeLen()).setCreateDate(videoList.get(p).getCreateDate()).setIsVip(videoList.get(p).getIsVip());
-
                     if (vo.getCover() != null && !vo.getCover().equals("")) {
                         vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
                     }
@@ -562,6 +547,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 System.out.println(" resultList size:" + resultList.size());
             }
         } else {
+            //用户行为表里没有该用户数据的video筛选逻辑
+
             String domain = domainService.getDomain(request);
             String domain2 = domainService.getAppPicDomain();//图片封面域名
             //观影记录中的视频ids
@@ -602,7 +589,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(ro.getVId())
                                 .setCover(ro.getVCover()).setTitle(ro.getVTitle()).setPlaySum(ro.getVPlaySum())
                                 .setTimeLen(ro.getVTimeLen()).setCreateDate(ro.getVCreateDate()).setIsVip(ro.getVIsVip());
-
                         if (vo.getCover() != null && !vo.getCover().equals("")) {
                             vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
                         }
@@ -632,7 +618,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         if (resultList.size() > 0) {
             adService.getAd4User(resultList, request);
         }
-        System.out.println(" resultList size:" + resultList.size());
         return resultList;
     }
 
