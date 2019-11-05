@@ -2,7 +2,6 @@ package com.k365.video_base.model.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -149,5 +148,15 @@ public class User implements Serializable {
      * VIP类型（0不是VIP 1是vip未到期 2VIP已到期）
      */
     private Integer vipType;
+
+    /**
+     * 推广渠道
+     */
+    private String registerChannel;
+
+    /**
+     * 最近使用时长
+     */
+    private Long lastTime;
 
 }

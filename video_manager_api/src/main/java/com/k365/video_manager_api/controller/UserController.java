@@ -2,11 +2,11 @@ package com.k365.video_manager_api.controller;
 
 
 import com.k365.user_service.UserService;
+import com.k365.video_base.common.ResultFactory;
 import com.k365.video_base.model.dto.UserDTO;
 import com.k365.video_base.model.po.User;
 import com.k365.video_base.model.so.UserSO;
 import com.k365.video_common.annotation.SysLogs;
-import com.k365.video_base.common.ResultFactory;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -70,5 +70,7 @@ public class UserController {
         userService.remove(id);
         return ResultFactory.buildSuccessResult();
     }
+
+
 }
 

@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -93,4 +91,16 @@ public class UserDTO extends SplitPageDTO implements BaseDTO {
      * 推广码
      */
     private String spreadCode;
+
+    /**
+     * 推广渠道
+     */
+    private String registerChannel;
+
+    /**
+     * 最近使用时长
+     */
+    private Date lastTime;
+
+
 }
