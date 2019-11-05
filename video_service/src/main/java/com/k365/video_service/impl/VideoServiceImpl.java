@@ -505,7 +505,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 needVideoSize = 100 - videoList.size();
 
                 List<Video> allVideoList = new ArrayList<Video>();
-                allVideoList = this.list(new QueryWrapper<Video>().orderByAsc("play_count_for_day"));
+                allVideoList = this.list(new QueryWrapper<Video>().eq("status", StatusEnum.ENABLE.key()).orderByAsc("play_count_for_day"));
                 for (int pp = 0; pp < needVideoSize; pp++) {
                     //补视频
                     videoList.add(allVideoList.get(pp));
@@ -590,6 +590,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 videoSO.setPage(videoDTO.getPage()).setPageSize(videoDTO.getPageSize());
                 videoSO.setIsAsc(false);
                 videoSO.setSortName("v_create_date");
+                videoSO.setStatus(StatusEnum.ENABLE.key());
                 List<VVideoChannelLabel> vvclros = vVideoChannelLabelService.findVideosByLabelIds(videoSO);
 
                 if (!ListUtils.isEmpty(vvclros)) {
