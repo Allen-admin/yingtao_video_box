@@ -188,19 +188,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         String ip = IPUtil.getClientIp(WebUtils.toHttp(request));
         user.setLastLoginIp(ip);
-        //获取上次登出时间
-        Long lastLoginOutTime = userDTO.getLastLoginOutTime();
-        //获取上次登录时间
-        Date lastLoginTime = user.getLastLoginTime();
-        //登录时前端传一个上次登出时间，用登出时间减去上次登录时间，存到数据库一个新的字段。
-        if (lastLoginOutTime != null && lastLoginTime != null) {
-            long time = lastLoginOutTime - lastLoginTime.getTime(); //最近使用时长
-            time = TimeUnit.MILLISECONDS.toMinutes(time);
-            user.setLastTime(time);
+
+        if (userDTO.getLastLoginOutTime() != null) {
+            //获取上次登出时间
+            Long lastLoginOutTime = userDTO.getLastLoginOutTime();
+            //获取上次登录时间
+            Date lastLoginTime = user.getLastLoginTime();
+            //登录时前端传一个上次登出时间，用登出时间减去上次登录时间，存到数据库一个新的字段。
+            if (lastLoginTime != null) {
+                long time = lastLoginOutTime - lastLoginTime.getTime(); //最近使用时长
+                time = TimeUnit.MILLISECONDS.toMinutes(time);
+                user.setLastTime(time);
+            }
         }
         //把上次登录登录时间设置为当前时间
         user.setLastLoginTime(new Date());
-
 
         if (this.saveOrUpdate(user)) {
             if (newUser || StringUtils.isBlank(user.getRecommendCode())) {
@@ -551,8 +553,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user2 = UserContext.getCurrentUser();
         if (user2 == null)
             throw new ResponsiveException("用户不存在或已被删除");
-        if(user.getNickname()!=null){
-            if(this.getOne(new QueryWrapper<User>().notIn("id",user2.getId()).eq("nickname", user.getNickname()))!=null) {
+        if (user.getNickname() != null) {
+            if (this.getOne(new QueryWrapper<User>().notIn("id", user2.getId()).eq("nickname", user.getNickname())) != null) {
                 throw new ResponsiveException("该用户名已存在！");
             }
         }
