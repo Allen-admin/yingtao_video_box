@@ -152,6 +152,7 @@ public class User implements Serializable {
     /**
      * 推广渠道
      */
+
     private String registerChannel;
 
     /**

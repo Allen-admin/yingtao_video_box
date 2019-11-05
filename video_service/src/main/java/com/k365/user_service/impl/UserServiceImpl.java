@@ -626,11 +626,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
     public void spreadRegister(String spreadCode, String registerChannel) {
         User spreadUser = this.getById(spreadCode);
-
-        spreadUser.setRegisterChannel(registerChannel);
-
         //填写当前玩家等推广人
         User currentUser = UserContext.getCurrentUser();
+
+        if (registerChannel != null && registerChannel != "") {
+            System.out.println("registerChannel:" + registerChannel);
+            this.doUpdateUser(User.builder().id(currentUser.getId()).registerChannel(registerChannel).build());
+        }
+
         if (spreadUser != null && StringUtils.isBlank(currentUser.getRecommenderId())) {
             spreadUser.setRecommendCount(spreadUser.getRecommendCount() + 1);
 
