@@ -53,6 +53,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -137,12 +138,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         User user = this.getOne(new QueryWrapper<User>().eq("mac_addr", macAddr));
 
-    /*            if (cache.hasKey(cacheKey)) {
-            user = (User) cache.get(cacheKey);
-        } else {
-
-        }*/
-
         boolean newUser = false;
         if (user == null) {
             newUser = true;
@@ -150,8 +145,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
             user = User.builder().macAddr(userDTO.getMacAddr()).userLevel(1).viewingCount(level.getViewingCount())
                     .saveCount(level.getSaveCount()).status(UserStatusEnum.NORMAL.code()).registerTime(new Date())
-                    .usedViewingCount(0).recommendCount(0).awardSaveCount(0).awardViewingCount(0)
-                    .usedSaveCount(0)
+                    .usedViewingCount(0).recommendCount(0).awardSaveCount(0).awardViewingCount(0).usedSaveCount(0)
                     .nickname("樱桃" + RandomKeyUtil.getRandomStr(6).toUpperCase())
                     .appType(appType.getKey()).build();
         } else if (user.getStatus() != UserStatusEnum.NORMAL.code()) {
@@ -160,18 +154,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
 
         //判断是否为会员
-        if(user.getPhone()!=null&&!user.getPhone().equals("")){
+        if (user.getPhone() != null && !user.getPhone().equals("")) {
             if (user.getVipEndTime() != null) {
                 int compare = user.getVipEndTime().compareTo(new Date());
-                if (compare == -1||compare == 0) {
+                if (compare == -1 || compare == 0) {
                     user.setVipType(2);
-                }else{
+                } else {
                     user.setVipType(1);
                 }
-            }else {
+            } else {
                 user.setVipType(2);
             }
-        }else {
+        } else {
             user.setVipType(0);
         }
 
@@ -194,7 +188,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         String ip = IPUtil.getClientIp(WebUtils.toHttp(request));
         user.setLastLoginIp(ip);
+        //获取上次登出时间
+        Long lastLoginOutTime = userDTO.getLastLoginOutTime();
+        //获取上次登录时间
+        Date lastLoginTime = user.getLastLoginTime();
+        //登录时前端传一个上次登出时间，用登出时间减去上次登录时间，存到数据库一个新的字段。
+        if (lastLoginOutTime != null && lastLoginTime != null) {
+            long time = lastLoginOutTime - lastLoginTime.getTime(); //最近使用时长
+            time = TimeUnit.MILLISECONDS.toMinutes(time);
+            user.setLastTime(time);
+        }
+        //把上次登录登录时间设置为当前时间
         user.setLastLoginTime(new Date());
+
 
         if (this.saveOrUpdate(user)) {
             if (newUser || StringUtils.isBlank(user.getRecommendCode())) {
@@ -391,7 +397,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         try {
             statusCode = sms.getSMSProvider().sendCode(mobile, verifyCode);
-            System.out.println(statusCode+"====");
+            System.out.println(statusCode + "====");
         } catch (Exception e) {
             throw new GeneralException("发送短信验证码失败", e);
         }
@@ -442,7 +448,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             user = this.getOne(new QueryWrapper<User>().eq("id", uId));
             if (user == null)
                 return null;
-
             cache.set(cacheKey, user, DateUtil.getSurplusSecondOfToday());
         }
         return user;
@@ -591,7 +596,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         // vip到期时间
         Date time = new Date();
-        Date tim2=time;
+        Date tim2 = time;
         if (currentUser.getVipEndTime() != null) {
             time = currentUser.getVipEndTime();
         }
@@ -603,10 +608,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
         Date endTime = cal.getTime();*/
         int compare = time.compareTo(tim2);
-        boolean updated=true;
-        if (compare == -1||compare==0) {
+        boolean updated = true;
+        if (compare == -1 || compare == 0) {
             updated = this.doUpdateUser(User.builder().vipType(2).phone(phone).id(currentUser.getId()).build());
-        }else{
+        } else {
             updated = this.doUpdateUser(User.builder().vipType(1).vipEndTime(time).phone(phone).id(currentUser.getId()).build());
         }
         if (updated) {
@@ -617,7 +622,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
-    public void spreadRegister(String spreadCode,String registerChannel) {
+    public void spreadRegister(String spreadCode, String registerChannel) {
         User spreadUser = this.getById(spreadCode);
 
         spreadUser.setRegisterChannel(registerChannel);
@@ -658,8 +663,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
             //推广后台系统推广人数+1
             ManagerEmployee managerEmployee = managerEmployeeService.getByMacAddr(spreadUser.getMacAddr());
-            if(managerEmployee!=null){
-                managerEmployee.setRecommendCount(managerEmployee.getRecommendCount()+1);
+            if (managerEmployee != null) {
+                managerEmployee.setRecommendCount(managerEmployee.getRecommendCount() + 1);
                 managerEmployeeService.updateByObj(managerEmployee);
             }
 
@@ -705,10 +710,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public void EndTime() {
         User currentUser = UserContext.getCurrentUser();
         String id = currentUser.getId();
-        User user=this.getById(id);
+        User user = this.getById(id);
 
         Date date = new Date();
-        user.setLastTime((date.getTime()-user.getLastLoginTime().getTime())/60000);
+        user.setLastTime((date.getTime() - user.getLastLoginTime().getTime()) / 60000);
         this.updateUser(user);
 
     }
