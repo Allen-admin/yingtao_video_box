@@ -40,12 +40,20 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.ListUtils;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -101,11 +109,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         final AppTypeEnum appType = HttpUtil.getAppType(request) == null ? AppTypeEnum.XIAO_AI : HttpUtil.getAppType(request);
 
         String macAddr = userDTO.getMacAddr();
+
+
         //TODO mac未加密 暂时注释
         //AES解密
-       /* try {
+        try {
             macAddr = AESCipher.aesDecryptString(macAddr);
-
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
@@ -121,13 +130,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-*/
         //mac地址前添加app标识，多个app用户数据隔离
         macAddr = StringUtils.join(appType.getCode(), "-", macAddr);
         userDTO.setMacAddr(macAddr);
 
-
         User user = this.getOne(new QueryWrapper<User>().eq("mac_addr", macAddr));
+
+
+
 
     /*            if (cache.hasKey(cacheKey)) {
             user = (User) cache.get(cacheKey);
@@ -151,18 +161,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
 
         //判断是否为会员
-        if(user.getPhone()!=null&&!user.getPhone().equals("")){
+        if (user.getPhone() != null && !user.getPhone().equals("")) {
             if (user.getVipEndTime() != null) {
                 int compare = user.getVipEndTime().compareTo(new Date());
-                if (compare == -1||compare == 0) {
+                if (compare == -1 || compare == 0) {
                     user.setVipType(2);
-                }else{
+                } else {
                     user.setVipType(1);
                 }
-            }else {
+            } else {
                 user.setVipType(2);
             }
-        }else {
+        } else {
             user.setVipType(0);
         }
         //判断用户VIP到期时间是否已经到期  如果已经到期则修改VIP类型为2
@@ -184,7 +194,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         String ip = IPUtil.getClientIp(WebUtils.toHttp(request));
         user.setLastLoginIp(ip);
+        //获取上次登出时间
+        Date lastLoginOutTime = userDTO.getLastLoginOutTime();
+        //获取上次登录时间
+        Date lastLoginTime = user.getLastLoginTime();
+        //登录时前端传一个上次登出时间，用登出时间减去上次登录时间，存到数据库一个新的字段。
+        if (lastLoginOutTime != null && lastLoginTime != null) {
+            long time = lastLoginOutTime.getTime() - lastLoginTime.getTime(); //最近使用时长
+            time = TimeUnit.MILLISECONDS.toMinutes(time);
+            user.setLastTime(time);
+        }
+        //把上次登录登录时间设置为当前时间
         user.setLastLoginTime(new Date());
+
 
         if (this.saveOrUpdate(user)) {
             if (newUser || StringUtils.isBlank(user.getRecommendCode())) {
@@ -381,7 +403,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         try {
             statusCode = sms.getSMSProvider().sendCode(mobile, verifyCode);
-            System.out.println(statusCode+"====");
+            System.out.println(statusCode + "====");
         } catch (Exception e) {
             throw new GeneralException("发送短信验证码失败", e);
         }
@@ -536,8 +558,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user2 = UserContext.getCurrentUser();
         if (user2 == null)
             throw new ResponsiveException("用户不存在或已被删除");
-        if(user.getNickname()!=null){
-            if(this.getOne(new QueryWrapper<User>().notIn("id",user2.getId()).eq("nickname", user.getNickname()))!=null) {
+        if (user.getNickname() != null) {
+            if (this.getOne(new QueryWrapper<User>().notIn("id", user2.getId()).eq("nickname", user.getNickname())) != null) {
                 throw new ResponsiveException("该用户名已存在！");
             }
         }
@@ -581,7 +603,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         // vip到期时间
         Date time = new Date();
-        Date tim2=time;
+        Date tim2 = time;
         if (currentUser.getVipEndTime() != null) {
             time = currentUser.getVipEndTime();
         }
@@ -593,10 +615,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
         Date endTime = cal.getTime();*/
         int compare = time.compareTo(tim2);
-        boolean updated=true;
-        if (compare == -1||compare==0) {
+        boolean updated = true;
+        if (compare == -1 || compare == 0) {
             updated = this.doUpdateUser(User.builder().vipType(2).phone(phone).id(currentUser.getId()).build());
-        }else{
+        } else {
             updated = this.doUpdateUser(User.builder().vipType(1).vipEndTime(time).phone(phone).id(currentUser.getId()).build());
         }
         if (updated) {
@@ -607,7 +629,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
-    public void spreadRegister(String spreadCode,String registerChannel) {
+    public void spreadRegister(String spreadCode, String registerChannel) {
         User spreadUser = this.getById(spreadCode);
 
         spreadUser.setRegisterChannel(registerChannel);
@@ -648,8 +670,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
             //推广后台系统推广人数+1
             ManagerEmployee managerEmployee = managerEmployeeService.getByMacAddr(spreadUser.getMacAddr());
-            if(managerEmployee!=null){
-                managerEmployee.setRecommendCount(managerEmployee.getRecommendCount()+1);
+            if (managerEmployee != null) {
+                managerEmployee.setRecommendCount(managerEmployee.getRecommendCount() + 1);
                 managerEmployeeService.updateByObj(managerEmployee);
             }
 
@@ -695,10 +717,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public void EndTime() {
         User currentUser = UserContext.getCurrentUser();
         String id = currentUser.getId();
-        User user=this.getById(id);
+        User user = this.getById(id);
 
         Date date = new Date();
-        user.setLastTime((date.getTime()-user.getLastLoginTime().getTime())/60000);
+        user.setLastTime((date.getTime() - user.getLastLoginTime().getTime()) / 60000);
         this.updateUser(user);
 
     }
