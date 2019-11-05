@@ -40,11 +40,18 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.ListUtils;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
@@ -101,9 +108,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         final AppTypeEnum appType = HttpUtil.getAppType(request) == null ? AppTypeEnum.XIAO_AI : HttpUtil.getAppType(request);
 
         String macAddr = userDTO.getMacAddr();
+
         //TODO mac未加密 暂时注释
         //AES解密
-       /* try {
+        try {
             macAddr = AESCipher.aesDecryptString(macAddr);
 
         } catch (InvalidKeyException e) {
@@ -121,7 +129,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-*/
+
         //mac地址前添加app标识，多个app用户数据隔离
         macAddr = StringUtils.join(appType.getCode(), "-", macAddr);
         userDTO.setMacAddr(macAddr);
@@ -142,7 +150,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
             user = User.builder().macAddr(userDTO.getMacAddr()).userLevel(1).viewingCount(level.getViewingCount())
                     .saveCount(level.getSaveCount()).status(UserStatusEnum.NORMAL.code()).registerTime(new Date())
-                    .usedViewingCount(0).recommendCount(0).awardSaveCount(0).awardViewingCount(0).usedSaveCount(0)
+                    .usedViewingCount(0).recommendCount(0).awardSaveCount(0).awardViewingCount(0)
+                    .usedSaveCount(0)
                     .nickname("樱桃" + RandomKeyUtil.getRandomStr(6).toUpperCase())
                     .appType(appType.getKey()).build();
         } else if (user.getStatus() != UserStatusEnum.NORMAL.code()) {
@@ -165,6 +174,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }else {
             user.setVipType(0);
         }
+
         //判断用户VIP到期时间是否已经到期  如果已经到期则修改VIP类型为2
        /* if (user.getVipType() == null) {
             user.setVipType(0);
