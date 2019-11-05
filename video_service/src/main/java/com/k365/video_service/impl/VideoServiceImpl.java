@@ -614,7 +614,6 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 }
             }
         }
-
         if (resultList.size() > 0) {
             adService.getAd4User(resultList, request);
         }
