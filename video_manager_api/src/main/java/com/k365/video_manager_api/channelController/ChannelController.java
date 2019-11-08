@@ -52,13 +52,49 @@ public class ChannelController {
     }
 
     @PostMapping("/search")
-    @ApiOperation(value = "分页搜索渠道")
-    public String search(@RequestBody ChannelDTO channelDTO) {
-        return ResultFactory.buildSuccessResult(channelService.search(channelDTO));
+    @ApiOperation(value = "通过渠道编号和渠道名搜索")
+    public String searchPage(@RequestBody ChannelDTO channelDTO) {
+        return ResultFactory.buildSuccessResult(channelService.searchPage(channelDTO));
     }
 
+/*    @PostMapping("/search")
+    @ApiOperation(value = "通过渠道编号和渠道名搜索")
+    public String search(@RequestBody ChannelDTO channelDTO) {
+        return ResultFactory.buildSuccessResult(channelService.search(channelDTO));
+    }*/
 
 
+    @PostMapping("/searchDate")
+    @ApiOperation(value = "通过时间段搜索")
+    public String searchDate(@RequestBody ChannelDTO channelDTO) {
+        return ResultFactory.buildSuccessResult(channelService.searchDate(channelDTO));
+    }
+
+    @PostMapping("/count")
+    @ApiOperation(value = "查询")
+    public String count(@RequestBody ChannelDTO channelDTO) {
+        return ResultFactory.buildSuccessResult(channelService.count(channelDTO));
+    }
+
+    /*
+    @PostMapping("/list")
+    @ApiOperation(value = "渠道列表")
+    public String searchPage(@RequestBody ChannelDTO channelDTO) {
+        return ResultFactory.buildSuccessResult(channelService.searchPage(channelDTO));
+    }*/
+
+/*    @PostMapping("/findPage")
+    @ApiOperation(value = "查询渠道和数量")
+    public String findPage(@RequestBody ChannelDTO channelDTO) {
+        return ResultFactory.buildSuccessResult(channelService.findPage(channelDTO));
+    }*/
+
+
+    @GetMapping("/findAll")
+    @ApiOperation(value = "查询")
+    public String findAll() {
+        return ResultFactory.buildSuccessResult(channelService.findAll());
+    }
 
 
 }

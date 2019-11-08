@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.k365.video_base.mapper.VUserChannelMapper">
+
+    <select id="find" parameterType="com.k365.video_base.model.so.VUserChannelSO"
+            resultType="com.k365.video_base.model.vo.VUserChannelVO">
+        SELECT
+        c_id,
+        c_name,
+        c_channel_code,
+        c_create_date,
+        t_register_count
+        FROM
+        `v_user_channel`
+         LIMIT #{pageSize} OFFSET ${page}
+    </select>
+
+
+    <select id="count" parameterType="com.k365.video_base.model.so.VUserChannelSO" resultType="java.lang.Long">
+        SELECT
+        COUNT(DISTINCT c_id)
+        FROM
+        `v_user_channel`
+    </select>
+
+
+    <select id="search" parameterType="com.k365.video_base.model.so.VUserChannelSO"
+            resultType="com.k365.video_base.model.po.VUserChannel">
+        SELECT
+        c_id,
+        c_name,
+        c_channel_code,
+        c_create_date,
+        t_register_count
+
+        FROM
+        `v_user_channel`
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+            AND MATCH(c_name,c_channel_code)
+            AGAINST(#{searchValue} IN BOOLEAN MODE)
+            </if>
+            LIMIT #{pageSize} OFFSET ${page}
+        </where>
+    </select>
+
+    <select id="findPage" parameterType="com.k365.video_base.model.so.VUserChannelSO"
+            resultType="com.k365.video_base.model.vo.VUserChannelVO">
+        SELECT
+        c.id AS c_id,
+        c.name AS c_name,
+        c.channel_code AS c_channel_code,
+        c.create_date AS c_create_date,
+        t.register_count AS t_register_count
+       FROM
+    (
+        channel c
+    LEFT JOIN ( SELECT u.register_channel AS register_channel, count( u.register_channel ) AS register_count FROM (
+       SELECT * FROM user where user.register_time between "${beginTime}" and  "${endTime}"
+      )u GROUP BY u.register_channel ) t ON ((
+      t.register_channel = c.channel_code
+  )))
+    LIMIT #{pageSize} OFFSET ${page}
+    </select>
+
+    <select id="findPageTotle" parameterType="com.k365.video_base.model.so.VUserChannelSO"
+            resultType="com.k365.video_base.model.vo.VUserChannelVO">
+        SELECT
+        COUNT(*)
+        FROM
+        (
+        channel c
+        LEFT JOIN ( SELECT u.register_channel AS register_channel, count( u.register_channel ) AS register_count FROM (
+        SELECT * FROM user where user.register_time between "${beginTime}" and  "${endTime}"
+        )u GROUP BY u.register_channel ) t ON ((
+        t.register_channel = c.channel_code
+        )))
+    </select>
+
+
+
+        <select id="list" parameterType="com.k365.video_base.model.so.VUserChannelSO"
+                resultType="com.k365.video_base.model.vo.VUserChannelVO">
+        SELECT
+		`c`.`id` AS `c_id`,
+		`c`.`name` AS `c_name`,
+		`c`.`channel_code` AS `c_channel_code`,
+		`c`.`create_date` AS `c_create_date`,
+		`t`.`register_count` AS `t_register_count`
+	FROM
+		(
+			`channel` `c`
+			LEFT JOIN ( SELECT `user`.`register_channel` AS `register_channel`, count( `user`.`register_channel` ) AS `register_count` FROM	(SELECT * FROM user where user.register_time between "${beginTime}" and  '2019-12-28 02:20:34'
+
+      )`user` GROUP BY `user`.`register_channel` ) `t` ON ((
+				`t`.`register_channel` = `c`.`channel_code`
+	)))
+            <where>
+                <if test="searchValue != null and searchValue != ''">
+                    AND MATCH(c_name,c_channel_code)
+                    AGAINST(#{searchValue} IN BOOLEAN MODE)
+                </if>
+            </where>
+            LIMIT #{pageSize} OFFSET ${page}
+        </select>
+
+
+
+
+</mapper>

@@ -21,4 +21,7 @@ public interface VVideoSubjectMapper extends BaseMapper<VVideoSubject> {
 
     List<VVideoSubjectRO> findVideoSubject(VideoSubjectDTO videoSubjectDTO);
 
+
+    List<VVideoSubjectRO> findVideoSubject1(VideoSubjectDTO videoSubjectDTO);
+
 }

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
@@ -22,10 +23,11 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 public class Channel {
 
-    @TableId(value = "id",type = IdType.UUID)
-    private String id;
+    @TableId(value = "id",type = IdType.AUTO)
+    private Integer id;
 
     /**
      * 渠道名称
@@ -40,11 +42,12 @@ public class Channel {
     /**
      * 创建时间
      */
-    private Date CreateDate;
+    private Date createDate;
 
     /**
-     * 用户id
+     *渠道编号
      */
-    private  String UserId;
+    private String channelCode;
+
 
 }

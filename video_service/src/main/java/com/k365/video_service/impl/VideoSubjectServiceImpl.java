@@ -101,13 +101,9 @@ public class VideoSubjectServiceImpl extends ServiceImpl<VideoSubjectMapper, Vid
     @Override
     public BaseListVO<VideoSubject> findPage(VideoSubjectDTO videoSubjectDTO) {
 
-        IPage<VideoSubject> page=this.page(new Page<VideoSubject>().setSize(videoSubjectDTO.getPageSize()).
+        IPage<VideoSubject> page = this.page(new Page<VideoSubject>().setSize(videoSubjectDTO.getPageSize()).
                         setCurrent(videoSubjectDTO.getPage()),
                 new QueryWrapper<VideoSubject>().orderByAsc("sort"));
-
-
-
-
 
 
         return new BaseListVO<VideoSubject>().setTotal(page.getTotal()).setList(page.getRecords());
@@ -115,25 +111,39 @@ public class VideoSubjectServiceImpl extends ServiceImpl<VideoSubjectMapper, Vid
     }
 
     @Override
-    public List<VVideoSubjectRO> pageList(VideoSubjectDTO videoSubjectDTO,ServletRequest request) {
+    public List<VVideoSubjectRO> pageList(VideoSubjectDTO videoSubjectDTO, ServletRequest request) {
 
-        if(videoSubjectDTO.getSubjectType()==null){
+        if (videoSubjectDTO.getSubjectType() == null && videoSubjectDTO.getSubjectType().equals("")) {
             videoSubjectDTO.setSubjectType(SubjectTypeEnum.LEVEL1.key());
         }
+
         String domain2 = domainService.getAppPicDomain();//图片封面域名
-        List<VVideoSubjectRO> ros = vVideoSubjectService.findVideoSubjects(videoSubjectDTO);
-        for (VVideoSubjectRO v:ros){
+        List<VVideoSubjectRO> ros = vVideoSubjectService.findVideoSubjects1(videoSubjectDTO);
+        for (VVideoSubjectRO v : ros) {
             v.setVsCover(domain2 + Trim.custom_ltrim(v.getVsCover(), "group"));
-            if(v.getVsIcon()!=null&&!v.getVsIcon().equals("")){
-                v.setVsIcon(domain2+Trim.custom_ltrim(v.getVsIcon(), "group"));
+            if (v.getVsIcon() != null && !v.getVsIcon().equals("")) {
+                v.setVsIcon(domain2 + Trim.custom_ltrim(v.getVsIcon(), "group"));
             }
         }
+
         AdVO adVO = adService.getOneVAdBy4User(request);
-        if (adVO != null&&videoSubjectDTO.getSubjectType()!=SubjectTypeEnum.LEVEL2.key()) {
-            ros = ListUtils.isEmpty(ros) ? new ArrayList<>() : ros;
-            ros.add(new VVideoSubjectRO().setVsCover(domain2 + Trim.custom_ltrim(adVO.getCover(), "group")).setVsId(adVO.getId()).setVsName(adVO.getTitle())
-                    .setAdUrl(adVO.getDetailsUrl()).setIsAd(true));
+        if (adVO != null && videoSubjectDTO.getSubjectType() != SubjectTypeEnum.LEVEL2.key()) {
+            List<VVideoSubjectRO> ros1 = vVideoSubjectService.findVideoSubjects(videoSubjectDTO);
+            for (VVideoSubjectRO v : ros1) {
+                v.setVsCover(domain2 + Trim.custom_ltrim(v.getVsCover(), "group"));
+                if (v.getVsIcon() != null && !v.getVsIcon().equals("")) {
+                    v.setVsIcon(domain2 + Trim.custom_ltrim(v.getVsIcon(), "group"));
+                }
+            }
+
+            ros1 = ListUtils.isEmpty(ros) ? new ArrayList<>() : ros1;
+            ros1.add(new VVideoSubjectRO().setVsCover(domain2 + Trim.custom_ltrim(adVO.getCover(), "group"))
+                    .setVsId(adVO.getId())
+                    .setVsName(adVO.getTitle())
+                    .setAdUrl(adVO.getDetailsUrl())
+                    .setIsAd(true));
         }
+
         return ros;
     }
 

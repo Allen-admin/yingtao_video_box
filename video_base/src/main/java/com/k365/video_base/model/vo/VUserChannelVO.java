@@ -10,41 +10,40 @@ import java.util.Date;
 
 /**
  * @author Allen
- * @date 2019/11/05
+ * @date 2019/8/29 16:33
  * @description：
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class ChannelVO {
-
-    private Integer id;
+@Accessors(chain = true)
+public class VUserChannelVO {
 
     /**
-     * 渠道名称
+     * id
      */
-    private String name;
+    private Integer cId;
 
     /**
-     * 渠道链接
+     * 名称
      */
-    private String link;
+    private String cName;
+
+    /**
+     *编号
+     */
+    private String cChannelCode;
 
     /**
      * 创建时间
      */
-    private Date createDate;
-
-    /**
-     *渠道编号
-     */
-    private String channelCode;
+    private Date cCreateDate;
 
     /**
      * 数量
      */
-    private Integer channelTotal;
+    private Integer tRegisterCount;
+
 
 }

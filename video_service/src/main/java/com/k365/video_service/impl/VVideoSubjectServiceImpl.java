@@ -1,7 +1,6 @@
 package com.k365.video_service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.k365.video_base.mapper.VVideoSubjectMapper;
@@ -29,6 +28,12 @@ public class VVideoSubjectServiceImpl extends ServiceImpl<VVideoSubjectMapper, V
     public List<VVideoSubjectRO> findVideoSubjects(VideoSubjectDTO videoSubjectDTO) {
         videoSubjectDTO.setPage((videoSubjectDTO.getPage() - 1) * videoSubjectDTO.getPageSize());
         return this.baseMapper.findVideoSubject(videoSubjectDTO);
+    }
+
+    @Override
+    public List<VVideoSubjectRO> findVideoSubjects1(VideoSubjectDTO videoSubjectDTO) {
+        videoSubjectDTO.setPage((videoSubjectDTO.getPage() - 1) * videoSubjectDTO.getPageSize());
+        return this.baseMapper.findVideoSubject1(videoSubjectDTO);
     }
 
     @Override

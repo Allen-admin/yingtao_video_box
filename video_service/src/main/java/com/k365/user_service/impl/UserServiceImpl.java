@@ -189,7 +189,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String ip = IPUtil.getClientIp(WebUtils.toHttp(request));
         user.setLastLoginIp(ip);
 
-        if (userDTO.getLastLoginOutTime() != null) {
+        if (userDTO.getLastLoginOutTime() != null || userDTO.getLastLoginOutTime() != 0 || !"0".equals(userDTO.getLastLoginOutTime())) {
             //获取上次登出时间
             Long lastLoginOutTime = userDTO.getLastLoginOutTime();
             //获取上次登录时间

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.k365.video_base.model.dto.VideoSubjectDTO;
 import com.k365.video_base.model.po.VVideoSubject;
 import com.k365.video_base.model.ro.VVideoSubjectRO;
-import com.k365.video_base.model.vo.VideoSubjectVO;
 
 import java.util.List;
 
@@ -22,6 +21,13 @@ public interface VVideoSubjectService extends IService<VVideoSubject> {
      * 分页查询视频专题和视频数量
      */
     List<VVideoSubjectRO> findVideoSubjects(VideoSubjectDTO videoSubjectDTO);
+
+    /**
+     * 分页查询普通专题和视频数量
+     * @param videoSubjectDTO
+     * @return
+     */
+     List<VVideoSubjectRO> findVideoSubjects1(VideoSubjectDTO videoSubjectDTO);
 
     /**
      * 分页查询专题视频

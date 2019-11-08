@@ -1,4 +1,4 @@
-package com.k365.video_base.model.dto;
+package com.k365.video_base.model.so;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,45 +8,47 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 /**
- * <p>
- * <p>
- * </p>
- *
- * @author Allen
- * @since 2019-11-05
+ * @author Gavin
+ * @date 2019/8/16 13:12
+ * @description：
  */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class ChannelDTO extends SplitPageDTO implements BaseDTO {
-
-    private Integer id;
-
-    /**
-     * 渠道名称
-     */
-    private String name;
+@NoArgsConstructor
+public class VUserChannelSO extends BaseSO{
 
     /**
-     * 渠道链接
+     * id
      */
-    private String link;
+    private String cId;
+
+    /**
+     * 名称
+     */
+    private String cName;
+
+    /**
+     *
+     */
+    private String vChannelCode;
 
     /**
      * 创建时间
      */
-    private Date createDate;
+    private Date cCreateDate;
 
     /**
-     *渠道编号
+     * 总数
      */
-    private String channelCode;
+    private Integer tRegisterCount;
+
 
     /**
      * 检索关键字 渠道编号+渠道名称
      */
     private String searchValue;
+
 
     /**
      * 开始时间

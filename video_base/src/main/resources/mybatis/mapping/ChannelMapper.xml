@@ -2,4 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.k365.video_base.mapper.ChannelMapper">
 
+    <select id="searchMatchChannelPage" parameterType="com.k365.video_base.model.dto.ChannelDTO"
+            resultType="com.k365.video_base.model.po.Channel">
+        SELECT
+          id,name,link,create_date,channel_code
+        FROM
+          channel
+        <where>
+            <if test="searchValue != null and searchValue != '' ">
+                AND MATCH(name,channel_code)
+                AGAINST(#{searchValue} IN BOOLEAN MODE)
+            </if>
+            LIMIT #{pageSize} OFFSET ${page}
+        </where>
+    </select>
+
+
 </mapper>

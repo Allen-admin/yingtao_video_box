@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
 
 /**
  * @author Gavin
@@ -100,7 +99,7 @@ public class UserDTO extends SplitPageDTO implements BaseDTO {
     /**
      * 最近使用时长
      */
-    private Date lastTime;
+    private Long lastTime;
 
     /**
      * 上一次的登出时间
