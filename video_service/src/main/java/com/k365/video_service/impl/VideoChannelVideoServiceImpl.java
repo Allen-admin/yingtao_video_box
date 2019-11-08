@@ -57,7 +57,7 @@ public class VideoChannelVideoServiceImpl extends
             //获取 旧频道id 与 交集 的差集 【删除】
             oldVcIds.removeAll(intersection);
             if(!SetUtils.isEmpty(oldVcIds)) {
-                this.remove(new UpdateWrapper<VideoChannelVideo>().in("video_channel_id", oldVcIds));
+                this.remove(new UpdateWrapper<VideoChannelVideo>().in("video_channel_id", oldVcIds).eq("video_id",videoId));
             }
 
             //获取 新频道id 与 交集 的差集 【新增】

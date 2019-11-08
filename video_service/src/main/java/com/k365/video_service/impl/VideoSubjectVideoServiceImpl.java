@@ -57,7 +57,7 @@ public class VideoSubjectVideoServiceImpl extends
             //获取 旧专题id 与 交集 的差集 【删除】
             oldVsIds.removeAll(intersection);
             if(!SetUtils.isEmpty(oldVsIds)) {
-                this.remove(new UpdateWrapper<VideoSubjectVideo>().in("video_subject_id", oldVsIds));
+                this.remove(new UpdateWrapper<VideoSubjectVideo>().in("video_subject_id", oldVsIds).eq("video_id",videoId));
             }
 
             //获取 新专题id 与 交集 的差集 【新增】

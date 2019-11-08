@@ -58,7 +58,7 @@ public class VideoLabelVideoServiceImpl extends ServiceImpl<VideoLabelVideoMappe
             //获取 旧标签id 与 交集 的差集 【删除】
             oldVlIds.removeAll(intersection);
             if(!SetUtils.isEmpty(oldVlIds)) {
-                this.remove(new UpdateWrapper<VideoLabelVideo>().in("video_label_id", oldVlIds));
+                this.remove(new UpdateWrapper<VideoLabelVideo>().in("video_label_id", oldVlIds).eq("video_id",videoId));
             }
 
             //获取 新标签id 与 交集 的差集 【新增】
@@ -69,6 +69,7 @@ public class VideoLabelVideoServiceImpl extends ServiceImpl<VideoLabelVideoMappe
         newVlIds.forEach(newVcId ->
                 newVcv.add(VideoLabelVideo.builder().videoId(videoId).videoLabelId(newVcId).build())
         );
+
 
         this.saveBatch(newVcv);
     }
