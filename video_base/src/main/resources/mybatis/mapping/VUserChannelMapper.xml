@@ -90,7 +90,8 @@
 	FROM
 		(
 			`channel` `c`
-			LEFT JOIN ( SELECT `user`.`register_channel` AS `register_channel`, count( `user`.`register_channel` ) AS `register_count` FROM	(SELECT * FROM user where user.register_time between "${beginTime}" and  '2019-12-28 02:20:34'
+			LEFT JOIN ( SELECT `user`.`register_channel` AS `register_channel`, count( `user`.`register_channel` ) AS `register_count` FROM
+            (SELECT * FROM user where user.register_time between "${beginTime}" and  "${endTime}"
 
       )`user` GROUP BY `user`.`register_channel` ) `t` ON ((
 				`t`.`register_channel` = `c`.`channel_code`

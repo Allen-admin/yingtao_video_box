@@ -117,10 +117,6 @@ public class VUserChannelServicelmpl extends ServiceImpl<VUserChannelMapper, VUs
       return voList;
      }
 
-
-
-
-
     @Override
     public List<VUserChannelVO> searchList(VUserChannelSO vUserChannelSO) {
         vUserChannelSO.setPage((vUserChannelSO.getPage() - 1) * vUserChannelSO.getPageSize());
