@@ -13,10 +13,7 @@ import com.k365.video_base.common.UserContext;
 import com.k365.video_base.common.VideoContants;
 import com.k365.video_base.mapper.UserMapper;
 import com.k365.video_base.model.dto.UserDTO;
-import com.k365.video_base.model.po.ManagerEmployee;
-import com.k365.video_base.model.po.User;
-import com.k365.video_base.model.po.UserLevel;
-import com.k365.video_base.model.po.UserVideoCollection;
+import com.k365.video_base.model.po.*;
 import com.k365.video_base.model.so.UserSO;
 import com.k365.video_base.model.vo.*;
 import com.k365.video_common.constant.*;
@@ -28,6 +25,9 @@ import com.k365.video_common.handler.sms.AbstractSMSProvider;
 import com.k365.video_common.handler.sms.NeteaseSMS;
 import com.k365.video_common.handler.sms.SMSFactory;
 import com.k365.video_common.util.*;
+import com.k365.video_service.UserActionAnalyzeService;
+import com.k365.video_service.VideoLabelVideoService;
+import com.k365.video_service.VideoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.util.WebUtils;
@@ -103,6 +103,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Lazy
     private ManagerEmployeeService managerEmployeeService;
 
+    @Autowired
+    @Lazy
+    private UserActionAnalyzeService userActionAnalyzeService;
+
+    @Autowired
+    @Lazy
+    private VideoLabelVideoService videoLabelVideoService;
+    @Autowired
+    @Lazy
+    private VideoService videoService;
+
+
+
     @Override
     public Map<String, Object> visitorAutoRegister(ServletRequest request, UserDTO userDTO) {
         //获取App类型
@@ -112,7 +125,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         //TODO mac未加密 暂时注释
         //AES解密
-        try {
+       /* try {
             macAddr = AESCipher.aesDecryptString(macAddr);
 
         } catch (InvalidKeyException e) {
@@ -129,7 +142,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }
+        }*/
 
         //mac地址前添加app标识，多个app用户数据隔离
         macAddr = StringUtils.join(appType.getCode(), "-", macAddr);
@@ -194,7 +207,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setLastLoginIp(ip);
 
         /*   && !"".equals(userDTO.getLastLoginOutTime())*/
-        if (userDTO.getLastLoginOutTime() != null || userDTO.getLastLoginOutTime() != 0 || !"0".equals(userDTO.getLastLoginOutTime())) {
+        if(userDTO.getLastLoginOutTime()==null){
+
+        }else if (userDTO.getLastLoginOutTime() != null || userDTO.getLastLoginOutTime() != 0 || !"0".equals(userDTO.getLastLoginOutTime())) {
             //获取上次登出时间
             Long lastLoginOutTime = userDTO.getLastLoginOutTime();
             //获取上次登录时间
@@ -231,6 +246,122 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 }
             }).start();
 
+            //另起一个线程来存放智能推荐的数据
+            new Thread(() -> {
+                try {
+                    //根据macAddr查询videoLabelId
+
+                    List<UserActionAnalyze> userActionAnalyzeList = userActionAnalyzeService.findUserActionAnaylzeListByMacAddr(userDTO.getMacAddr());
+                    Map<Integer,Integer> map=new HashMap<>();
+                    if (userActionAnalyzeList.size() > 0){
+                        if(cache.get(uId + "v")!=null){
+                            cache.del(uId + "v");
+                        }
+                    for (int i = 0; i < userActionAnalyzeList.size(); i++) {
+                        if(null==map.get(userActionAnalyzeList.get(i).getVideoLabelId())){
+                            map.put(userActionAnalyzeList.get(i).getVideoLabelId(),1);
+                        }else{
+                            map.put(userActionAnalyzeList.get(i).getVideoLabelId(),map.get(userActionAnalyzeList.get(i).getVideoLabelId())+1);
+
+                        }
+                    }
+                    //map值降序
+                    map= MapSortUtil.sortDescend(map);
+                    //判断map中key的个数,创建一个list用来装标签id
+                    List<Integer> labelList=new ArrayList<>();
+                    if(map.size()<=4){
+                        for (Integer key : map.keySet()) {
+                            labelList.add(key);
+                        }
+                    }else{
+                        int i=0;
+                        for (Integer key : map.keySet()) {
+                            if(i<4){
+                                labelList.add(key);
+                                i=i+1;
+                            }else{
+                                break;
+                            }
+                        }
+                    }
+                    //通过标签查询视频ids
+                    List<Video> videos = videoLabelVideoService.getVideoVoByLabels(labelList);
+                    if(videos.size()<100){
+                        Integer need=100-videos.size();
+                        //查询最新视频列表
+                        IPage<Video> page2 = videoService.page(new Page<Video>().setCurrent(1).setSize(need),
+                                new QueryWrapper<Video>().eq("status", StatusEnum.ENABLE.key()).orderByDesc("create_date"));
+                        List<Video> records = page2.getRecords();
+                        //补全100个视频列表
+                        for(Video v:records){
+                            videos.add(v);
+                        }
+                    }
+                    cache.set(uId + "v",videos,3600);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
+            //另起一个线程来存放智能推荐的数据
+            new Thread(() -> {
+                try {
+                    //根据macAddr查询videoLabelId
+
+                    List<UserActionAnalyze> userActionAnalyzeList = userActionAnalyzeService.findUserActionAnaylzeListByMacAddr(userDTO.getMacAddr());
+                    Map<Integer,Integer> map=new HashMap<>();
+                    if (userActionAnalyzeList.size() > 0){
+                        if(cache.get(uId + "v")!=null){
+                            cache.del(uId + "v");
+                        }
+                    for (int i = 0; i < userActionAnalyzeList.size(); i++) {
+                        if(null==map.get(userActionAnalyzeList.get(i).getVideoLabelId())){
+                            map.put(userActionAnalyzeList.get(i).getVideoLabelId(),1);
+                        }else{
+                            map.put(userActionAnalyzeList.get(i).getVideoLabelId(),map.get(userActionAnalyzeList.get(i).getVideoLabelId())+1);
+
+                        }
+                    }
+                    //map值降序
+                    map= MapSortUtil.sortDescend(map);
+                    //判断map中key的个数,创建一个list用来装标签id
+                    List<Integer> labelList=new ArrayList<>();
+                    if(map.size()<=4){
+                        for (Integer key : map.keySet()) {
+                            labelList.add(key);
+                        }
+                    }else{
+                        int i=0;
+                        for (Integer key : map.keySet()) {
+                            if(i<4){
+                                labelList.add(key);
+                                i=i+1;
+                            }else{
+                                break;
+                            }
+                        }
+                    }
+                    //通过标签查询视频ids
+                    List<Video> videos = videoLabelVideoService.getVideoVoByLabels(labelList);
+                    if(videos.size()<100){
+                        Integer need=100-videos.size();
+                        //查询最新视频列表
+                        IPage<Video> page2 = videoService.page(new Page<Video>().setCurrent(1).setSize(need),
+                                new QueryWrapper<Video>().eq("status", StatusEnum.ENABLE.key()).orderByDesc("create_date"));
+                        List<Video> records = page2.getRecords();
+                        //补全100个视频列表
+                        for(Video v:records){
+                            videos.add(v);
+                        }
+                    }
+                    cache.set(uId + "v",videos,3600);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
             String cacheKey = Constants.CACHE_VISITOR_USER_INFO + user.getId();
             cache.set(cacheKey, user, DateUtil.getSurplusSecondOfToday());
 
@@ -240,6 +371,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             UserInfoVO userInfo = getUserInfo(user);
             userInfo.setVipType(user.getVipType());
             userInfo.setVipEndTime(user.getVipEndTime());
+
+            if(null!=user.getBoss()){
+                if(user.getBoss()==1){
+                    userInfo.setBoss(user.getBoss());
+                }else{
+                    userInfo.setBoss(0);
+                }
+            }else{
+                userInfo.setBoss(0);
+            }
             result.put("token", sign);
             result.put("userInfo", userInfo);
             return result;

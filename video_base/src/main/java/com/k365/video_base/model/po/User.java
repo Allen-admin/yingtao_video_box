@@ -164,4 +164,8 @@ public class User implements Serializable {
      */
     private String loginIp;
 
+    /**
+     * 是否最高权限（1是最高权限）
+     * */
+    private Integer boss;
 }
