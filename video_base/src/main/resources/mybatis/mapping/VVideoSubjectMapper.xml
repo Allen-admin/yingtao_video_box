@@ -24,7 +24,7 @@
                 AND v_status = ${vStatus}
             </if>
             <if test="subjectType != null ">
-                AND vs_subject_type = ${subjectType}
+                AND vs_subject_type = 2
             </if>
         </where>
         GROUP BY vs_id
