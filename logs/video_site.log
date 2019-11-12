@@ -1,172 +1,59 @@
-2019-10-16 09:29:04,990 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 1292 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 09:29:05,006 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 09:29:05,007 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 09:29:10,485 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 09:29:10,491 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 09:29:10,526 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 09:29:21,527 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 1292 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 09:29:21,528 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 09:29:21,528 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 09:29:25,483 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 09:29:25,486 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 09:29:25,522 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 09:29:30,237 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 8.77 seconds (JVM running for 59975.196)
-2019-10-16 12:10:43,950 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 1292 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 12:10:43,950 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 12:10:43,951 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 12:10:49,853 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 12:10:49,858 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 12:10:49,895 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 12:10:54,687 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 10.984 seconds (JVM running for 69659.909)
-2019-10-16 13:34:18,023 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 1292 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 13:34:18,023 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 13:34:18,023 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 13:34:23,398 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 13:34:23,412 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 13:34:23,466 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 13:52:24,489 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 1292 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 13:52:24,490 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 13:52:24,490 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 13:52:30,336 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 13:52:30,339 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 13:52:30,425 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 14:57:05,499 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 1292 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 14:57:05,500 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 14:57:05,500 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 14:57:11,940 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 14:57:11,944 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 14:57:11,999 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 14:57:16,918 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 11.479 seconds (JVM running for 79642.228)
-2019-10-16 15:45:49,093 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 10468 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 15:45:49,095 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 15:45:49,095 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 15:46:15,420 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 15:46:15,516 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 15:46:15,595 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 15:46:22,055 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 33.598 seconds (JVM running for 34.762)
-2019-10-16 15:47:23,916 INFO (IPUtil.java:53)- 客户端IP转为数值型:【127.0.0.1】
-2019-10-16 15:47:24,819 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,ip,restrict_type,project,restrict_way,country,region,city,remarks,ip_from,ip_end,status FROM ip_restrict WHERE status = ? 
-2019-10-16 15:47:24,851 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: true(Boolean)
-2019-10-16 15:47:24,874 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 0
-2019-10-16 15:47:25,058 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,nickname,gender,user_icon,profile,user_level,register_time,phone,mac_addr,save_count,recommend_code,last_login_time,last_login_ip,status,recommend_count,used_save_count,used_viewing_count,viewing_count,recommender_id,award_viewing_count,award_save_count,spread_qrcode_url,app_type,vip_end_time,vip_type FROM user WHERE mac_addr = ? 
-2019-10-16 15:47:25,062 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: xiao_ai-a-vb-a-b-ac(String)
-2019-10-16 15:47:25,087 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 1
-2019-10-16 15:47:25,091 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,nickname,gender,user_icon,profile,user_level,register_time,phone,mac_addr,save_count,recommend_code,last_login_time,last_login_ip,status,recommend_count,used_save_count,used_viewing_count,viewing_count,recommender_id,award_viewing_count,award_save_count,spread_qrcode_url,app_type,vip_end_time,vip_type FROM user WHERE id=? 
-2019-10-16 15:47:25,095 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 834a1cd7c9c286c297452e3fa4d9b72d(String)
-2019-10-16 15:47:25,119 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 1
-2019-10-16 15:47:25,133 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: UPDATE user SET nickname=?, user_level=?, register_time=?, mac_addr=?, save_count=?, recommend_code=?, last_login_time=?, last_login_ip=?, status=?, recommend_count=?, used_save_count=?, used_viewing_count=?, viewing_count=?, award_viewing_count=?, award_save_count=?, spread_qrcode_url=?, app_type=?, vip_type=? WHERE id=? 
-2019-10-16 15:47:25,142 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 新用户XXDZQD(String), 1(Integer), 2019-10-04 10:28:13.0(Timestamp), xiao_ai-a-vb-a-b-ac(String), 2(Integer), 834a1cd7c9c286c297452e3fa4d9b72d(String), 2019-10-16 15:47:25.089(Timestamp), 127.0.0.1(String), 1(Integer), 0(Integer), 0(Integer), 0(Integer), 10(Integer), 0(Integer), 0(Integer), http://www.ludobe.net/group1/M00/00/10/Z2SO0F2WrmaABA1RAAB1ellNldk357.png(String), 1(Integer), 0(Integer), 834a1cd7c9c286c297452e3fa4d9b72d(String)
-2019-10-16 15:47:25,196 DEBUG (BaseJdbcLogger.java:143)- <==    Updates: 1
-2019-10-16 15:47:25,576 ERROR (FastDFSHelper.java:136)- Non IO Exception: Get File from Fast DFS failed
-java.lang.NullPointerException: null
-	at java.io.ByteArrayInputStream.<init>(ByteArrayInputStream.java:106)
-	at com.k365.video_common.handler.fastdfs.FastDFSHelper.downloadFile(FastDFSHelper.java:131)
-	at com.k365.user_service.impl.UserServiceImpl.verifySpreadQr(UserServiceImpl.java:213)
-	at com.k365.user_service.impl.UserServiceImpl.lambda$visitorAutoRegister$0(UserServiceImpl.java:180)
-	at java.lang.Thread.run(Thread.java:748)
-2019-10-16 15:47:25,576 INFO (FastDFSHelper.java:203)- 关闭trackerServer连接
-2019-10-16 15:47:25,604 ERROR (UserServiceImpl.java:218)- 解析推广二维码路径出错
-java.lang.IllegalArgumentException: input == null!
-	at javax.imageio.ImageIO.read(ImageIO.java:1348)
-	at com.k365.video_common.util.QRcodeUtil.decode(QRcodeUtil.java:209)
-	at com.k365.user_service.impl.UserServiceImpl.verifySpreadQr(UserServiceImpl.java:216)
-	at com.k365.user_service.impl.UserServiceImpl.lambda$visitorAutoRegister$0(UserServiceImpl.java:180)
-	at java.lang.Thread.run(Thread.java:748)
-2019-10-16 15:47:25,608 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT param_value FROM sys_conf_param WHERE param_name = ? 
-2019-10-16 15:47:25,613 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: qr_code_logo(String)
-2019-10-16 15:47:25,639 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 1
-2019-10-16 15:47:25,642 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT param_value FROM sys_conf_param WHERE param_name = ? 
-2019-10-16 15:47:25,645 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: app_download_page(String)
-2019-10-16 15:47:25,667 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 1
-2019-10-16 15:47:25,843 ERROR (FastDFSHelper.java:136)- Non IO Exception: Get File from Fast DFS failed
-org.csource.common.MyException: getStoreStorage fail, errno code: 2
-	at org.csource.fastdfs.StorageClient.newReadableStorageConnection(StorageClient.java:1233)
-	at org.csource.fastdfs.StorageClient.download_file(StorageClient.java:778)
-	at org.csource.fastdfs.StorageClient.download_file(StorageClient.java:774)
-	at com.k365.video_common.handler.fastdfs.FastDFSHelper.downloadFile(FastDFSHelper.java:130)
-	at com.k365.user_service.impl.UserServiceImpl.createSpreadQrcodeImg(UserServiceImpl.java:249)
-	at com.k365.user_service.impl.UserServiceImpl.lambda$visitorAutoRegister$0(UserServiceImpl.java:181)
-	at java.lang.Thread.run(Thread.java:748)
-2019-10-16 15:47:25,843 INFO (FastDFSHelper.java:203)- 关闭trackerServer连接
-2019-10-16 15:47:25,930 INFO (FastDFSHelper.java:46)- File Name: nullFile Length:29579
-2019-10-16 15:47:26,592 INFO (FastDFSHelper.java:203)- 关闭trackerServer连接
-2019-10-16 15:47:26,593 INFO (FastDFSHelper.java:72)- upload_file time used:575 ms
-2019-10-16 15:47:26,593 INFO (FastDFSHelper.java:79)- upload file successfully!!!group_name:group1, remoteFileName: M00/00/23/0yvEWF2my4qALzdkAABzi6ZlEe4803.png
-2019-10-16 15:47:28,241 INFO (FastDFSHelper.java:203)- 关闭trackerServer连接
-2019-10-16 15:47:28,241 INFO (FastDFSHelper.java:167)- delete file successfully!!!2
-2019-10-16 15:47:28,242 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: UPDATE user SET spread_qrcode_url=? WHERE id=? 
-2019-10-16 15:47:28,245 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: http://211.43.196.88:8888/group1/M00/00/23/0yvEWF2my4qALzdkAABzi6ZlEe4803.png(String), 834a1cd7c9c286c297452e3fa4d9b72d(String)
-2019-10-16 15:47:28,296 DEBUG (BaseJdbcLogger.java:143)- <==    Updates: 1
-2019-10-16 15:47:28,297 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,nickname,gender,user_icon,profile,user_level,register_time,phone,mac_addr,save_count,recommend_code,last_login_time,last_login_ip,status,recommend_count,used_save_count,used_viewing_count,viewing_count,recommender_id,award_viewing_count,award_save_count,spread_qrcode_url,app_type,vip_end_time,vip_type FROM user WHERE id=? 
-2019-10-16 15:47:28,300 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 834a1cd7c9c286c297452e3fa4d9b72d(String)
-2019-10-16 15:47:28,326 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 1
-2019-10-16 15:48:01,235 INFO (IPUtil.java:53)- 客户端IP转为数值型:【127.0.0.1】
-2019-10-16 15:48:01,320 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,ip,restrict_type,project,restrict_way,country,region,city,remarks,ip_from,ip_end,status FROM ip_restrict WHERE status = ? 
-2019-10-16 15:48:01,324 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: true(Boolean)
-2019-10-16 15:48:01,347 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 0
-2019-10-16 15:48:01,445 ERROR (GlobalExceptionHandler.java:137)- 短信验证码错误！
-2019-10-16 15:49:19,410 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 14496 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 15:49:19,413 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 15:49:19,414 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 15:49:25,497 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 15:49:25,593 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 15:49:25,677 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 15:49:31,966 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 13.117 seconds (JVM running for 14.301)
-2019-10-16 15:49:41,167 INFO (IPUtil.java:53)- 客户端IP转为数值型:【127.0.0.1】
-2019-10-16 15:49:41,670 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,ip,restrict_type,project,restrict_way,country,region,city,remarks,ip_from,ip_end,status FROM ip_restrict WHERE status = ? 
-2019-10-16 15:49:41,698 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: true(Boolean)
-2019-10-16 15:49:41,723 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 0
-2019-10-16 15:56:27,118 ERROR (GlobalExceptionHandler.java:137)- 短信验证码错误！
-2019-10-16 15:59:24,311 INFO (IPUtil.java:53)- 客户端IP转为数值型:【127.0.0.1】
-2019-10-16 17:51:00,364 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 3912 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 17:51:00,367 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 17:51:00,368 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 17:51:26,030 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 17:51:26,130 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 17:51:26,238 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 17:51:32,584 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 32.686 seconds (JVM running for 34.116)
-2019-10-16 18:16:14,092 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 6104 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 18:16:14,096 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 18:16:14,097 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 18:16:23,024 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 18:16:23,142 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 18:16:23,258 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 18:16:30,603 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 17.0 seconds (JVM running for 35.356)
-2019-10-16 18:26:18,382 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 6104 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 18:26:18,383 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 18:26:18,384 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 18:26:23,210 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 6104 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 18:26:23,210 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 18:26:23,210 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 18:26:26,800 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 18:26:26,803 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 18:26:26,876 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 18:26:32,473 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 9.306 seconds (JVM running for 637.226)
-2019-10-16 18:27:27,497 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 6104 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 18:27:27,497 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 18:27:27,497 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 18:27:32,000 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 18:27:32,003 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 18:27:32,041 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 18:27:37,877 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 10.426 seconds (JVM running for 702.63)
-2019-10-16 18:54:37,930 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 6104 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 18:54:37,930 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 18:54:37,930 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 18:54:43,002 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 18:54:43,006 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 18:54:43,046 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 18:54:48,708 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 10.822 seconds (JVM running for 2333.461)
-2019-10-16 19:05:30,756 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 10176 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 19:05:30,759 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 19:05:30,759 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 19:05:36,742 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 19:05:36,839 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 19:05:36,930 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 19:05:43,302 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 12.955 seconds (JVM running for 14.663)
-2019-10-16 19:12:33,021 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 10176 (D:\hello\video_box\video_site_api\target\classes started by Administrator in D:\hello\video_box)
-2019-10-16 19:12:33,021 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
-2019-10-16 19:12:33,021 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
-2019-10-16 19:12:36,378 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
-2019-10-16 19:12:36,385 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
-2019-10-16 19:12:36,428 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
-2019-10-16 19:12:42,676 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 9.694 seconds (JVM running for 434.037)
+2019-11-08 13:48:41,148 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 18116 (D:\work-----1\video_box_new\video_site_api\target\classes started by Administrator in D:\work-----1\video_box_new)
+2019-11-08 13:48:41,154 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-11-08 13:48:41,154 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-11-08 13:48:47,164 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
+2019-11-08 13:48:47,253 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
+2019-11-08 13:48:47,335 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
+2019-11-08 13:48:54,040 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 13.468 seconds (JVM running for 14.762)
+2019-11-08 13:52:30,263 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 18684 (D:\work-----1\video_box_new\video_site_api\target\classes started by Administrator in D:\work-----1\video_box_new)
+2019-11-08 13:52:30,265 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-11-08 13:52:30,266 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-11-08 13:52:36,668 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
+2019-11-08 13:52:36,761 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
+2019-11-08 13:52:36,857 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
+2019-11-08 13:52:43,839 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 14.001 seconds (JVM running for 15.593)
+2019-11-08 14:00:25,188 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 18684 (D:\work-----1\video_box_new\video_site_api\target\classes started by Administrator in D:\work-----1\video_box_new)
+2019-11-08 14:00:25,189 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-11-08 14:00:25,189 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-11-08 14:00:29,297 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
+2019-11-08 14:00:29,302 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
+2019-11-08 14:00:29,357 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
+2019-11-08 14:00:36,086 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 10.941 seconds (JVM running for 487.84)
+2019-11-08 14:13:34,861 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 18684 (D:\work-----1\video_box_new\video_site_api\target\classes started by Administrator in D:\work-----1\video_box_new)
+2019-11-08 14:13:34,862 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-11-08 14:13:34,863 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-11-08 14:14:27,067 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 18684 (D:\work-----1\video_box_new\video_site_api\target\classes started by Administrator in D:\work-----1\video_box_new)
+2019-11-08 14:14:27,106 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-11-08 14:14:27,106 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-11-08 14:14:32,052 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
+2019-11-08 14:14:32,057 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
+2019-11-08 14:14:32,106 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
+2019-11-08 14:14:38,864 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 11.912 seconds (JVM running for 1330.618)
+2019-11-08 14:15:56,066 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 18684 (D:\work-----1\video_box_new\video_site_api\target\classes started by Administrator in D:\work-----1\video_box_new)
+2019-11-08 14:15:56,066 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-11-08 14:15:56,066 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-11-08 14:16:02,936 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
+2019-11-08 14:16:02,942 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
+2019-11-08 14:16:03,014 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
+2019-11-08 14:16:09,550 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 13.531 seconds (JVM running for 1421.304)
+2019-11-08 14:18:44,115 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 18684 (D:\work-----1\video_box_new\video_site_api\target\classes started by Administrator in D:\work-----1\video_box_new)
+2019-11-08 14:18:44,115 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-11-08 14:18:44,115 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-11-08 14:18:47,541 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
+2019-11-08 14:18:47,545 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
+2019-11-08 14:18:47,591 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
+2019-11-08 14:18:54,851 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 10.775 seconds (JVM running for 1586.605)
+2019-11-08 14:24:52,937 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 18684 (D:\work-----1\video_box_new\video_site_api\target\classes started by Administrator in D:\work-----1\video_box_new)
+2019-11-08 14:24:52,938 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-11-08 14:24:52,938 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-11-08 14:24:58,838 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
+2019-11-08 14:24:58,843 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
+2019-11-08 14:24:58,887 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
+2019-11-08 14:25:05,396 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 12.528 seconds (JVM running for 1957.15)
+2019-11-08 14:33:21,996 INFO (StartupInfoLogger.java:50)- Starting VideoSiteApiApplication on DESKTOP-CVMCHK1 with PID 18684 (D:\work-----1\video_box_new\video_site_api\target\classes started by Administrator in D:\work-----1\video_box_new)
+2019-11-08 14:33:21,996 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.5.RELEASE, Spring v5.1.7.RELEASE
+2019-11-08 14:33:21,997 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-11-08 14:33:26,620 DEBUG (BaseJdbcLogger.java:143)- ==>  Preparing: SELECT id,name,type_code,parent_id,permit_code,icon,sort,url,create_date,verification FROM sys_resource ORDER BY type_code DESC , sort ASC 
+2019-11-08 14:33:26,624 DEBUG (BaseJdbcLogger.java:143)- ==> Parameters: 
+2019-11-08 14:33:26,667 DEBUG (BaseJdbcLogger.java:143)- <==      Total: 141
+2019-11-08 14:33:32,938 INFO (StartupInfoLogger.java:59)- Started VideoSiteApiApplication in 11.014 seconds (JVM running for 2464.692)
