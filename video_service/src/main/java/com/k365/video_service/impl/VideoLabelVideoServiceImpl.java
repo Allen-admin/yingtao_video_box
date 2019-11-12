@@ -6,8 +6,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.k365.video_base.mapper.VideoLabelVideoMapper;
+import com.k365.video_base.model.po.Video;
 import com.k365.video_base.model.po.VideoLabelVideo;
+import com.k365.video_common.constant.StatusEnum;
+import com.k365.video_common.util.MapSortUtil;
 import com.k365.video_service.VideoLabelVideoService;
+import com.k365.video_service.VideoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -28,6 +34,10 @@ import java.util.*;
 @Service
 public class VideoLabelVideoServiceImpl extends ServiceImpl<VideoLabelVideoMapper, VideoLabelVideo>
         implements VideoLabelVideoService {
+
+    @Autowired
+    @Lazy
+    private VideoService videoService;
 
 
     @Override
@@ -79,6 +89,58 @@ public class VideoLabelVideoServiceImpl extends ServiceImpl<VideoLabelVideoMappe
         return JSONArray.parseArray(JSON.toJSONString(this.listObjs(new QueryWrapper<VideoLabelVideo>()
                 .in("video_id",videoIds).select("video_label_id"))),Integer.class);
 
+    }
+
+    @Override
+    public List<Video> getVideoVoByLabels(List<Integer> labels) {
+
+        //创建一个list装视频id
+        List<String> videoIds=new ArrayList<>();
+        //创建一个map用于去重
+        Map<String,Integer> map=new HashMap<>();
+        for (Integer label:labels){
+            List<VideoLabelVideo> videoLabelVideos = this.list(new QueryWrapper<VideoLabelVideo>().eq("video_label_id", label));
+            for(VideoLabelVideo videoLabelVideo:videoLabelVideos){
+                if(map.get(videoLabelVideo.getVideoId())!=null){
+                    map.put(videoLabelVideo.getVideoId(),map.get(videoLabelVideo.getVideoId())+1);
+                }else{
+                    map.put(videoLabelVideo.getVideoId(),1);
+                }
+            }
+        }
+        //对map进行排序
+        map=MapSortUtil.sortDescend(map);
+        System.out.println(map);
+        //遍历map获取前100个视频id
+        if(map.size()<=100){
+            for (String key : map.keySet()) {
+                videoIds.add(key);
+            }
+        }else{
+            int i=0;
+            for (String key : map.keySet()) {
+                if(i<100){
+                    videoIds.add(key);
+                    i=i+1;
+                }else{
+                    break;
+                }
+            }
+        }
+        List<Video> videos=new ArrayList<>();
+        //通过最后得到的视频id查询视频相关信息
+        for(String vid:videoIds){
+
+            Video video = videoService.getById(vid);
+            if(video!=null){
+                if(video.getStatus()==StatusEnum.ENABLE.key()){
+                    videos.add(video);
+                }
+            }
+
+        }
+
+        return videos;
     }
 
     @Override

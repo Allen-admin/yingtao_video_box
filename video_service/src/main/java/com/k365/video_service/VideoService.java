@@ -141,6 +141,13 @@ public interface VideoService extends IService<Video> {
      * 查询视频相关简略信息
      * */
     VideoBasicInfoVO getViderSimpInfo(String id);
+
+
+    /**
+     *
+     * 设置或者取消视频置顶
+     * */
+    boolean setVideoTop(String vid,Integer type, Integer location);
 }
 
 

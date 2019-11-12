@@ -159,8 +159,17 @@ public class VideoController {
 
     @PostMapping("/get/getViderSimpInfo")
     @ApiOperation(value = "查询视频相关简略信息")
-    public String getViderSimpInfo(String id) {
+    public String getVidimpInfo(String id) {
         return ResultFactory.buildNotNullResult(videoService.getViderSimpInfo(id));
+    }
+
+    @PostMapping(value="/set/setTop/{vid}/{type}/{location}")
+    @ApiOperation(value = "设置或者取消视频置顶")
+    @TokenVerify
+    @Armor(target = {OSEnum.IOS, OSEnum.ANDROID})
+    @ApiImplicitParam(paramType = "header", name = "Token", value = "身份认证Token")
+    public String setVideoTop(@PathVariable("vid") String vid,@PathVariable("type") Integer type,@PathVariable("location") Integer location) {
+        return ResultFactory.buildNotNullResult(videoService.setVideoTop(vid,type,location));
     }
 
 }

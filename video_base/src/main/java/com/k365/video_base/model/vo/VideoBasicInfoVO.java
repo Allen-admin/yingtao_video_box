@@ -1,10 +1,11 @@
 package com.k365.video_base.model.vo;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.aspectj.lang.annotation.Aspect;
 
-import java.util.*;
+import java.util.Date;
 
 /**
  * @author Gavin
@@ -59,5 +60,20 @@ public class VideoBasicInfoVO {
      * 是否为VIP视频
      */
     private Boolean isVip;
+
+    /**
+     * 是否为VIP视频
+     */
+    private Boolean isSvip;
+
+    /**
+     * 编辑精选置顶
+     */
+    private Integer topPerfect;
+
+    /**
+     * 智能推荐置顶
+     */
+    private Integer topLike;
 
 }

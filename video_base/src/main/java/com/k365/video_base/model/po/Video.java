@@ -111,7 +111,20 @@ public class Video {
      */
     private Boolean isVip;
 
+    /**
+     * 是否为SVIP视频
+     */
+    private Boolean isSvip;
 
+    /**
+     * 编辑精选置顶
+     */
+    private Integer topPerfect;
+
+    /**
+     * 猜你喜欢置顶
+     */
+    private Integer topLike;
 }
 
 

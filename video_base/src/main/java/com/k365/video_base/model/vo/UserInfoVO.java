@@ -56,4 +56,9 @@ public class UserInfoVO {
      */
     private Integer vipType;
 
+    /**
+     * 是否最高权限
+     */
+    private Integer boss;
+
 }

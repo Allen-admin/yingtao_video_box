@@ -1,8 +1,7 @@
 package com.k365.video_service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -12,9 +11,7 @@ import com.k365.manager_service.SysConfParamService;
 import com.k365.user_service.UserService;
 import com.k365.user_service.UserVideoFabulousService;
 import com.k365.user_service.UserViewingRecordService;
-import com.k365.video_base.common.AppDisplayTypeEnum;
-import com.k365.video_base.common.UserContext;
-import com.k365.video_base.common.VideoContants;
+import com.k365.video_base.common.*;
 import com.k365.video_base.mapper.VideoMapper;
 import com.k365.video_base.model.dto.UserActionAnaylzeDTO;
 import com.k365.video_base.model.dto.VideoDTO;
@@ -113,6 +110,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     @Autowired
     private UserVideoFabulousService userVideoFabulousService;
+
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
@@ -408,233 +406,173 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         List<UserActionAnalyze> userActionAnalyzeList = userActionAnalyzeService.findUserActionAnaylzeListByMacAddr(macAddr);
 
         List<VideoBasicInfoVO> resultList = new ArrayList<>();
-        if (userActionAnalyzeList.size() > 0) {
+        List<Video> videos=null;
+        //查询置顶视频   置换前两部视频.
+        if(videoDTO.getPage()==1) {
+            List<Video> topLike = this.list(new QueryWrapper<Video>().eq("top_like", 1).eq("status", StatusEnum.ENABLE.key()));
+            String domain2 = domainService.getAppPicDomain();//图片封面域名
+            if (topLike.size() <= 2 && topLike.size() > 0) {
+                for (Video po : topLike) {
+                    VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(po.getId())
+                            .setCover(po.getCover()).setTitle(po.getTitle()).setPlaySum(po.getPlaySum())
+                            .setTimeLen(po.getTimeLen()).setCreateDate(po.getCreateDate()).setIsVip(po.getIsVip()).setTopLike(po.getTopLike());
 
-            MyHashMap lableIdCountMap = new MyHashMap();//key:videoLableId,value:count
+                    if (vo.getCover() != null && !vo.getCover().equals("")) {
+                        vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
+                    }
+                    resultList.add(vo);
+                }
+            }
+        }
+
+        if (userActionAnalyzeList.size() > 0){
+            if(cache.get(currentUser.getId()+"v")==null){
+            Map<Integer,Integer> map=new HashMap<>();
 
             for (int i = 0; i < userActionAnalyzeList.size(); i++) {
-                lableIdCountMap.putInteger(userActionAnalyzeList.get(i).getVideoLabelId(), 1);
-            }
+                if(null==map.get(userActionAnalyzeList.get(i).getVideoLabelId())){
+                    map.put(userActionAnalyzeList.get(i).getVideoLabelId(),1);
+                }else{
+                    map.put(userActionAnalyzeList.get(i).getVideoLabelId(),map.get(userActionAnalyzeList.get(i).getVideoLabelId())+1);
 
-            //对lableIdMap的value及count进行降序排序
-            Map<Integer, Integer> probs = new TreeMap<Integer, Integer>();
-            probs = lableIdCountMap.sortByValueDescending(lableIdCountMap);
-
-            //取次数个数大小排前四的videoLableId
-            List<Integer> videoLabelIdList = new ArrayList<>();
-            int flag = 0;
-            for (Map.Entry<Integer, Integer> entry : probs.entrySet()) {
-                if (flag < 4) {
-                    flag++;
-                    videoLabelIdList.add(entry.getKey());
                 }
             }
-
-            System.out.println("videoLabelIdList list:" + videoLabelIdList);
-
-            //根据4个videoLableId查询videoId
-            List<List<String>> videoIdList4 = new ArrayList<>();
-
-            //遍历videoLableId List
-            for (int k = 0; k < videoLabelIdList.size(); k++) {
-
-                List<VideoLabelVideo> videoLabelVideoList = new ArrayList<>();
-                //每个videoLableId对应的videoList
-                videoLabelVideoList = videoLabelVideoService.getVideoLableVideosByLableId(String.valueOf(videoLabelIdList.get(k)));
-
-                //每个videoList对应的videoIdList
-                List<String> videoLableVideoIdList = new ArrayList<>();
-
-                for (int kk = 0; kk < videoLabelVideoList.size(); kk++) {
-                    videoLableVideoIdList.add(videoLabelVideoList.get(kk).getVideoId());
+            //map值降序
+            map= MapSortUtil.sortDescend(map);
+            //判断map中key的个数,创建一个list用来装标签id
+            List<Integer> labelList=new ArrayList<>();
+            if(map.size()<=4){
+                for (Integer key : map.keySet()) {
+                    labelList.add(key);
                 }
-                //每个videoLableId所对应的videoList
-                videoIdList4.add(videoLableVideoIdList);
-            }
-
-            List<String> videoIdList = new ArrayList<>();
-
-            //取4个videoIdList中的并集
-            if (videoIdList4.size() > 0) {
-                videoIdList = videoIdList4.get(0);
-            }
-            for (int kkk = 1; kkk < videoIdList4.size(); kkk++) {
-                videoIdList.retainAll(videoIdList4.get(kkk));
-            }
-
-            System.out.println("video id union set size:" + videoIdList.size());
-
-
-            //如果并集为0
-            if (videoIdList.size() == 0) {
-                //从4个videoIdList中取100条数据
-                Set<String> videoIdAllSet = new HashSet<>();
-
-                for (int i = 0; i < videoIdList4.size(); i++) {
-                    for (int j = 0; j < videoIdList4.get(i).size(); j++) {
-                        if (videoIdAllSet.size() == 100) {
-                            break;
-                        }
-                        videoIdAllSet.add(videoIdList4.get(i).get(j));
+            }else{
+                int i=0;
+                for (Integer key : map.keySet()) {
+                    if(i<4){
+                        labelList.add(key);
+                        i=i+1;
+                    }else{
+                        break;
                     }
                 }
-                System.out.println("videoIdAllSet:" + videoIdAllSet);
-
-                Iterator it = videoIdAllSet.iterator();
-                while (it.hasNext()) {
-                    videoIdList.add((String) it.next());
-                }
-                System.out.println("when union set size is 0,new videoIdList:" + videoIdList);
             }
-
-            List<Video> videoList = new ArrayList<>();
-            //遍历videoIdList获取video
-            for (int jj = 0; jj < videoIdList.size(); jj++) {
-                Video video = this.getOne(new QueryWrapper<Video>()
-                        .eq("id", videoIdList.get(jj)).and(wrapper -> wrapper.eq("status", StatusEnum.ENABLE.key())));
-                if(video!=null){
-                    videoList.add(video);
+            //通过标签查询视频ids
+            videos = videoLabelVideoService.getVideoVoByLabels(labelList);
+            if(videos.size()<100){
+                Integer need=100-videos.size();
+                //查询最新视频列表
+                IPage<Video> page = this.page(new Page<Video>().setCurrent(1).setSize(need),
+                        new QueryWrapper<Video>().eq("status", StatusEnum.ENABLE.key()).notIn("top_like",1).orderByDesc("create_date"));
+                List<Video> records = page.getRecords();
+                //补全100个视频列表
+                for(Video v:records){
+                    videos.add(v);
                 }
             }
-            System.out.println("union set video list size:" + videoList.size());
-
-            //如果video<100
-            int needVideoSize = 0;
-            if (videoList.size() > 0 && videoList.size() < 100) {
-                //待补全的视频个数
-                needVideoSize = 100 - videoList.size();
-
-                List<Video> allVideoList = new ArrayList<Video>();
-                allVideoList = this.list(new QueryWrapper<Video>().eq("status", StatusEnum.ENABLE.key()).orderByAsc("play_count_for_day"));
-                for (int pp = 0; pp < needVideoSize; pp++) {
-                    //补视频
-                    videoList.add(allVideoList.get(pp));
-                }
-
-            } else if (videoList.size() > 100) {
-                //待删除个数
-                needVideoSize = videoList.size() - 100;
-                for (int pp = 0; pp < needVideoSize; pp++) {
-                    videoList.remove(pp);
-                }
+                cache.set(currentUser.getId() + "v",videos,3600);
+            }else{
+                videos = (List<Video>) cache.get(currentUser.getId() + "v");
             }
 
+            
+
+
+            //给100个视频分页
+            List<Video> pageList=new ArrayList<>();
+            //如果传过来的查询是在100条结果以外，那么返回null
+            if(videoDTO.getPage()*videoDTO.getPageSize()>videos.size()){
+                return null;
+            }
+            //计算角标
+            Integer i=videoDTO.getPageSize()*(videoDTO.getPage()-1);
+            //计算最大页码
+            Integer maxPage=videos.size()/videoDTO.getPage()+1;
+            //计算最大页码的视频个数
+            Integer maxPageCount=videos.size()-(maxPage-1)*videoDTO.getPage();
+            //计算最大页码角标起始值
+            Integer maxPageStart=videoDTO.getPageSize()*(maxPage-1)+1;
+            if(i<maxPageStart){
+                for(int j=0;j<videoDTO.getPageSize();j++){
+                    pageList.add(videos.get(i));
+                    i=i+1;
+                }
+            }else{
+                for(int j=0;j<maxPageCount;j++){
+                    pageList.add(videos.get(i));
+                    i=i+1;
+                }
+            }
+            //po转vo
             String domain2 = domainService.getAppPicDomain();//图片封面域名
+            for (Video po : pageList) {
+                VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(po.getId())
+                        .setCover(po.getCover()).setTitle(po.getTitle()).setPlaySum(po.getPlaySum())
+                        .setTimeLen(po.getTimeLen()).setCreateDate(po.getCreateDate()).setIsVip(po.getIsVip());
 
-            if (!ListUtils.isEmpty(videoList)) {
-                int pageSize = videoDTO.getPageSize();
-                int currPage = videoDTO.getPage();
-                int index = 0;
-                if (videoList.size() >= currPage * pageSize) {
-                    if (currPage > 1) {
-                        index = (currPage - 1) * pageSize;
-                    }
+                if (vo.getCover() != null && !vo.getCover().equals("")) {
+                    vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
                 }
-                if (index > 0) {
-                    pageSize = videoList.size();
+                if(po.getTopLike()!=1){
+                    resultList.add(vo);
                 }
-                System.out.println("index start is :" + index);
-                //组装vo
-                for (int p = index; p < pageSize; p++) {
-                    VideoBasicInfoVO vo = new VideoBasicInfoVO();
-                    if(videoList.get(p).getId()!=null){
-                        vo.setId(videoList.get(p).getId());
-                        vo.setCover(videoList.get(p).getCover());
-                        vo.setTitle(videoList.get(p).getTitle());
-                        vo.setPlaySum(videoList.get(p).getPlaySum());
-                        vo.setTimeLen(videoList.get(p).getTimeLen());
-                        vo.setCreateDate(videoList.get(p).getCreateDate());
-                        vo.setIsVip(videoList.get(p).getIsVip());
-                        if (vo.getCover() != null && !vo.getCover().equals("")) {
-                            vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
-                        }
-                        resultList.add(vo);
-                    }
-
-                }
-                System.out.println(" resultList size:" + resultList.size());
             }
-        } else {
-            //用户行为表里没有该用户数据的video筛选逻辑
 
+        }else{
+            //查询最新视频
             String domain = domainService.getDomain(request);
             String domain2 = domainService.getAppPicDomain();//图片封面域名
-            //观影记录中的视频ids
-            List<String> videoIds = JSONArray.parseArray(JSON.toJSONString(userViewingRecordService.listObjs(new QueryWrapper<UserViewingRecord>()
-                    .eq("user_id", currentUser.getId()).select("video_id").orderByDesc("record_time"))), String.class);
+            IPage<Video> page = this.page(new Page<Video>().setCurrent(videoDTO.getPage()).setSize(videoDTO.getPageSize()),
+                    new QueryWrapper<Video>().eq("status", StatusEnum.ENABLE.key()).notIn("top_like",1).orderByDesc("create_date"));
 
-            //观影记录中视频的标签ids
-            List<Integer> videoLabelIds;
-            if (!ListUtils.isEmpty(videoIds) && !ListUtils.isEmpty(videoLabelIds = videoLabelVideoService.getVLIdsByVIds(videoIds))) {
-                //map存储标签热度，key为标签id，value为标签出现次数，即热度
-                Map<Integer, Integer> map = new HashMap<>();
-                videoLabelIds.forEach(vlId -> {
-                    Integer val = map.get(vlId);
-                    map.put(vlId, (val == null) ? 1 : val + 1);
-                });
-
-                // 根据value逆序
-                List<Map.Entry<Integer, Integer>> entries = new ArrayList<>(map.entrySet());
-                entries.sort(Comparator.comparing(Map.Entry<Integer, Integer>::getValue).reversed());
-                Set<Integer> vlIds = new HashSet<>();
-                int i = 0;
-                Iterator<Map.Entry<Integer, Integer>> iterator = entries.iterator();
-                while (iterator.hasNext() && i < 5) {
-                    Map.Entry<Integer, Integer> next = iterator.next();
-                    vlIds.add(next.getKey());
-                    i++;
+            List<Video> records = page.getRecords();
+            for (Video vo : records) {
+                if (vo.getCover() != null && !vo.getCover().equals("")) {
+                    vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
                 }
 
-                //查询视频信息
-                VideoSO videoSO = VideoSO.builder().videoLabelIds(vlIds).status(StatusEnum.ENABLE.key()).build();
-                videoSO.setPage(videoDTO.getPage()).setPageSize(videoDTO.getPageSize());
-                videoSO.setIsAsc(false);
-                videoSO.setSortName("v_create_date");
-                videoSO.setStatus(StatusEnum.ENABLE.key());
-                List<VVideoChannelLabel> vvclros = vVideoChannelLabelService.findVideosByLabelIds(videoSO);
-
-                if (!ListUtils.isEmpty(vvclros)) {
-                    for (VVideoChannelLabel ro : vvclros) {
-                        VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(ro.getVId())
-                                .setCover(ro.getVCover()).setTitle(ro.getVTitle()).setPlaySum(ro.getVPlaySum())
-                                .setTimeLen(ro.getVTimeLen()).setCreateDate(ro.getVCreateDate()).setIsVip(ro.getVIsVip());
-                        if (vo.getCover() != null && !vo.getCover().equals("")) {
-                            vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
-                        }
-                        resultList.add(vo);
-                    }
-                }
-
-            } else {
-                //随机挑选10部影片
-                List<Video> videoList = this.page(new Page<Video>().setSize(videoDTO.getPageSize())
-                        .setCurrent(videoDTO.getPage()), new QueryWrapper<Video>().eq("status", StatusEnum.ENABLE.key()).orderByDesc("id")).getRecords();
-                if (!ListUtils.isEmpty(videoList)) {
-                    for (Video po : videoList) {
-                        VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(po.getId())
-                                .setCover(po.getCover()).setTitle(po.getTitle()).setPlaySum(po.getPlaySum())
-                                .setTimeLen(po.getTimeLen()).setCreateDate(po.getCreateDate()).setIsVip(po.getIsVip());
-
-                        if (vo.getCover() != null && !vo.getCover().equals("")) {
-                            vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
-                        }
-                        resultList.add(vo);
-                    }
+                if (vo.getPlayUrl() != null && !vo.getPlayUrl().equals("")) {
+                    vo.setPlayUrl(domain + Trim.custom_ltrim(vo.getPlayUrl(), "group"));
                 }
             }
+
+            List<VideoBasicInfoVO> videoBasicInfoVOS = videoDataConverter(page, true, request);
+            videoBasicInfoVOS.addAll(0, resultList);
+            return videoBasicInfoVOS;
         }
 
         if (resultList.size() > 0) {
             adService.getAd4User(resultList, request);
         }
+
+
         return resultList;
     }
 
     @Override
     public List<VideoBasicInfoVO> findFeatured(VideoDTO videoDTO, ServletRequest request) {
-        String domain = domainService.getDomain(request);
+       /* String domain = domainService.getDomain(request);
         String domain2 = domainService.getAppPicDomain();//图片封面域名
         List<VideoBasicInfoVO> voList = new ArrayList<>();
+
+        if(videoDTO.getPage()==1) {
+            //查询置顶视频   置换前两部视频
+            List<Video> topLike = this.list(new QueryWrapper<Video>().eq("top_perfect", 1).eq("status", StatusEnum.ENABLE.key()));
+            List<VideoBasicInfoVO> topList = new ArrayList<>();
+            if (topLike.size() <= 2 && topLike.size() > 0) {
+                for (Video po : topLike) {
+                    VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(po.getId())
+                            .setCover(po.getCover()).setTitle(po.getTitle()).setPlaySum(po.getPlaySum())
+                            .setTimeLen(po.getTimeLen()).setCreateDate(po.getCreateDate()).setIsVip(po.getIsVip()).setTopPerfect(po.getTopPerfect());
+
+                    if (vo.getCover() != null && !vo.getCover().equals("")) {
+                        vo.setCover(domain2 + Trim.custom_ltrim(vo.getCover(), "group"));
+                    }
+                    voList.add(vo);
+                }
+            }
+        }
+
+
         List<AdVO> adsByType = adService.findAdsByType(AppDisplayTypeEnum.AD_DISPLAY_FOR_FEATURED_VIDEO, request);
         if (!ListUtils.isEmpty(adsByType)) {
             AdVO vo = adsByType.get(0);
@@ -644,10 +582,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
             videoDTO.setPageSize(videoDTO.getPageSize() - 1);
         }
+        if(videoDTO.getPage()==1){
+            videoDTO.setPageSize(6-voList.size());
+        }
 
         List<Video> list = this.page(new Page<Video>().setCurrent(videoDTO.getPage()).setSize(videoDTO.getPageSize()),
                 new QueryWrapper<Video>().eq("status", StatusEnum.ENABLE.key())
-                        .select("id,cover,title,play_sum,time_len,create_date,is_vip")
+                        .select("id,cover,title,play_sum,time_len,create_date,is_vip").notIn("top_perfect",1)
                         .orderByDesc("play_sum")).getRecords();
 
         if (!ListUtils.isEmpty(list)) {
@@ -663,11 +604,52 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
             }
 
-           /* list.forEach(video -> voList.add(new VideoBasicInfoVO().setId(video.getId()).setCover(video.getCover())
+           *//* list.forEach(video -> voList.add(new VideoBasicInfoVO().setId(video.getId()).setCover(video.getCover())
                     .setTitle(video.getTitle()).setPlaySum(video.getPlaySum()).setTimeLen(video.getTimeLen())
-                    .setCreateDate(video.getCreateDate())));*/
+                    .setCreateDate(video.getCreateDate())));*//*
+        }*/
+        List<VideoBasicInfoVO> voList=new ArrayList<>();
+
+        //查询顶部视频
+        IPage<Video> page1 = this.page(new Page<Video>().setSize(2).setCurrent(videoDTO.getPage()), new QueryWrapper<Video>().eq("top_perfect",1).orderByDesc("create_date"));
+        List<Video> topList = page1.getRecords();
+        //查询中间两部最新视频
+        IPage<Video> page2 = this.page(new Page<Video>().setSize(6).setCurrent(videoDTO.getPage()), new QueryWrapper<Video>().notIn("top_perfect",1).notIn("is_vip",1).notIn("is_svip",1).orderByDesc("create_date"));
+        List<Video> midList = page2.getRecords();
+        //查询VIP视频
+        IPage<Video> page3 = this.page(new Page<Video>().setSize(1).setCurrent(videoDTO.getPage()), new QueryWrapper<Video>().notIn("top_perfect",1).eq("is_vip",1).orderByDesc("create_date"));
+        List<Video> buttomLeft = page3.getRecords();
+        //查询SVIP视频
+        IPage<Video> page4 = this.page(new Page<Video>().setSize(1).setCurrent(videoDTO.getPage()), new QueryWrapper<Video>().notIn("top_perfect",1).eq("is_svip",1).orderByDesc("create_date"));
+        List<Video> buttomRight = page4.getRecords();
+
+        if(topList.size()==1){
+            midList.set(0,topList.get(0));
+        }
+        if(topList.size()==2){
+            midList.set(0,topList.get(0));
+            midList.set(1,topList.get(1));
+        }
+        if(buttomLeft.size()==1){
+            midList.set(4,buttomLeft.get(0));
+        }
+        if(buttomRight.size()==1){
+            midList.set(5,buttomRight.get(0));
         }
 
+        String domain2 = domainService.getAppPicDomain();//图片封面域名
+        for (Video video : midList) {
+            VideoBasicInfoVO vo = new VideoBasicInfoVO().setId(video.getId()).setCover(video.getCover())
+                    .setTitle(video.getTitle()).setPlaySum(video.getPlaySum()).setTimeLen(video.getTimeLen())
+                    .setCreateDate(video.getCreateDate()).setIsVip(video.getIsVip()).setIsSvip(video.getIsSvip()).setTopPerfect(video.getTopPerfect());
+
+            if (video.getCover() != null && !video.getCover().equals("")) {
+                vo.setCover(domain2 + Trim.custom_ltrim(video.getCover(), "group"));
+            }
+
+            voList.add(vo);
+
+        }
         return voList;
     }
 
@@ -695,9 +677,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     @Override
     public List<VideoBasicInfoVO> findHottest(VideoDTO videoDTO, ServletRequest request) {
+        String domain2 = domainService.getAppPicDomain();//图片封面域名
         IPage<Video> page = this.page(new Page<Video>().setCurrent(videoDTO.getPage()).setSize(videoDTO.getPageSize()),
                 new QueryWrapper<Video>().eq("status", StatusEnum.ENABLE.key()).orderByDesc("play_sum"));
-
+        List<Video> records = page.getRecords();
+        for(Video video:records){
+            video.setCover(domain2 + Trim.custom_ltrim(video.getCover(), "group"));
+        }
         return videoDataConverter(page, true, request);
     }
 
@@ -1134,6 +1120,41 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
             vo.setTitle(video.getTitle());
         }
         return vo;
+    }
+
+    @Override
+    public boolean setVideoTop(String vid,Integer type,Integer location) {
+        //设置置顶
+        Video video = this.getById(vid);
+        if(type== TopTypeEnum.SETTOP.key()){
+            List<Video> topLikes = this.list(new QueryWrapper<Video>().eq("top_like", TopLikeEnum.ISTOP.key()));
+            List<Video> topPerfects = this.list(new QueryWrapper<Video>().eq("top_perfect", TopPerfectEnum.ISTOP.key()));
+            if(location==TopLocationEnum.TOPPERFECT.key()&&topPerfects.size()<2){
+                video.setTopPerfect(TopPerfectEnum.ISTOP.key());
+            }
+            if(location==TopLocationEnum.TOPLIKE.key()&&topLikes.size()<2){
+                video.setTopLike(TopLikeEnum.ISTOP.key());
+            }
+            if(topPerfects.size()==2&&location==TopLocationEnum.TOPPERFECT.key()){
+                return false;
+            }
+            if(topLikes.size()==2&&location==TopLocationEnum.TOPLIKE.key()){
+                return false;
+            }
+
+        }
+        //取消置顶
+        else if(type==TopTypeEnum.NOSETTOP.key()){
+            if(location==TopLocationEnum.TOPPERFECT.key()){
+                video.setTopPerfect(TopPerfectEnum.NOTTOP.key());
+            }else if(location==TopLocationEnum.TOPLIKE.key()){
+                video.setTopLike(TopLikeEnum.NOTTOP.key());
+            }
+        }
+
+        this.update(video,new UpdateWrapper<Video>().eq("id",vid));
+
+        return true;
     }
 
 }

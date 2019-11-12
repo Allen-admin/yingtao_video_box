@@ -1,7 +1,8 @@
 package com.k365.video_service;
 
-import com.k365.video_base.model.po.VideoLabelVideo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.k365.video_base.model.po.Video;
+import com.k365.video_base.model.po.VideoLabelVideo;
 
 import java.util.List;
 
@@ -34,6 +35,11 @@ public interface VideoLabelVideoService extends IService<VideoLabelVideo> {
      * 根据视频ids批量查询标签ids
      */
     List<Integer> getVLIdsByVIds(List<String> videoIds);
+
+    /**
+     * 根据视频标签批量查询视频
+     */
+    List<Video> getVideoVoByLabels(List<Integer> labels);
 
     /**
      * 根据视频id批量查询
