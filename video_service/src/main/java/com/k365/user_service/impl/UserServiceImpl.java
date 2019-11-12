@@ -25,9 +25,6 @@ import com.k365.video_common.handler.sms.AbstractSMSProvider;
 import com.k365.video_common.handler.sms.NeteaseSMS;
 import com.k365.video_common.handler.sms.SMSFactory;
 import com.k365.video_common.util.*;
-import com.k365.video_service.UserActionAnalyzeService;
-import com.k365.video_service.VideoLabelVideoService;
-import com.k365.video_service.VideoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.util.WebUtils;
@@ -125,7 +122,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         //TODO mac未加密 暂时注释
         //AES解密
-       /* try {
+        try {
             macAddr = AESCipher.aesDecryptString(macAddr);
 
         } catch (InvalidKeyException e) {
@@ -142,7 +139,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }*/
+        }
 
         //mac地址前添加app标识，多个app用户数据隔离
         macAddr = StringUtils.join(appType.getCode(), "-", macAddr);
@@ -778,7 +775,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         if (registerChannel != null && registerChannel != "") {
             System.out.println("registerChannel:" + registerChannel);
-            this.doUpdateUser(User.builder().id(currentUser.getId()).registerChannel(registerChannel).build());
+            this.doUpdateUser(User.builder().registerChannel(registerChannel).build());
         }
 
         if (spreadUser != null && StringUtils.isBlank(currentUser.getRecommenderId())) {

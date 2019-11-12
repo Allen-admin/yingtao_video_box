@@ -113,22 +113,14 @@ public class VideoSubjectServiceImpl extends ServiceImpl<VideoSubjectMapper, Vid
     @Override
     public List<VVideoSubjectRO> pageList(VideoSubjectDTO videoSubjectDTO, ServletRequest request) {
 
-        if (videoSubjectDTO.getSubjectType() == null && videoSubjectDTO.getSubjectType().equals("")) {
+        String domain2 = domainService.getAppPicDomain();//图片封面域名
+
+        if (("").equals(videoSubjectDTO.getSubjectType()) && videoSubjectDTO.getSubjectType() == null) {
             videoSubjectDTO.setSubjectType(SubjectTypeEnum.LEVEL1.key());
         }
 
-        String domain2 = domainService.getAppPicDomain();//图片封面域名
-        List<VVideoSubjectRO> ros = vVideoSubjectService.findVideoSubjects1(videoSubjectDTO);
-        for (VVideoSubjectRO v : ros) {
-            v.setVsCover(domain2 + Trim.custom_ltrim(v.getVsCover(), "group"));
-            if (v.getVsIcon() != null && !v.getVsIcon().equals("")) {
-                v.setVsIcon(domain2 + Trim.custom_ltrim(v.getVsIcon(), "group"));
-            }
-        }
-
-        AdVO adVO = adService.getOneVAdBy4User(request);
-        if (adVO != null && videoSubjectDTO.getSubjectType() != SubjectTypeEnum.LEVEL2.key()) {
-            List<VVideoSubjectRO> ros1 = vVideoSubjectService.findVideoSubjects(videoSubjectDTO);
+        if (videoSubjectDTO.getSubjectType()!=null&&videoSubjectDTO.getSubjectType() == 1) {
+            List<VVideoSubjectRO> ros1 = vVideoSubjectService.findVideoSubjects1(videoSubjectDTO);
             for (VVideoSubjectRO v : ros1) {
                 v.setVsCover(domain2 + Trim.custom_ltrim(v.getVsCover(), "group"));
                 if (v.getVsIcon() != null && !v.getVsIcon().equals("")) {
@@ -136,15 +128,60 @@ public class VideoSubjectServiceImpl extends ServiceImpl<VideoSubjectMapper, Vid
                 }
             }
 
-            ros1 = ListUtils.isEmpty(ros) ? new ArrayList<>() : ros1;
+            AdVO adVO = adService.getOneVAdBy4User(request);
+
+            ros1 = ListUtils.isEmpty(ros1) ? new ArrayList<>() : ros1;
             ros1.add(new VVideoSubjectRO().setVsCover(domain2 + Trim.custom_ltrim(adVO.getCover(), "group"))
                     .setVsId(adVO.getId())
                     .setVsName(adVO.getTitle())
                     .setAdUrl(adVO.getDetailsUrl())
                     .setIsAd(true));
+
+            return ros1;
+
+        } else if (videoSubjectDTO.getSubjectType()!=null&&videoSubjectDTO.getSubjectType() == 2) {
+            List<VVideoSubjectRO> ros = vVideoSubjectService.findVideoSubjects(videoSubjectDTO);
+            for (VVideoSubjectRO v : ros) {
+                v.setVsCover(domain2 + Trim.custom_ltrim(v.getVsCover(), "group"));
+                if (v.getVsIcon() != null && !v.getVsIcon().equals("")) {
+                    v.setVsIcon(domain2 + Trim.custom_ltrim(v.getVsIcon(), "group"));
+                }
+            }
+
+            AdVO adVO = adService.getOneVAdBy4User(request);
+
+            ros = ListUtils.isEmpty(ros) ? new ArrayList<>() : ros;
+            ros.add(new VVideoSubjectRO().setVsCover(domain2 + Trim.custom_ltrim(adVO.getCover(), "group"))
+                    .setVsId(adVO.getId())
+                    .setVsName(adVO.getTitle())
+                    .setAdUrl(adVO.getDetailsUrl())
+                    .setIsAd(true));
+
+            return ros;
+
+        } else {
+
+            List<VVideoSubjectRO> ros1 = vVideoSubjectService.findVideoSubjects1(videoSubjectDTO);
+            for (VVideoSubjectRO v : ros1) {
+                v.setVsCover(domain2 + Trim.custom_ltrim(v.getVsCover(), "group"));
+                if (v.getVsIcon() != null && !v.getVsIcon().equals("")) {
+                    v.setVsIcon(domain2 + Trim.custom_ltrim(v.getVsIcon(), "group"));
+                }
+            }
+
+            AdVO adVO = adService.getOneVAdBy4User(request);
+
+            ros1 = ListUtils.isEmpty(ros1) ? new ArrayList<>() : ros1;
+            ros1.add(new VVideoSubjectRO().setVsCover(domain2 + Trim.custom_ltrim(adVO.getCover(), "group"))
+                    .setVsId(adVO.getId())
+                    .setVsName(adVO.getTitle())
+                    .setAdUrl(adVO.getDetailsUrl())
+                    .setIsAd(true));
+
+            return ros1;
+
         }
 
-        return ros;
     }
 
 
