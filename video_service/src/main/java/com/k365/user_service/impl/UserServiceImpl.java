@@ -187,14 +187,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }*/
 
         String ip = IPUtil.getClientIp(WebUtils.toHttp(request));
-
-        if(user.getLoginIp() == null && "".equals(user.getLoginIp())){
+        if (user.getLoginIp() == null && "".equals(user.getLoginIp())) {
             user.setLoginIp(ip);
         }
         user.setLastLoginIp(ip);
 
-        /*   && !"".equals(userDTO.getLastLoginOutTime())*/
-        if (userDTO.getLastLoginOutTime() != null || userDTO.getLastLoginOutTime() != 0 || !"0".equals(userDTO.getLastLoginOutTime())) {
+        if (!("").equals(userDTO.getLastLoginOutTime()) && userDTO.getLastLoginOutTime() != null && userDTO.getLastLoginOutTime() != 0 && !"0".equals(userDTO.getLastLoginOutTime())) {
             //获取上次登出时间
             Long lastLoginOutTime = userDTO.getLastLoginOutTime();
             //获取上次登录时间
@@ -220,6 +218,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             final String uId = user.getId();
             final boolean isNeedCreateQR = newUser || StringUtils.isBlank(user.getSpreadQrcodeUrl());
             final String spreadQrcodeUrl = user.getSpreadQrcodeUrl();
+
             //另起一个线程来生成推广二维码图片
             new Thread(() -> {
                 try {
