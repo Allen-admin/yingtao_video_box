@@ -1,7 +1,7 @@
 package com.k365.video_base.mapper;
 
-import com.k365.video_base.model.po.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.k365.video_base.model.po.User;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

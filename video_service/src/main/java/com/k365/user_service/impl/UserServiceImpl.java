@@ -187,8 +187,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }*/
 
         String ip = IPUtil.getClientIp(WebUtils.toHttp(request));
+
+        if(user.getLoginIp() == null && "".equals(user.getLoginIp())){
+            user.setLoginIp(ip);
+        }
         user.setLastLoginIp(ip);
 
+        /*   && !"".equals(userDTO.getLastLoginOutTime())*/
         if (userDTO.getLastLoginOutTime() != null || userDTO.getLastLoginOutTime() != 0 || !"0".equals(userDTO.getLastLoginOutTime())) {
             //获取上次登出时间
             Long lastLoginOutTime = userDTO.getLastLoginOutTime();
@@ -201,6 +206,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 user.setLastTime(time);
             }
         }
+
         //把上次登录登录时间设置为当前时间
         user.setLastLoginTime(new Date());
 

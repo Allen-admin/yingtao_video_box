@@ -159,4 +159,9 @@ public class User implements Serializable {
      */
     private Long lastTime;
 
+    /**
+     * 登录ip
+     */
+    private String loginIp;
+
 }
