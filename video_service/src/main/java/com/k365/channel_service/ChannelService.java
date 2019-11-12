@@ -3,7 +3,6 @@ package com.k365.channel_service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.k365.video_base.model.dto.ChannelDTO;
 import com.k365.video_base.model.po.Channel;
-import com.k365.video_base.model.po.User;
 import com.k365.video_base.model.vo.BaseListVO;
 import com.k365.video_base.model.vo.ChannelVO;
 
@@ -52,27 +51,6 @@ public interface ChannelService extends IService<Channel> {
      */
     Integer count(ChannelDTO channelDTO);
 
-
-    /**
-     *查询用户信息
-     * @param channelDTO
-     * @return
-     */
-    List<User> findAll(ChannelDTO channelDTO);
-
-    /**
-     *通过时间段检索
-     * @param channelDTO
-     * @return
-     */
-    BaseListVO<Channel> searchDate(ChannelDTO channelDTO);
-
-    /**
-     * 查询渠道和数量
-     * @param channelDTO
-     * @return
-     */
-    /*List<Channel> findPage(ChannelDTO channelDTO);*/
 
     /**
      * 查询所有的渠道

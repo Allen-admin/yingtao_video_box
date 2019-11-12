@@ -21,6 +21,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class ChannelDTO extends SplitPageDTO implements BaseDTO {
 
+
     private Integer id;
 
     /**
@@ -47,15 +48,5 @@ public class ChannelDTO extends SplitPageDTO implements BaseDTO {
      * 检索关键字 渠道编号+渠道名称
      */
     private String searchValue;
-
-    /**
-     * 开始时间
-     */
-    private String beginTime;
-
-    /**
-     * 结束时间
-     */
-    private String endTime;
 
 }
