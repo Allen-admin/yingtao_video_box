@@ -636,7 +636,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         if (registerChannel != null && registerChannel != "") {
             System.out.println("registerChannel:" + registerChannel);
-            this.doUpdateUser(User.builder().id(currentUser.getId()).registerChannel(registerChannel).build());
+            this.doUpdateUser(User.builder().registerChannel(registerChannel).build());
         }
 
         if (spreadUser != null && StringUtils.isBlank(currentUser.getRecommenderId())) {
