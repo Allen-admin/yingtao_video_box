@@ -15,34 +15,29 @@
          LIMIT #{pageSize} OFFSET ${page}
     </select>
 
-
-    <select id="count" parameterType="com.k365.video_base.model.so.VUserChannelSO" resultType="java.lang.Long">
-        SELECT
-        COUNT(DISTINCT c_id)
-        FROM
-        `v_user_channel`
-    </select>
-
-
     <select id="search" parameterType="com.k365.video_base.model.so.VUserChannelSO"
             resultType="com.k365.video_base.model.po.VUserChannel">
         SELECT
-        c_id,
-        c_name,
-        c_channel_code,
-        c_create_date,
-        t_register_count
-
+        c.id AS c_id,
+        c.name AS c_name,
+        c.channel_code AS c_channel_code,
+        c.create_date AS c_create_date,
+        t.register_count AS t_register_count
         FROM
-        `v_user_channel`
-        <where>
-            <if test="searchValue != null and searchValue != ''">
-            AND MATCH(c_name,c_channel_code)
-            AGAINST(#{searchValue} IN BOOLEAN MODE)
-            </if>
-            LIMIT #{pageSize} OFFSET ${page}
-        </where>
+        ( channel c
+        LEFT JOIN (
+        SELECT user.register_channel AS register_channel,
+        count( user.register_channel ) AS register_count
+        FROM user
+
+        GROUP BY user.register_channel ) t ON ((
+        t.register_channel = c.channel_code
+        )))
+
+        LIMIT #{pageSize} OFFSET ${page}
+
     </select>
+
 
     <select id="findPage" parameterType="com.k365.video_base.model.so.VUserChannelSO"
             resultType="com.k365.video_base.model.vo.VUserChannelVO">
@@ -55,13 +50,18 @@
        FROM
     (
         channel c
-    LEFT JOIN ( SELECT u.register_channel AS register_channel, count( u.register_channel ) AS register_count FROM (
-       SELECT * FROM user where user.register_time between "${beginTime}" and  "${endTime}"
+    LEFT JOIN ( SELECT u.register_channel
+    AS register_channel,
+     count( u.register_channel ) AS register_count FROM (
+       SELECT * FROM user
+       where user.register_time
+       between "${beginTime}" and  "${endTime}"
       )u GROUP BY u.register_channel ) t ON ((
       t.register_channel = c.channel_code
   )))
     LIMIT #{pageSize} OFFSET ${page}
     </select>
+
 
     <select id="findPageTotle" parameterType="com.k365.video_base.model.so.VUserChannelSO"
             resultType="com.k365.video_base.model.vo.VUserChannelVO">
@@ -70,42 +70,144 @@
         FROM
         (
         channel c
-        LEFT JOIN ( SELECT u.register_channel AS register_channel, count( u.register_channel ) AS register_count FROM (
+        LEFT JOIN ( SELECT u.register_channel AS register_channel,
+        count( u.register_channel ) AS register_count FROM (
         SELECT * FROM user where user.register_time between "${beginTime}" and  "${endTime}"
         )u GROUP BY u.register_channel ) t ON ((
         t.register_channel = c.channel_code
         )))
     </select>
 
-
-
         <select id="list" parameterType="com.k365.video_base.model.so.VUserChannelSO"
                 resultType="com.k365.video_base.model.vo.VUserChannelVO">
-        SELECT
-		`c`.`id` AS `c_id`,
-		`c`.`name` AS `c_name`,
-		`c`.`channel_code` AS `c_channel_code`,
-		`c`.`create_date` AS `c_create_date`,
-		`t`.`register_count` AS `t_register_count`
-	FROM
-		(
-			`channel` `c`
-			LEFT JOIN ( SELECT `user`.`register_channel` AS `register_channel`, count( `user`.`register_channel` ) AS `register_count` FROM
-            (SELECT * FROM user where user.register_time between "${beginTime}" and  "${endTime}"
+            SELECT
+            c.id AS c_id,
+            c.name AS c_name,
+            c.channel_code AS c_channel_code,
+            c.create_date AS c_create_date,
+            t.register_count AS t_register_count
+            FROM
+            ( channel c
+            LEFT JOIN (
+            SELECT user.register_channel AS register_channel,
+            count( user.register_channel ) AS register_count
+            FROM user
 
-      )`user` GROUP BY `user`.`register_channel` ) `t` ON ((
-				`t`.`register_channel` = `c`.`channel_code`
-	)))
+            GROUP BY user.register_channel ) t ON ((
+            t.register_channel = c.channel_code
+            )))
             <where>
+
                 <if test="searchValue != null and searchValue != ''">
-                    AND MATCH(c_name,c_channel_code)
-                    AGAINST(#{searchValue} IN BOOLEAN MODE)
+                AND c_name like concat('%',concat(#{searchValue}),'%')
+                </if>
+                <if test="searchValue != null and searchValue != ''">
+                    AND c_channel_code like concat('%',concat(#{searchValue}),'%')
                 </if>
             </where>
+         union all
+        SELECT
+        c.id AS c_id,
+        c.name AS c_name,
+        c.channel_code AS c_channel_code,
+        c.create_date AS c_create_date,
+        t.register_count AS t_register_count
+       FROM
+    (
+        channel c
+    LEFT JOIN ( SELECT u.register_channel AS register_channel, count( u.register_channel ) AS register_count FROM (
+       SELECT * FROM user
+
+            <where>
+            <!-- 查询条件：创建开始时间 -->
+            <if test="beginTime!=null and beginTime!=''">
+                AND user.register_time &gt; "${beginTime}"
+            </if>
+
+            <!-- 查询条件：创建结束时间 -->
+            <if test="endTime!=null and endTime!=''">
+                AND user.register_time &lt;= "${endTime}"
+            </if>
+            </where>
+
+      )u GROUP BY u.register_channel ) t ON ((
+      t.register_channel = c.channel_code
+     )))
             LIMIT #{pageSize} OFFSET ${page}
         </select>
 
 
+    <!--根据时间和渠道编号检索-->
+    <select id="searchList" parameterType="com.k365.video_base.model.so.VUserChannelSO"
+            resultType="com.k365.video_base.model.vo.VUserChannelVO">
 
+        select cc.*
+        from
+        (
+        select c.channel_code,c.name , uu.channelNum
+        from channel c
+        left  join
+        (SELECT count(u.register_channel) as channelNum ,register_channel FROM user u
+
+        <where>
+            <!-- 查询条件：创建开始时间 -->
+            <if test="beginTime != null and beginTime != ''">
+                AND u.register_time &gt;= str_to_date('${beginTime}', '%Y-%m-%d %H:%i:%s')
+            </if>
+
+            <!-- 查询条件：创建结束时间 -->
+            <if test="endTime != null and endTime != ''">
+                AND u.register_time &lt;= str_to_date('${endTime}', '%Y-%m-%d %H:%i:%s')
+            </if>
+        </where>
+        group by u.register_channel) uu
+        on c.channel_code = uu.register_channel
+        ) cc
+    <where>
+        <if test="cName != null and cName != ''">
+            AND cc.name like concat('%',concat(#{cName}),'%')
+                </if>
+            </where>
+             LIMIT #{pageSize} OFFSET ${page}
+
+           </select>
+
+    <!--根据时间和渠道编号检索-->
+    <select id="count" parameterType="com.k365.video_base.model.so.VUserChannelSO"
+            resultType="java.lang.Long">
+        SELECT
+        count( 0 ) AS `COUNT(*)`
+        FROM
+        (
+        select cc.*
+        from
+        (
+        select c.channel_code,c.name , uu.channelNum
+        from channel c
+        left  join
+        (SELECT count(u.register_channel) as channelNum ,register_channel FROM user u
+
+        <where>
+            <!-- 查询条件：创建开始时间 -->
+            <if test="beginTime != null and beginTime != ''">
+                AND u.register_time &gt;= str_to_date('${beginTime}', '%Y-%m-%d %H:%i:%s')
+            </if>
+
+            <!-- 查询条件：创建结束时间 -->
+            <if test="endTime != null and endTime != ''">
+                AND u.register_time &lt;= str_to_date('${endTime}', '%Y-%m-%d %H:%i:%s')
+            </if>
+        </where>
+        group by u.register_channel) uu
+        on c.channel_code = uu.register_channel
+        ) cc
+        <where>
+            <if test="cName != null and cName != ''">
+                AND cc.name like concat('%',concat(#{cName}),'%')
+            </if>
+        </where>
+        ) count_table
+
+    </select>
 
 </mapper>

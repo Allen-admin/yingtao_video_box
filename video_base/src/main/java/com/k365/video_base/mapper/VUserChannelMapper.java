@@ -33,7 +33,6 @@ public interface VUserChannelMapper  extends BaseMapper<VUserChannel> {
      */
     List<VUserChannelVO> count(VUserChannelSO vUserChannelSO);
 
-
     /**
      * 檢索用戶信息
      * @param
@@ -41,13 +40,13 @@ public interface VUserChannelMapper  extends BaseMapper<VUserChannel> {
      */
     List<VUserChannelVO> search(VUserChannelSO vUserChannelSO);
 
-
     /**
      *根据时间段查询
      * @param
      * @return
      */
-    List<VUserChannelVO> findPage(VUserChannelSO vUserChannelSO);
+    List<VUserChannelVO> findPage( VUserChannelSO vUserChannelSO);
+
 
     /**
      *根据渠道名,编号，时间搜索
@@ -55,5 +54,13 @@ public interface VUserChannelMapper  extends BaseMapper<VUserChannel> {
      * @return
      */
     List<VUserChannelVO> list(VUserChannelSO vUserChannelSO);
+
+
+    /**
+     * 根据渠道名，时间搜索
+     * @param vUserChannelSO
+     * @return
+     */
+    List<VUserChannelVO> searchList(VUserChannelSO vUserChannelSO);
 
 }

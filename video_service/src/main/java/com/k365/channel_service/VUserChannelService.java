@@ -1,9 +1,12 @@
 package com.k365.channel_service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.k365.video_base.model.po.UserLevel;
 import com.k365.video_base.model.po.VUserChannel;
+import com.k365.video_base.model.so.UserChannelSO;
 import com.k365.video_base.model.so.VUserChannelSO;
+import com.k365.video_base.model.vo.BaseListVO;
+import com.k365.video_base.model.vo.UserChannelVO;
+import com.k365.video_base.model.vo.UserLevelVO;
 import com.k365.video_base.model.vo.VUserChannelVO;
 
 import java.util.HashMap;
@@ -38,13 +41,13 @@ public interface VUserChannelService extends IService<VUserChannel> {
      * @param vUserChannelSO
      * @return
      */
-    List<VUserChannelVO> searchPage(VUserChannelSO vUserChannelSO);
+    HashMap<String,Object> searchPage(VUserChannelSO vUserChannelSO);
 
     /**
      * 获取所有用户等级
      * @return
      */
-    List<UserLevel> findAll();
+    List<UserLevelVO> findAll();
 
 
     /**
@@ -53,6 +56,22 @@ public interface VUserChannelService extends IService<VUserChannel> {
      * @return
      */
     List<VUserChannelVO> searchList(VUserChannelSO vUserChannelSO);
+
+
+    /**
+     *查询用户信息
+     * @param
+     * @return
+     */
+    BaseListVO<UserChannelVO> findUser(VUserChannelSO vUserChannelSO);
+
+
+    /**
+     * 根据条件检索用户信息
+     * @param userChannelSO
+     * @return
+     */
+    BaseListVO<UserChannelVO> searchUser(UserChannelSO userChannelSO);
 
 
 }

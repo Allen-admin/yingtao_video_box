@@ -18,31 +18,35 @@ import java.util.Date;
 @NoArgsConstructor
 public class VUserChannelSO extends BaseSO{
 
+
     /**
      * id
      */
     private String cId;
+
 
     /**
      * 名称
      */
     private String cName;
 
+
     /**
      *
      */
     private String vChannelCode;
+
 
     /**
      * 创建时间
      */
     private Date cCreateDate;
 
+
     /**
      * 总数
      */
     private Integer tRegisterCount;
-
 
     /**
      * 检索关键字 渠道编号+渠道名称
@@ -55,9 +59,11 @@ public class VUserChannelSO extends BaseSO{
      */
     private String beginTime;
 
+
     /**
      * 结束时间
      */
     private String endTime;
+
 
 }

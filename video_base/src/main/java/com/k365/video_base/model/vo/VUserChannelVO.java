@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.Date;
-
 /**
  * @author Allen
  * @date 2019/8/29 16:33
@@ -21,29 +19,20 @@ import java.util.Date;
 public class VUserChannelVO {
 
     /**
-     * id
-     */
-    private Integer cId;
-
-    /**
      * 名称
      */
-    private String cName;
+    private String name;
 
     /**
-     *编号
+     * 编号
      */
-    private String cChannelCode;
+    private String channelCode;
 
-    /**
-     * 创建时间
-     */
-    private Date cCreateDate;
 
     /**
      * 数量
      */
-    private Integer tRegisterCount;
+    private Integer channelNum;
 
 
 }
