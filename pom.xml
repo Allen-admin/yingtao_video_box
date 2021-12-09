@@ -36,7 +36,7 @@
         <shiro-redis.version>3.2.3</shiro-redis.version>
         <fastjson.version>1.2.60</fastjson.version>
         <jedis.version>2.9.0</jedis.version>
-        <jackson-databind.version>2.9.6</jackson-databind.version>
+        <jackson-databind.version>2.9.10.8</jackson-databind.version>
         <velocity-engine-core.version>2.1</velocity-engine-core.version>
         <javase.version>3.3.0</javase.version>
         <java-jwt.version>3.7.0</java-jwt.version>
