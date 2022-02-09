@@ -32,7 +32,7 @@
         <mapper.version>4.1.5</mapper.version>
         <mybatis-plus.version>2.2.0</mybatis-plus.version>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
-        <shiro-spring.version>1.4.1</shiro-spring.version>
+        <shiro-spring.version>1.7.1</shiro-spring.version>
         <shiro-redis.version>3.2.3</shiro-redis.version>
         <fastjson.version>1.2.60</fastjson.version>
         <jedis.version>2.9.0</jedis.version>
